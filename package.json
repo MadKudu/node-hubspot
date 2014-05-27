@@ -12,6 +12,6 @@
   "author": "Brian Falk",
   "license": "BSD",
   "dependencies": {
-    "request": "^2.36.0"
+    "request": "2.36.0"
   }
 }
