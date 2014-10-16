@@ -1,0 +1,18 @@
+{
+    "curly": true,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "indent": 2,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "nonew": true,
+    "plusplus": true,
+    "undef": true,
+    "unused": true,
+    "trailing": true,
+    "asi": true,
+    "laxcomma": true,
+    "node": true
+}
