@@ -10,7 +10,7 @@
     "hubspot"
   ],
   "author": "Brian Falk",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "request": "2.36.0"
   }
