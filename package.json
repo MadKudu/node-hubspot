@@ -16,11 +16,12 @@
     "API"
   ],
   "author": {
-    "name" : "Brian Falk",
-    "url" : "https://github.com/brainflake/"
+    "name": "Brian Falk",
+    "url": "https://github.com/brainflake/"
   },
   "license": "MIT",
   "dependencies": {
+    "object.assign": "^4.0.3",
     "request": "2.36.0"
   }
 }
