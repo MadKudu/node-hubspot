@@ -4,7 +4,7 @@ Node.js wrapper for the HubSpot API
 
 ## install
 
-npm install node-hubspot
+npm install hubspot
 
 ## use
 

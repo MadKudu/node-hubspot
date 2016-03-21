@@ -1,17 +1,27 @@
 {
   "name": "hubspot",
-  "version": "0.0.3",
+  "version": "0.2.1",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brainflake/node-hubspot.git"
+  },
   "keywords": [
-    "hubspot"
+    "hubspot",
+    "client",
+    "API"
   ],
-  "author": "Brian Falk",
-  "license": "BSD",
+  "author": {
+    "name": "Brian Falk",
+    "url": "https://github.com/brainflake/"
+  },
+  "license": "MIT",
   "dependencies": {
+    "object.assign": "^4.0.3",
     "request": "2.36.0"
   }
 }
