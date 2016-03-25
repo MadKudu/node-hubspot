@@ -12,9 +12,15 @@ npm install hubspot
 
   var client = new Client();
 
-  client.useKey('API_KEY');
-  client.useToken('MY_ACCESS_TOKEN');
-  
+  /*
+   * You can use either a key OR a token
+   */
+  if (config.key) {
+    client.useKey(config.key);
+  } else if (config.token) {
+    client.useToken(config.token);
+  }
+
   client.campaigns.get(function(err, res) {
     if (err) { throw err; }
     console.log(res);
