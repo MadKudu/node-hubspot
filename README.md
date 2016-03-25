@@ -70,3 +70,10 @@ npm install hubspot
 ## License
 
 MIT
+
+## Contributors
+
+Brian Falk @brainflake
+Tim Atkinson @timisbusy
+Tejas Manohar @tejasmanohar
+Krispin Schulz @kr1sp1n
