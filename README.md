@@ -63,11 +63,7 @@ npm install hubspot
 
     client.campaigns.get(opts, cb)
     client.campaigns.getOne(id, appId, cb)
-    client.campaigns.tracking.events(id, opts, cb)
-
-### Events
-
-    client.events.get(opts, cb)
+    client.campaigns.events(opts, cb)
 
 ### Social Media
 
