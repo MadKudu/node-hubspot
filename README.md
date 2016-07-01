@@ -69,6 +69,12 @@ npm install hubspot
 
     client.broadcasts.get(opts, cb)
 
+### Deals
+
+    client.deals.getRecentyModified(opts, cb)
+    client.deals.getRecentlyCreated(opts, cb)
+    client.deals.getById(opts, cb)
+
 ## License
 
 MIT
