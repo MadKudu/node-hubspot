@@ -75,11 +75,11 @@ npm install hubspot
     client.deals.getRecentlyCreated(opts, cb)
     client.deals.getById(opts, cb)
     client.deals.deleteById(id, opts, cb)
-    client.deals.updateById(id, opts, cb)
+    client.deals.updateById(id, data, cb)
     client.deals.create(opts, cb)
 
-    client.deals.associate(id, opts, cb)
-    client.deals.removeAssociation(id, opts, cb)
+    client.deals.associate(id, data, cb)
+    client.deals.removeAssociation(id, data, cb)
     **On the option of the associate and removeAssociation  you will need to pass throught the following params:**
     ``
 
