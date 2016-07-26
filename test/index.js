@@ -15,7 +15,6 @@ describe('companies', function () {
 		it('should return some recent companies', function (done) {
 			client.companies.getRecentlyCreated(function(err, res) {
 			  if (err) { throw err; }
-			  console.log(res);
 				expect(res).to.be.defined;
 				expect(res.results).to.be.defined;
 				done();
@@ -29,9 +28,21 @@ describe('companies', function () {
 		it('should return some recent deals', function (done) {
 			client.deals.getRecentlyCreated(function(err, res) {
 			  if (err) { throw err; }
-			  console.log(res);
 				expect(res).to.be.defined;
 				expect(res.results).to.be.defined;
+				done();
+			})
+		});
+
+	});
+
+	describe('pipelines', function () {
+
+		it('should return some pipelines', function (done) {
+			client.pipelines.get(function(err, res) {
+			  if (err) { throw err; }
+				expect(res).to.be.defined;
+				expect(res[0].pipelineId).to.be.defined;
 				done();
 			})
 		});
