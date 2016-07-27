@@ -42,6 +42,14 @@ npm install hubspot
     client.contacts.create(data, cb)
     client.contacts.createOrUpdateBatch(data, cb)
 
+### Deals
+
+    client.deals.getRecentlyCreated(opts, cb)
+
+### Pipelines
+
+    client.pipelines.get(opts, cb)
+
 ### Lists
 
     client.lists.get(opts, cb)
