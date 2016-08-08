@@ -41,6 +41,7 @@ npm install hubspot
     client.contacts.update(id, data, cb)
     client.contacts.create(data, cb)
     client.contacts.createOrUpdateBatch(data, cb)
+		client.contacts.properties.get(cb)
 
 ### Deals
 
