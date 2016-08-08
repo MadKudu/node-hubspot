@@ -78,17 +78,9 @@ npm install hubspot
     client.deals.updateById(id, data, cb)
     client.deals.create(opts, cb)
 
-    client.deals.associate(id, data, cb)
-    client.deals.removeAssociation(id, data, cb)
-    **On the option of the associate and removeAssociation  you will need to pass throught the following params:**
-    ``
-
-    options.objectiveType
-    options.id  
-
-    ``
-    On the options id pass throught either the contact id or the company id.
-
+    client.deals.associate(id, objectType, associatedObjectId, cb)
+    client.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+    
 ## License
 
 MIT
