@@ -10,6 +10,19 @@ client.useKey(api_key);
 
 describe('companies', function () {
 
+  describe('contacts', function () {
+
+		it('should return some contact properties', function (done) {
+			client.contacts.properties.get(function(err, res) {
+			  if (err) { throw err; }
+				expect(res).to.be.defined;
+				expect(res.results).to.be.defined;
+				done();
+			})
+		});
+
+	});
+
 	describe('companies', function () {
 
 		it('should return some recent companies', function (done) {
