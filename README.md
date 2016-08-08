@@ -1,5 +1,9 @@
 # node-hubspot
 
+[![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
+[![Code Climate](https://codeclimate.com/github/brainflake/node-hubspot/badges/gpa.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
+[![Test Coverage](https://codeclimate.com/github/brainflake/node-hubspot/badges/coverage.svg)](https://codeclimate.com/github/brainflake/node-hubspot/coverage)
+
 Node.js wrapper for the HubSpot API
 
 ## Installing
@@ -44,7 +48,15 @@ npm install hubspot
 
 ### Deals
 
+    client.deals.getRecentyModified(opts, cb)
     client.deals.getRecentlyCreated(opts, cb)
+    client.deals.getById(id, cb)
+    client.deals.deleteById(id, cb)
+    client.deals.updateById(id, data, cb)
+    client.deals.create(data, cb)
+
+    client.deals.associate(id, objectType, associatedObjectId, cb)
+    client.deals.removeAssociation(id, objectType, associatedObjectId, cb)
 
 ### Pipelines
 
@@ -76,7 +88,7 @@ npm install hubspot
 ### Social Media
 
     client.broadcasts.get(opts, cb)
-
+    
 ## License
 
 MIT
@@ -90,3 +102,5 @@ Tim Atkinson @timisbusy
 Tejas Manohar @tejasmanohar
 
 Krispin Schulz @kr1sp1n
+
+Filipe Ferreira @iTsFILIPOficial
