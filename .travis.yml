@@ -1,9 +1,6 @@
 language: node_js
 node_js: ["4.4.*"]
 
-env:
-  CODECLIMATE_REPO_TOKEN: d6bf5f16e2c205f7abd3b338c1c206a48b656c64ca63204866c323e3f1590b0d
-
 before_script:
 - npm install -g istanbul
 - npm install -g mocha
