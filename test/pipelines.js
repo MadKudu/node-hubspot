@@ -8,7 +8,7 @@ var api_key = 'demo';
 client.useKey(api_key);
 
 
-describe('pipelines', function () {
+describe('Po', function () {
 
 	it('should return some pipelines', function (done) {
 		client.pipelines.get(function(err, res) {
