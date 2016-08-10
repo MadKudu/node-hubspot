@@ -129,4 +129,15 @@ describe('Deals', function () {
     });
   });
 
+  describe('Remove Association', function () {
+    it('Returns a 200 response if successful.', function (done) {
+      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
+        if (err) { throw err; }
+        expect(data).to.be.defined;
+        expect(res.statusCode).to.equal(200);
+        done();
+      })
+    });
+  });
+
 });
