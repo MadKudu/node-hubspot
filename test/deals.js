@@ -12,11 +12,11 @@ describe('Deals', function () {
   describe('Recently Created', function () {
 
     it('Returns Recently Modified Deals', function (done) {
-      client.deals.getRecentlyCreated(function(err, res) {
+      client.deals.getRecentlyCreated(function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
-        expect(res.results).to.be.defined;
+        expect(res.statusCode).to.equal(200);
+        expect(data).to.be.defined;
+        expect(data.results).to.be.defined;
         done();
       })
     });
@@ -26,11 +26,11 @@ describe('Deals', function () {
   describe('Recently Modified', function () {
 
     it('Returns Recently Modified Deals', function (done) {
-      client.deals.getRecentlyModified(function(err, res) {
+      client.deals.getRecentlyModified(function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
-        expect(res.results).to.be.defined;
+        expect(res.statusCode).to.equal(200);
+        expect(data).to.be.defined;
+        expect(data.results).to.be.defined;
         done();
       })
     });
@@ -38,22 +38,19 @@ describe('Deals', function () {
 
   describe('Get By Id', function () {
     it('Returns the entire deal, including all of it\'s properties', function (done) {
-      client.deals.getById(3865198,function(err, res) {
+      client.deals.getById(3865198,function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
-        expect(res.results).to.be.defined;
+        expect(data).to.be.defined;
+        expect(data.results).to.be.defined;
         done();
       })
     });
   });
-
   describe('Delete By Id', function () {
     it('Returns object', function (done) {
-      client.deals.deleteById(10444744,function(err, res) {
+      client.deals.deleteById(10444744,function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
+        expect(data).to.be.defined;
         done();
       })
     });
@@ -63,11 +60,10 @@ describe('Deals', function () {
     it('Returns the entire deal profile', function (done) {
       client.deals.updateById(10444744, {
         "properties": [{"name": "amount", "value": "70000"}]
-      }, function(err, res) {
+      }, function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
-        expect(res.results).to.be.defined;
+        expect(data).to.be.defined;
+        expect(data.results).to.be.defined;
         done();
       })
     });
@@ -115,11 +111,10 @@ describe('Deals', function () {
                     "name": "dealtype"
                 }
             ]
-        }, function(err, res) {
+        }, function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
-        expect(res.results).to.be.defined;
+        expect(data).to.be.defined;
+        expect(data.results).to.be.defined;
         done();
       })
     });
@@ -127,10 +122,9 @@ describe('Deals', function () {
 
   describe('Associate', function () {
     it('Returns a 204 response if successful.', function (done) {
-      client.deals.associate(1126609, 'CONTACT', 394455, function(err, res) {
+      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
         if (err) { throw err; }
-        expect(200);
-        expect(res).to.be.defined;
+        expect(data).to.be.defined;
         done();
       })
     });

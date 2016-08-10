@@ -13,11 +13,11 @@ describe('Contacts', function () {
 
     describe('Get All Contacts', function(){
         it('Should return contacts properties', function (done) {
-            client.contacts.get(function(err, res) {
+            client.contacts.get(function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
-                expect(res).to.be.defined;
-                expect(res.properties).to.be.defined;
+                expect(res.statusCode).to.equal(200);
+                expect(data).to.be.defined;
+                expect(data.properties).to.be.defined;
                 done();
             })
         });
@@ -25,11 +25,10 @@ describe('Contacts', function () {
 
     describe('Get A Contact By Id', function(){
         it('Should return a contact based on its id', function (done) {
-            client.contacts.getById(215913,function(err, res) {
+            client.contacts.getById(1,function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
-                expect(res).to.be.defined;
-                expect(res.properties).to.be.defined;
+                expect(data).to.be.defined;
+                expect(data.properties).to.be.defined;
                 done();
             })
         });
@@ -37,11 +36,11 @@ describe('Contacts', function () {
 
     describe('Get A Contact By Email', function(){
         it('Should return a contact record based on the email', function (done) {
-            client.contacts.getByEmail('testingapis@hubspot.com',function(err, res) {
+            client.contacts.getByEmail('testingapis@hubspot.com',function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
-                expect(res).to.be.defined;
-                expect(res.properties).to.be.defined;
+                expect(res.statusCode).to.equal(200);
+                expect(data).to.be.defined;
+                expect(data.properties).to.be.defined;
                 done();
             })
         });
@@ -51,9 +50,9 @@ describe('Contacts', function () {
         it('Should return a contact record based on a array of emails', function (done) {
             client.contacts.getByEmailBatch({
                 emails: ['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']
-            },function(err, res) {
+            },function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
+                expect(res.statusCode).to.equal(200);
                 expect(res).to.be.defined;
                 done();
             })
@@ -87,11 +86,10 @@ describe('Contacts', function () {
                     "value": "customer"
                 }
             ]
-        },function(err, res) {
+        },function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
-                expect(res).to.be.defined;
-                expect(res.properties).to.be.defined;
+                expect(data).to.be.defined;
+                expect(data.properties).to.be.defined;
                 done();
             })
         });
@@ -142,11 +140,10 @@ describe('Contacts', function () {
                         "value": "02139"
                     }
                 ]
-            },function(err, res) {
+            },function(err, data, res) {
                 if (err) { throw err; }
-                expect(200);
-                expect(res).to.be.defined;
-                expect(res.properties).to.be.defined;
+                expect(data).to.be.defined;
+                expect(data.properties).to.be.defined;
                 done();
             })
         });
@@ -156,10 +153,10 @@ describe('Contacts', function () {
         it('should return some recent companies', function (done) {
             client.contacts.createOrUpdateBatch(
                 [{"email":"testingapis@hubspot.com","properties":[{"property":"firstname","value":"Codey"},{"property":"lastname","value":"Huang"},{"property":"website","value":"http://hubspot.com"},{"property":"company","value":"HubSpot"},{"property":"phone","value":"555-122-2323"},{"property":"address","value":"25 First Street"},{"property":"city","value":"Cambridge"},{"property":"state","value":"MA"},{"property":"zip","value":"02139"}]},{"vid":"259429","properties":[{"property":"firstname","value":"Harper"},{"property":"lastname","value":"Wolfberg"},{"property":"website","value":"http://hubspot.com"},{"property":"company","value":"HubSpot"},{"property":"phone","value":"555-122-2323"},{"property":"address","value":"25 First Street"},{"property":"city","value":"Cambridge"},{"property":"state","value":"MA"},{"property":"zip","value":"02139"}]}],
-                function(err, res) {
+                function(err, data, res) {
                     if (err) { throw err; }
-                    expect(200);
-                    expect(res).to.be.defined;
+                    expect(res.statusCode).to.equal(202);
+                    expect(data).to.be.defined;
                     done();
             })
         });

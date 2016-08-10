@@ -11,12 +11,12 @@ client.useKey(api_key);
 describe('Companies', function () {
 
 	describe('Get Recently Created', function(){
-		it('should return some recent companies', function (done) {
-			client.companies.getRecentlyCreated(function(err, res) {
+		it('Should return recently created companies', function (done) {
+			client.companies.getRecentlyCreated(function(err, data, res) {
 			  if (err) { throw err; }
-				expect(200);
-				expect(res).to.be.defined;
-				expect(res.results).to.be.defined;
+				expect(res.statusCode).to.equal(200);
+				expect(data).to.be.defined;
+				expect(data.results).to.be.defined;
 				done();
 			})
 		});
