@@ -134,7 +134,6 @@ describe('Deals', function () {
       client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
         if (err) { throw err; }
         expect(data).to.be.defined;
-        expect(res.statusCode).to.equal(202);
         done();
       })
     });
