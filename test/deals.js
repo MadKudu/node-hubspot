@@ -1,4 +1,3 @@
-// mocha tests
 var chai = require('chai');
 var expect = chai.expect;
 
