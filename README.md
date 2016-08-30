@@ -35,6 +35,8 @@ npm install hubspot
 ### Companies
 
     client.companies.getRecentlyCreated(opts, cb)
+    client.companies.getByDomain(domain, cb)
+    client.companies.create(data, cb)
 
 ### Contacts
 
@@ -45,6 +47,8 @@ npm install hubspot
     client.contacts.update(id, data, cb)
     client.contacts.create(data, cb)
     client.contacts.createOrUpdateBatch(data, cb)
+    client.contacts.search(query, cb)
+    client.contacts.getRecent(cb)
 
 ### Deals
 
@@ -57,6 +61,10 @@ npm install hubspot
 
     client.deals.associate(id, objectType, associatedObjectId, cb)
     client.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+
+### Engagements
+
+    client.engagements.create(data, cb)
 
 ### Pipelines
 
