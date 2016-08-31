@@ -93,6 +93,61 @@ describe('Contacts', function () {
             })
         });
     });
+    describe('Create or update', function(){
+      it('Should Create or Update a contact', function(done){
+        client.contacts.createOrUpdate('test@hubspot.com',
+        {
+          "properties": [
+              {
+                  "property": "email",
+                  "value": "test@hubspot.com"
+              },
+              {
+                  "property": "firstname",
+                  "value": "Matt"
+              },
+              {
+                  "property": "lastname",
+                  "value": "Schnitt"
+              },
+              {
+                  "property": "website",
+                  "value": "http://hubspot.com"
+              },
+              {
+                  "property": "company",
+                  "value": "HubSpot"
+              },
+              {
+                  "property": "phone",
+                  "value": "555-122-2323"
+              },
+              {
+                  "property": "address",
+                  "value": "25 First Street"
+              },
+              {
+                  "property": "city",
+                  "value": "Cambridge"
+              },
+              {
+                  "property": "state",
+                  "value": "MA"
+              },
+              {
+                  "property": "zip",
+                  "value": "02139"
+              }
+          ]
+      }
+        ,function(err, data, res){
+          if (err) { throw err; }
+          expect(data).to.be.defined;
+          expect(data.properties).to.be.defined;
+          done();
+        })
+      })
+    })
 
     describe('Create  A Contact', function(){
         it('Should create a new contact', function (done) {
