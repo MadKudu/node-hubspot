@@ -216,4 +216,14 @@ describe('Contacts', function () {
         });
     });
 
+    describe('Search', function(){
+        it('should return contacts and some data associated with those contacts by the contact\'s email address or name.', function (done) {
+          client.contacts.search('example', function(err, data, res){
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.defined;
+            done();
+          })
+        });
+    });
+
 });
