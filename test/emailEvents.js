@@ -54,7 +54,6 @@ describe('Email Events', function () {
 				expect(res.statusCode).to.equal(200);
 				expect(data).to.be.defined;
 				expect(data.events).to.be.defined;
-				expect(data.hasMore).to.equal(true);
 				done();
 			})
 		});
