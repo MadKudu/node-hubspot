@@ -225,5 +225,13 @@ describe('Contacts', function () {
           })
         });
     });
-
+    describe('Get Recent', function(){
+        it('should return last 100 updated contacts', function (done) {
+          client.contacts.getRecent(function(err, data, res){
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.defined;
+            done();
+          })
+        });
+    });
 });
