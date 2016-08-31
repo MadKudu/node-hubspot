@@ -21,15 +21,15 @@ describe('Files', function () {
   });
 
 
-  describe('Get a files', function(){
-    it('Should return one files', function (done) {
-  		client.files.getOne(2857188320,function(err,data, res) {
-  		  if (err) { throw err; }
-  			expect(res.statusCode).to.equal(200);
-  			expect(data).to.be.defined;
-      	expect(data.name).to.be.defined;
-  			done();
-  		})
-  	});
-  });
+  // describe('Get a file', function(){
+  //   it('Should return one file', function (done) {
+  // 		client.files.getOne(2857188320,function(err,data, res) {
+  // 		  if (err) { throw err; }
+  // 			expect(res.statusCode).to.equal(200);
+  // 			expect(data).to.be.defined;
+  //     	expect(data.name).to.be.defined;
+  // 			done();
+  // 		})
+  // 	});
+  // });
 });
