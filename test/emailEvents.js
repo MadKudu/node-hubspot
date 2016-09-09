@@ -47,4 +47,15 @@ describe('Email Events', function () {
 		});
 	});
 
+	describe('Get all campaign IDs for a portal by Id', function(){
+		it('Should return campaign IDs with recent activity associated with the portal', function (done) {
+			client.campaigns.getById(function(err, data, res) {
+				if (err) { throw err; }
+				expect(res.statusCode).to.equal(200);
+				expect(data).to.be.defined;
+				expect(data.events).to.be.defined;
+				done();
+			})
+		});
+	});
 });

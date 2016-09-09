@@ -93,6 +93,61 @@ describe('Contacts', function () {
             })
         });
     });
+    describe('Create or update', function(){
+      it('Should Create or Update a contact', function(done){
+        client.contacts.createOrUpdate('test@hubspot.com',
+        {
+          "properties": [
+              {
+                  "property": "email",
+                  "value": "test@hubspot.com"
+              },
+              {
+                  "property": "firstname",
+                  "value": "Matt"
+              },
+              {
+                  "property": "lastname",
+                  "value": "Schnitt"
+              },
+              {
+                  "property": "website",
+                  "value": "http://hubspot.com"
+              },
+              {
+                  "property": "company",
+                  "value": "HubSpot"
+              },
+              {
+                  "property": "phone",
+                  "value": "555-122-2323"
+              },
+              {
+                  "property": "address",
+                  "value": "25 First Street"
+              },
+              {
+                  "property": "city",
+                  "value": "Cambridge"
+              },
+              {
+                  "property": "state",
+                  "value": "MA"
+              },
+              {
+                  "property": "zip",
+                  "value": "02139"
+              }
+          ]
+      }
+        ,function(err, data, res){
+          if (err) { throw err; }
+          expect(data).to.be.defined;
+          expect(data.properties).to.be.defined;
+          done();
+        })
+      })
+    })
 
     describe('Create  A Contact', function(){
         it('Should create a new contact', function (done) {
@@ -161,4 +216,22 @@ describe('Contacts', function () {
         });
     });
 
+    describe('Search', function(){
+        it('should return contacts and some data associated with those contacts by the contact\'s email address or name.', function (done) {
+          client.contacts.search('example', function(err, data, res){
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.defined;
+            done();
+          })
+        });
+    });
+    describe('Get Recent', function(){
+        it('should return last 100 updated contacts', function (done) {
+          client.contacts.getRecent(function(err, data, res){
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.defined;
+            done();
+          })
+        });
+    });
 });
