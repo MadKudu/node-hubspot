@@ -14,8 +14,8 @@ describe('Deals', function () {
       client.deals.getRecentlyCreated(function(err, data, res) {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
-        expect(data).to.be.defined;
-        expect(data.results).to.be.defined;
+        expect(data.results).to.be.a('array');
+        expect(data.hasMore).to.equal(true);
         done();
       })
     });
@@ -28,8 +28,8 @@ describe('Deals', function () {
       client.deals.getRecentlyModified(function(err, data, res) {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
-        expect(data).to.be.defined;
-        expect(data.results).to.be.defined;
+        expect(data.results).to.be.a('array');
+        expect(data.hasMore).to.equal(true);
         done();
       })
     });
@@ -39,8 +39,9 @@ describe('Deals', function () {
     it('Returns the entire deal, including all of it\'s properties', function (done) {
       client.deals.getById(3865198,function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
-        expect(data.results).to.be.defined;
+        expect(res.statusCode).to.equal(404);
+        expect(data.status).to.equal('error');
+        expect(data.message).to.equal('Deal does not exist');
         done();
       })
     });
@@ -49,7 +50,7 @@ describe('Deals', function () {
     it('Returns object', function (done) {
       client.deals.deleteById(10444744,function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
+        expect(res.statusCode).to.equal(204);
         done();
       })
     });
@@ -61,8 +62,9 @@ describe('Deals', function () {
         "properties": [{"name": "amount", "value": "70000"}]
       }, function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
-        expect(data.results).to.be.defined;
+        expect(res.statusCode).to.equal(404);
+        expect(data.status).to.equal('error');
+        expect(data.message).to.equal('No deal found for dealId=10444744 portalId=62515');
         done();
       })
     });
@@ -112,8 +114,9 @@ describe('Deals', function () {
             ]
         }, function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
-        expect(data.results).to.be.defined;
+        expect(res.statusCode).to.equal(400);
+        expect(data.status).to.equal('error');
+        expect(data.message).to.equal('Property values were not valid');
         done();
       })
     });
@@ -123,7 +126,9 @@ describe('Deals', function () {
     it('Returns a 204 response if successful.', function (done) {
       client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
+        expect(res.statusCode).to.equal(404);
+        expect(data.status).to.equal('error');
+        expect(data.message).to.equal('Cannot add associations to deal that does not exist');
         done();
       })
     });
@@ -131,9 +136,9 @@ describe('Deals', function () {
 
   describe('Remove Association', function () {
     it('Returns a 200 response if successful.', function (done) {
-      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
+      client.deals.removeAssociation(1126609, 'CONTACT', 394455, function(err, data, res) {
         if (err) { throw err; }
-        expect(data).to.be.defined;
+        expect(res.statusCode).to.equal(204);
         done();
       })
     });
