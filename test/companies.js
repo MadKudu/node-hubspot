@@ -14,9 +14,9 @@ describe('Companies', function () {
 			client.companies.getRecentlyCreated(function(err, data, res) {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.results).to.be.defined;
-				done();
+				expect(data).to.be.a('object');
+				expect(data.results).to.be.a('array');
+        done();
 			})
 		});
 	})
