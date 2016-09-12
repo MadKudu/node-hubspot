@@ -13,7 +13,7 @@ describe('Social Media', function () {
   		client.broadcasts.get(function(err,data, res) {
   		  if (err) { throw err; }
   			expect(res.statusCode).to.equal(200);
-  			expect(data).to.be.defined;
+        expect(data).to.be.a('array');
   			done();
   		})
   	});

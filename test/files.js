@@ -13,8 +13,8 @@ describe('Files', function () {
   		client.files.get(function(err,data, res) {
   		  if (err) { throw err; }
   			expect(res.statusCode).to.equal(200);
-  			expect(data).to.be.defined;
-      	expect(data.total_count).to.be.defined;
+  			expect(data).to.be.a('object');
+      	expect(data.total_count).to.be.equal(0);
   			done();
   		})
   	});
