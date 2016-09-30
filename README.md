@@ -45,6 +45,7 @@ npm install hubspot
     client.contacts.getByEmail(email, cb)
     client.contacts.getByEmailBatch(emails, cb)
     client.contacts.getById(id, cb)
+    client.contacts.getByIdBatch(ids, cb)
     client.contacts.update(id, data, cb)
     client.contacts.create(data, cb)
     client.contacts.createOrUpdateBatch(data, cb)
@@ -97,7 +98,7 @@ npm install hubspot
 ### Social Media
 
     client.broadcasts.get(opts, cb)
-    
+
 ## License
 
 MIT
