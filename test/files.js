@@ -14,7 +14,7 @@ describe('Files', function () {
   		  if (err) { throw err; }
   			expect(res.statusCode).to.equal(200);
   			expect(data).to.be.a('object');
-      	expect(data.total_count).to.be.equal(0);
+      	expect(data.total_count).to.be.equal(2);
   			done();
   		})
   	});

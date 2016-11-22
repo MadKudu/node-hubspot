@@ -27,7 +27,7 @@ describe('Lists', function () {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
         expect(data).to.be.a('object');
-        expect(data.name).to.equal('update list name');
+        expect(data.name).to.equal('test emails');
         done();
       })
     });

@@ -73,50 +73,48 @@ describe('Deals', function () {
   describe('Create', function () {
     it('Returns a 200 with the newly created Deal', function (done) {
       client.deals.create({
-            "associations": {
-                "associatedCompanyIds": [
-                    8954037
-                ],
-                "associatedVids": [
-                    27136
-                ]
-            },
-            "portalId": 62515,
-            "properties": [
-                {
-                    "value": "Tim's Newer Deal",
-                    "name": "dealname"
-                },
-                {
-                    "value": "appointmentscheduled",
-                    "name": "dealstage"
-                },
-                {
-                    "value": "default",
-                    "name": "pipeline"
-                },
-                {
-                    "value": "24",
-                    "name": "hubspot_owner_id"
-                },
-                {
-                    "value": 1409443200000,
-                    "name": "closedate"
-                },
-                {
-                    "value": "60000",
-                    "name": "amount"
-                },
-                {
-                    "value": "newbusiness",
-                    "name": "dealtype"
-                }
-            ]
-        }, function(err, data, res) {
+        "associations": {
+          "associatedCompanyIds": [
+            8954037
+          ],
+          "associatedVids": [
+            27136
+          ]
+        },
+        "portalId": 62515,
+        "properties": [
+          {
+            "value": "Tim's Newer Deal",
+            "name": "dealname"
+          },
+          {
+            "value": "appointmentscheduled",
+            "name": "dealstage"
+          },
+          {
+            "value": "default",
+            "name": "pipeline"
+          },
+          {
+            "value": "24",
+            "name": "hubspot_owner_id"
+          },
+          {
+            "value": 1409443200000,
+            "name": "closedate"
+          },
+          {
+            "value": "60000",
+            "name": "amount"
+          },
+          {
+            "value": "newbusiness",
+            "name": "dealtype"
+          }
+        ]
+      }, function(err, data) {
         if (err) { throw err; }
-        expect(res.statusCode).to.equal(400);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.equal('Property values were not valid');
+        expect(data).to.be.a('object');
         done();
       })
     });
@@ -124,11 +122,9 @@ describe('Deals', function () {
 
   describe('Associate', function () {
     it('Returns a 204 response if successful.', function (done) {
-      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data, res) {
+      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data) {
         if (err) { throw err; }
-        expect(res.statusCode).to.equal(404);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.equal('Cannot add associations to deal that does not exist');
+        expect(data).to.be.a('object');
         done();
       })
     });

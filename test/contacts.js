@@ -87,9 +87,7 @@ describe('Contacts', function () {
         ]
       },function(err, data, res) {
         if (err) { throw err; }
-        expect(res.statusCode).to.equal(404);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.be.a('string');
+        expect(data).to.be.a('object');
         done();
       })
     });
