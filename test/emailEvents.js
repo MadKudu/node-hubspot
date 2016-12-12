@@ -13,9 +13,9 @@ describe('Email Events', function () {
 		it('Should return campaign IDs with recent activity associated with the portal', function (done) {
 			client.campaigns.get(function(err, data, res) {
 			  if (err) { throw err; }
-				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.hasMore).to.be.defined;
+        expect(res.statusCode).to.equal(200);
+        expect(data.campaigns).to.be.a('array');
+        expect(data.hasMore).to.equal(true);
 				done();
 			})
 		});
@@ -26,8 +26,7 @@ describe('Email Events', function () {
 			client.campaigns.getOne('by-id',function(err, data, res) {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.hasMore).to.be.defined;
+        expect(data.campaigns).to.be.a('array');
         expect(data.hasMore).to.equal(true);
 				done();
 			})
@@ -39,8 +38,7 @@ describe('Email Events', function () {
 			client.campaigns.events(function(err, data, res) {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.events).to.be.defined;
+        expect(data.events).to.be.a('array');
         expect(data.hasMore).to.equal(true);
 				done();
 			})
@@ -52,8 +50,8 @@ describe('Email Events', function () {
 			client.campaigns.getById(function(err, data, res) {
 				if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.events).to.be.defined;
+        expect(data.campaigns).to.be.a('array');
+        expect(data.hasMore).to.equal(true);
 				done();
 			})
 		});

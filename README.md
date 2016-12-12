@@ -1,6 +1,6 @@
 # node-hubspot
 [![Build Status](https://api.travis-ci.org/brainflake/node-hubspot.svg)](https://travis-ci.org/brainflake/node-hubspot)
-![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)
+[![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
 [![Code Climate](https://codeclimate.com/github/brainflake/node-hubspot/badges/gpa.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
 [![Test Coverage](https://codeclimate.com/github/brainflake/node-hubspot/badges/coverage.svg)](https://codeclimate.com/github/brainflake/node-hubspot/coverage)
 [![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
@@ -51,6 +51,7 @@ npm install hubspot
     client.contacts.createOrUpdateBatch(data, cb)
     client.contacts.search(query, cb)
     client.contacts.getRecent(cb)
+    client.contacts.createOrUpdate(email, data, cb)
 
 ### Deals
 
