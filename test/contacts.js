@@ -33,6 +33,19 @@ describe('Contacts', function () {
         });
     });
 
+    describe('Get A Contact By Id Batch', function(){
+        it('Should return a contact record based on a array of ids', function (done) {
+            client.contacts.getByIdBatch({
+                ids: [1, 2]
+            },function(err, data, res) {
+                if (err) { throw err; }
+                expect(res.statusCode).to.equal(200);
+                expect(res).to.be.defined;
+                done();
+            })
+        });
+    });
+
     describe('Get A Contact By Email', function(){
         it('Should return a contact record based on the email', function (done) {
             client.contacts.getByEmail('testingapis@hubspot.com',function(err, data, res) {
