@@ -14,8 +14,8 @@ describe('Email', function () {
 			client.subscriptions.get(function(err, data, res) {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
-				expect(data).to.be.defined;
-				expect(data.hasMore).to.be.defined;
+        expect(data.timeline).to.be.a('array');
+        expect(data.hasMore).to.equal(true);
 				done();
 			})
 		});
