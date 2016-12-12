@@ -57,7 +57,6 @@ describe('Contacts', function () {
             })
         });
     });
-  });
 
   describe('Get A Contact By Email Batch', function(){
     it('Should return a contact record based on a array of emails', function (done) {
