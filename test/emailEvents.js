@@ -3,7 +3,7 @@ var expect = chai.expect;
 
 var Client = require('../index.js');
 var client = new Client();
-var api_key = 'demo';
+var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
 client.useKey(api_key);
 
 
@@ -15,7 +15,7 @@ describe('Email Events', function () {
 			  if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
         expect(data.campaigns).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
 				done();
 			})
 		});
@@ -27,7 +27,7 @@ describe('Email Events', function () {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
         expect(data.campaigns).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
 				done();
 			})
 		});
@@ -39,7 +39,7 @@ describe('Email Events', function () {
 			  if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
         expect(data.events).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
 				done();
 			})
 		});
@@ -51,7 +51,7 @@ describe('Email Events', function () {
 				if (err) { throw err; }
 				expect(res.statusCode).to.equal(200);
         expect(data.campaigns).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
 				done();
 			})
 		});
