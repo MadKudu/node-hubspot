@@ -3,7 +3,7 @@ var expect = chai.expect;
 
 var Client = require('../index.js');
 var client = new Client();
-var api_key = 'demo';
+var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
 client.useKey(api_key);
 
 
@@ -27,7 +27,7 @@ describe('Lists', function () {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
         expect(data).to.be.a('object');
-        expect(data.name).to.equal('test emails');
+        expect(data.name).to.equal('Monthly Subscribers - Default HubSpot Blog');
         done();
       })
     });
@@ -59,7 +59,7 @@ describe('Lists', function () {
 
   describe('Add existing contacts to a list', function(){
     it('Should add contact to a list of contacts', function (done) {
-      client.lists.addContacts(3,{
+      client.lists.addContacts(5,{
         "vids": [61571], "emails": ["testingapis@hubspot.com"]
       },function(err, data, res) {
         if (err) { throw err; }

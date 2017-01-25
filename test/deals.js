@@ -3,19 +3,19 @@ var expect = chai.expect;
 
 var Client = require('../index.js');
 var client = new Client();
-var api_key = 'demo';
+var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
 client.useKey(api_key);
 
 
 describe('Deals', function () {
   describe('Recently Created', function () {
 
-    it('Returns Recently Modified Deals', function (done) {
+    it('Returns Recently Created Deals', function (done) {
       client.deals.getRecentlyCreated(function(err, data, res) {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
         expect(data.results).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
         done();
       })
     });
@@ -29,7 +29,7 @@ describe('Deals', function () {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(200);
         expect(data.results).to.be.a('array');
-        expect(data.hasMore).to.equal(true);
+        expect(data.hasMore).to.equal(false);
         done();
       })
     });
@@ -64,7 +64,7 @@ describe('Deals', function () {
         if (err) { throw err; }
         expect(res.statusCode).to.equal(404);
         expect(data.status).to.equal('error');
-        expect(data.message).to.equal('No deal found for dealId=10444744 portalId=62515');
+        expect(data.message).to.equal('No deal found for dealId=10444744 portalId=2837874');
         done();
       })
     });

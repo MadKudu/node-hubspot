@@ -3,7 +3,7 @@ var expect = chai.expect;
 
 var Client = require('../index.js');
 var client = new Client();
-var api_key = 'demo';
+var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
 client.useKey(api_key);
 
 
@@ -24,10 +24,11 @@ describe('Contacts', function () {
 
   describe('Get A Contact By Id', function(){
     it('Should return a contact based on its id', function (done) {
-      client.contacts.getById(1,function(err, data, res) {
+      client.contacts.getById(101,function(err, data, res) {
         if (err) { throw err; }
         expect(data).to.be.a('object');
-        expect(data.message).to.be.a('string');
+        // console.log(data);
+        expect(data.properties.company.value).to.equal('HubSpot');
         done();
       })
     });
