@@ -6,8 +6,8 @@ describe('Set key and token', function () {
   describe('Use Key', function () {
     it('Set Client to use key', function (done) {
       var client = new Client();
-      client.useKey('demo');
-      expect(client.self.key).to.equal('demo');
+      client.useKey('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
+      expect(client.self.key).to.equal('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
       done()
     });
   });
@@ -15,8 +15,8 @@ describe('Set key and token', function () {
   describe('Use Token', function () {
     it('Set Client to use Token', function (done) {
       var client = new Client();
-      client.useToken('demo');
-      expect(client.self.token).to.equal('demo');
+      client.useToken('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
+      expect(client.self.token).to.equal('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
       done();
     });
   });
@@ -25,21 +25,21 @@ describe('Use key and token', function () {
   describe('Use Token to get contacts', function () {
     it('Use token to get contact list', function (done) {
       var client = new Client();
-      client.useToken('demo');
+      client.useToken('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
       client.contacts.get(function (err, data, res) {
         expect(err).to.equal(null);
         expect(res.statusCode).to.equal(401);
         expect(data.status).to.equal('error');
-        expect(data.message).to.equal('access_token (demo) doesn\'t exist!');
+        expect(data.message).to.equal('access_token (5e4e9b8c-9146-4d90-95eb-8fe94edd3175) doesn\'t exist!');
         done();
       });
     });
   });
 
   describe('Use Token to get contacts', function () {
-    it('Use Key to get contact list', function (done) {
+    it('Use Token to get contact list', function (done) {
       var client = new Client();
-      client.useKey('demo');
+      client.useKey('5e4e9b8c-9146-4d90-95eb-8fe94edd3175');
       client.contacts.get(function (err, data, res) {
         expect(err).to.equal(null);
         expect(res.statusCode).to.equal(200);
