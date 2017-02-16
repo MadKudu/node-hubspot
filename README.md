@@ -35,6 +35,7 @@ npm install hubspot
 
 ### Companies
 
+    client.companies.getById(id, cb)
     client.companies.getRecentlyCreated(opts, cb)
     client.companies.getByDomain(domain, cb)
     client.companies.create(data, cb)
