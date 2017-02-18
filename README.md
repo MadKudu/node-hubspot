@@ -56,7 +56,7 @@ npm install hubspot
 
 ### Deals
 
-    client.deals.getRecentyModified(opts, cb)
+    client.deals.getRecentlyModified(opts, cb)
     client.deals.getRecentlyCreated(opts, cb)
     client.deals.getById(id, cb)
     client.deals.deleteById(id, cb)
