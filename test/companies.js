@@ -19,6 +19,30 @@ var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
         });
       });
 
+      describe('Get all companies', function(){
+        it('Should return all companies', function (done) {
+          client.companies.getAll(function(err, data, res) {
+            if (err) { throw err; }
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.a('object');
+            expect(data.companies).to.be.a('array');
+            done();
+          })
+        });
+
+        it('Should return a limited number of companies', function (done) {
+          client.companies.getAll({ limit: 5 }, function(err, data, res) {
+            if (err) { throw err; }
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.a('object');
+            expect(data.companies).to.be.a('array');
+            expect(data.companies.length).to.eq(5)
+            expect(data['has-more']).to.eq(true)
+            done();
+          })
+        });
+      });
+
       describe('Get Recently Created', function(){
         it('Should return recently created companies', function (done) {
           client.companies.getRecentlyCreated(function(err, data, res) {
