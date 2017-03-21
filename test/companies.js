@@ -27,7 +27,7 @@ var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
             expect(data).to.be.a('object');
             expect(data.companies).to.be.a('array');
             done();
-          })
+          });
         });
 
         it('Should return a limited number of companies', function (done) {
@@ -39,8 +39,18 @@ var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
             expect(data.companies.length).to.eq(5)
             expect(data['has-more']).to.eq(true)
             done();
-          })
+          });
         });
+
+        it('Should return properties', function (done) {
+          client.companies.getAll({ limit: 5, properties: ['name', 'country', 'city'] }, function(err, data, res) {
+            if (err) { throw err; }
+            expect(res.statusCode).to.equal(200);
+            expect(data.companies).to.be.a('array');
+            expect(data.companies[0].properties.name.value).to.eq('A company name')
+            done();
+          });
+        })
       });
 
       describe('Get Recently Created', function(){
