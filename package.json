@@ -4,7 +4,8 @@
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test  --timeout 15000"
+    "test": "mocha test  --timeout 15000",
+    "watch-test": "mocha test --timeout 15000 --watch"
   },
   "repository": {
     "type": "git",
