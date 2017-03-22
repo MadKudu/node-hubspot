@@ -35,6 +35,7 @@ npm install hubspot
 
 ### Companies
 
+    client.companies.getById(id, cb)
     client.companies.getRecentlyCreated(opts, cb)
     client.companies.getByDomain(domain, cb)
     client.companies.create(data, cb)
@@ -55,7 +56,7 @@ npm install hubspot
 
 ### Deals
 
-    client.deals.getRecentyModified(opts, cb)
+    client.deals.getRecentlyModified(opts, cb)
     client.deals.getRecentlyCreated(opts, cb)
     client.deals.getById(id, cb)
     client.deals.deleteById(id, cb)
