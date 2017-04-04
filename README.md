@@ -71,6 +71,10 @@ npm install hubspot
 
     client.engagements.create(data, cb)
 
+### Owners
+
+    client.owners.get(opts, cb)
+
 ### Pipelines
 
     client.pipelines.get(opts, cb)
