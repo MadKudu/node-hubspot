@@ -56,6 +56,7 @@ npm install hubspot
 
 ### Deals
 
+    client.deals.get(opts, cb)
     client.deals.getRecentlyModified(opts, cb)
     client.deals.getRecentlyCreated(opts, cb)
     client.deals.getById(id, cb)
@@ -69,6 +70,10 @@ npm install hubspot
 ### Engagements
 
     client.engagements.create(data, cb)
+
+### Owners
+
+    client.owners.get(opts, cb)
 
 ### Pipelines
 

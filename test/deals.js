@@ -8,6 +8,18 @@ client.useKey(api_key);
 
 
 describe('Deals', function () {
+  describe('Get All Deals', function(){
+    it('Should return deal properties', function (done) {
+      client.deals.get(function(err, data, res) {
+        if (err) { throw err; }
+        expect(res.statusCode).to.equal(200);
+        expect(data).to.be.a('object');
+        expect(data.deals).to.be.a('array');
+        done();
+      })
+    });
+  });
+
   describe('Recently Created', function () {
 
     it('Returns Recently Created Deals', function (done) {
