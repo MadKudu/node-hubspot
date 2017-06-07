@@ -92,7 +92,7 @@ var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
 
       describe('Add contact to company', function () {
         it('Should add contact to a specific company', function (done) {
-          client.companies.addContactToCompany({ companyId: 123123, contactVid: 123123 }, function (error, data) {
+          client.companies.addContactToCompany({ companyId: 322620707, contactVid: 123123 }, function (error, data, res) {
             if (error) {
               throw error;
             }
