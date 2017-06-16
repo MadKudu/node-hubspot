@@ -78,16 +78,29 @@ var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
       });
 
       describe('Create a Company', function(){
-    it('Should create a company in a given portal', function (done) {
-      client.companies.create({"properties": [{"name": "name", "value": "A company name"}, {"name": "description", "value": "A company description"}]}
-        ,function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(data).to.be.a('object');
-        expect(data.portalId).to.equal(2837874);
-        done();
-      })
-    });
-  });
+        it('Should create a company in a given portal', function (done) {
+          client.companies.create({"properties": [{"name": "name", "value": "A company name"}, {"name": "description", "value": "A company description"}]}
+            ,function(err, data, res) {
+            if (err) { throw err; }
+            expect(res.statusCode).to.equal(200);
+            expect(data).to.be.a('object');
+            expect(data.portalId).to.equal(2837874);
+            done();
+          })
+        });
+      });
+
+      describe('Add contact to company', function () {
+        it('Should add contact to a specific company', function (done) {
+          client.companies.addContactToCompany({ companyId: 322620707, contactVid: 123123 }, function (error, data, res) {
+            if (error) {
+              throw error;
+            }
+
+            expect(res.statusCode).to.equal(200);
+            done();
+          });
+        });
+      });
 
 });
