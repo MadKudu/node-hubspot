@@ -54,6 +54,7 @@ npm install hubspot
     client.contacts.search(query, cb)
     client.contacts.getRecent(cb)
     client.contacts.createOrUpdate(email, data, cb)
+    client.contacts.properties.get(cb)
 
 ### Deals
 
