@@ -1,5 +1,5 @@
 {
-  "name": "hubspot",
+  "name": "@madkudu/hubspot",
   "version": "0.4.5",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
