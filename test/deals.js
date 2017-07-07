@@ -34,47 +34,47 @@ describe('Deals', function () {
   })
 
   describe('getById', function () {
-    let deal_id
+    let dealId
 
     before(function () {
       return hubspot.deals.get().then(data => {
-        deal_id = data.deals[0].dealId
+        dealId = data.deals[0].dealId
       })
     })
     it('Returns the entire deal, including all of it\'s properties', function () {
-      return hubspot.deals.getById(deal_id).then(data => {
+      return hubspot.deals.getById(dealId).then(data => {
         expect(data).to.be.an('object')
       })
     })
   })
 
   describe('deleteById', function () {
-    let deal_id
+    let dealId
 
     before(function () {
       return hubspot.deals.get().then(data => {
-        deal_id = data.deals[0].dealId
+        dealId = data.deals[0].dealId
       })
     })
 
     it('should delete a deal by Id', function () {
-      return hubspot.deals.deleteById(deal_id).then(data => {
+      return hubspot.deals.deleteById(dealId).then(data => {
         expect(data).to.be.an('undefined')
       })
     })
   })
 
   describe('updateById', function () {
-    let deal_id
+    let dealId
 
     before(function () {
       return hubspot.deals.get().then(data => {
-        deal_id = data.deals[0].dealId
+        dealId = data.deals[0].dealId
       })
     })
 
     it('Returns the entire deal profile', function () {
-      return hubspot.deals.updateById(deal_id, {
+      return hubspot.deals.updateById(dealId, {
         'properties': [{'name': 'dealname', 'value': 'MadKudu'}]
       }).then(data => {
         expect(data).to.be.an('object')

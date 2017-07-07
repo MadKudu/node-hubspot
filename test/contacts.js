@@ -42,38 +42,38 @@ describe('contacts', function () {
   })
 
   describe('getById', function () {
-    let contact_id
+    let contactId
 
     before(function () {
       return hubspot.contacts.get().then(data => {
-        contact_id = data.contacts[0].vid
+        contactId = data.contacts[0].vid
       })
     })
 
     it('should return a contact based on its id', function () {
-      return hubspot.contacts.getById(contact_id).then(data => {
-        expect(data.vid).to.equal(contact_id)
+      return hubspot.contacts.getById(contactId).then(data => {
+        expect(data.vid).to.equal(contactId)
         expect(data.properties.company).to.be.an('object')
       })
     })
   })
 
   describe('getByIdBatch', function () {
-    let contact_ids
+    let contactIds
 
     before(function () {
       return hubspot.contacts.get({ count: 10 }).then(data => {
         // console.log(data)
-        contact_ids = _.map(data.contacts, 'vid')
+        contactIds = _.map(data.contacts, 'vid')
       })
     })
 
     it('should return a contact record based on a array of ids', function () {
-      // console.log(contact_ids)
-      return hubspot.contacts.getByIdBatch(contact_ids).then(data => {
+      // console.log(contactIds)
+      return hubspot.contacts.getByIdBatch(contactIds).then(data => {
         // console.log(data)
         expect(data).to.be.an('object')
-        expect(data).to.have.a.property(contact_ids[0])
+        expect(data).to.have.a.property(contactIds[0])
       })
     })
   })
@@ -98,15 +98,15 @@ describe('contacts', function () {
 
   describe('update', function () {
     it('should update an existing contact', function () {
-      let contact_id
+      let contactId
 
       before(function () {
         return hubspot.contacts.get().then(data => {
-          contact_id = data.contacts[0].vid
+          contactId = data.contacts[0].vid
         })
       })
 
-      return hubspot.contacts.update(contact_id, {
+      return hubspot.contacts.update(contactId, {
         'properties': [
           {
             'property': 'email',

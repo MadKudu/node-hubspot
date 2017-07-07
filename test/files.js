@@ -1,5 +1,5 @@
-var chai = require('chai')
-var expect = chai.expect
+const chai = require('chai')
+const expect = chai.expect
 
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
@@ -16,16 +16,16 @@ describe('files', function () {
   })
 
   describe('getOne', function () {
-    let file_id
+    let fileId
 
     before(function () {
       return hubspot.files.get().then(data => {
-        file_id = data.objects[0].id
+        fileId = data.objects[0].id
       })
     })
 
     it('Should return one file', function () {
-      return hubspot.files.getOne(file_id).then(data => {
+      return hubspot.files.getOne(fileId).then(data => {
         // console.log(data)
         expect(data).to.be.an('object')
       })

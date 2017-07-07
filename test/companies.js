@@ -31,16 +31,16 @@ describe('companies', function () {
   })
 
   describe('getById', function () {
-    let company_id
+    let companyId
 
     before(function () {
       return hubspot.companies.get().then(data => {
-        company_id = data.companies[0].companyId
+        companyId = data.companies[0].companyId
       })
     })
 
     it('should return a company', function () {
-      return hubspot.companies.getById(company_id).then(data => {
+      return hubspot.companies.getById(companyId).then(data => {
         expect(data).to.be.an('object')
       })
     })
