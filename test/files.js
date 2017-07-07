@@ -1,33 +1,34 @@
-var chai = require('chai');
-var expect = chai.expect;
+var chai = require('chai')
+var expect = chai.expect
 
-var Client = require('../index.js');
-var client = new Client();
-var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
-client.useKey(api_key);
+const Hubspot = require('..')
+const hubspot = new Hubspot({ apiKey: 'demo' })
 
+describe('files', function () {
+  describe('get', function () {
+    it('Should return all files', function () {
+      return hubspot.files.get().then(data => {
+        // console.log(data)
+        expect(data).to.be.a('object')
+        expect(data.total_count).to.be.above(0)
+      })
+    })
+  })
 
-describe('Files', function () {
-  describe('Get all files', function(){
-    it('Should return all files', function (done) {
-  		client.files.get(function(err,data, res) {
-  		  if (err) { throw err; }
-  			expect(res.statusCode).to.equal(200);
-  			expect(data).to.be.a('object');
-      	expect(data.total_count).to.be.equal(0);
-  			done();
-  		})
-  	});
-  });
+  describe('getOne', function () {
+    let file_id
 
+    before(function () {
+      return hubspot.files.get().then(data => {
+        file_id = data.objects[0].id
+      })
+    })
 
-  describe('Get a file', function(){
-    it('Should return one file', function (done) {
-  		client.files.getOne(358134645,function(err,data, res) {
-  		  if (err) { throw err; }
-  			expect(res.statusCode).to.equal(204);
-  			done();
-  		})
-  	});
-  });
-});
+    it('Should return one file', function () {
+      return hubspot.files.getOne(file_id).then(data => {
+        // console.log(data)
+        expect(data).to.be.an('object')
+      })
+    })
+  })
+})

@@ -1,112 +1,157 @@
 # node-hubspot
-[![Build Status](https://api.travis-ci.org/brainflake/node-hubspot.svg)](https://travis-ci.org/brainflake/node-hubspot)
-[![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
-[![Code Climate](https://codeclimate.com/github/brainflake/node-hubspot/badges/gpa.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
-[![Test Coverage](https://codeclimate.com/github/brainflake/node-hubspot/badges/coverage.svg)](https://codeclimate.com/github/brainflake/node-hubspot/coverage)
-[![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
+[![CircleCI](https://circleci.com/gh/MadKudu/node-hubspot/tree/master.svg?style=svg)](https://circleci.com/gh/MadKudu/node-hubspot/tree/master)
+[![Code Climate](https://codeclimate.com/github/MadKudu/node-hubspot/badges/gpa.svg)](https://codeclimate.com/github/MadKudu/node-hubspot)
+[![Test Coverage](https://codeclimate.com/github/MadKudu/node-hubspot/badges/coverage.svg)](https://codeclimate.com/github/MadKudu/node-hubspot/coverage)
+[![Issue Count](https://codeclimate.com/github/MadKudu/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/MadKudu/node-hubspot)
+[![Dependencies](https://david-dm.org/MadKudu/node-hubspot.svg)](https://david-dm.org/MadKudu/node-hubspot)
 
 Node.js wrapper for the HubSpot API
 
 ## Installing
 
-npm install hubspot
+```shell
+npm install @madkudu/hubspot
+```
 
 ## Usage
 
-    var Client = require('hubspot');
+```javascript
+const Hubspot = require('hubspot');
+const hubspot = new Hubspot({ apiKey: 'abc' });
+```
 
-    var client = new Client();
+You can also authenticate via token:
 
-    /*
-     * You can use either a key OR a token
-     */
-    if (config.key) {
-      client.useKey(config.key);
-    } else if (config.token) {
-      client.useToken(config.token);
-    }
+```javascript
+const hubspot = new Hubspot({ accessToken: 'abc' });
+```
 
-    client.campaigns.get(function(err, res) {
-      if (err) { throw err; }
-      console.log(res);
-    });
+To change the base url
+
+```javascript
+const hubspot = new Hubspot({ accessToken: 'abc', baseUrl: 'https://some-url' });
+```
+
+And then use the API method via:
+
+```javascript
+hubspot.contacts.get(options)
+  .then(results => {
+    console.log(results)
+  }).catch(err => {
+    console.error(err)
+  })
+```
+
+or if you prefer callbacks:
+
+```javascript
+hubspot.contacts.get(function(err, results) {
+  if (err) { console.error(err) }
+  console.log(results);
+});
+```
 
 ## Available Methods
 
 ### Companies
 
-    client.companies.getById(id, cb)
-    client.companies.getRecentlyCreated(opts, cb)
-    client.companies.getByDomain(domain, cb)
-    client.companies.create(data, cb)
-    client.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+```javascript
+hubspot.companies.get(opts, cb)
+hubspot.companies.getById(id, cb)
+hubspot.companies.getRecentlyCreated(opts, cb)
+hubspot.companies.getRecentlyModified(opts, cb)
+hubspot.companies.getByDomain(domain, cb)
+hubspot.companies.create(data, cb)
+hubspot.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+```
 
 ### Contacts
 
-    client.contacts.get(opts, cb)
-    client.contacts.getByEmail(email, cb)
-    client.contacts.getByEmailBatch(emails, cb)
-    client.contacts.getById(id, cb)
-    client.contacts.getByIdBatch(ids, cb)
-    client.contacts.update(id, data, cb)
-    client.contacts.create(data, cb)
-    client.contacts.createOrUpdateBatch(data, cb)
-    client.contacts.search(query, cb)
-    client.contacts.getRecent(cb)
-    client.contacts.createOrUpdate(email, data, cb)
-    client.contacts.properties.get(cb)
+```javascript
+hubspot.contacts.get(opts, cb)
+hubspot.contacts.getByEmail(email, cb)
+hubspot.contacts.getByEmailBatch(emails, cb)
+hubspot.contacts.getById(id, cb)
+hubspot.contacts.getByIdBatch(ids, cb)
+hubspot.contacts.update(id, data, cb)
+hubspot.contacts.create(data, cb)
+hubspot.contacts.createOrUpdateBatch(data, cb)
+hubspot.contacts.search(query, cb)
+hubspot.contacts.getRecent(cb)
+hubspot.contacts.createOrUpdate(email, data, cb)
+hubspot.contacts.properties.get(cb)
+```
 
 ### Deals
 
-    client.deals.get(opts, cb)
-    client.deals.getRecentlyModified(opts, cb)
-    client.deals.getRecentlyCreated(opts, cb)
-    client.deals.getById(id, cb)
-    client.deals.deleteById(id, cb)
-    client.deals.updateById(id, data, cb)
-    client.deals.create(data, cb)
-
-    client.deals.associate(id, objectType, associatedObjectId, cb)
-    client.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+```javascript
+hubspot.deals.get(opts, cb)
+hubspot.deals.getRecentlyModified(opts, cb)
+hubspot.deals.getRecentlyCreated(opts, cb)
+hubspot.deals.getById(id, cb)
+hubspot.deals.deleteById(id, cb)
+hubspot.deals.updateById(id, data, cb)
+hubspot.deals.create(data, cb)
+hubspot.deals.associate(id, objectType, associatedObjectId, cb)
+hubspot.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+```
 
 ### Engagements
 
-    client.engagements.create(data, cb)
+```javascript
+hubspot.engagements.create(data, cb)
+```
 
 ### Owners
 
-    client.owners.get(opts, cb)
+```javascript
+hubspot.owners.get(opts, cb)
+```
 
 ### Pipelines
 
-    client.pipelines.get(opts, cb)
+```javascript
+hubspot.pipelines.get(opts, cb)
+```
 
 ### Lists
 
-    client.lists.get(opts, cb)
-    client.lists.getOne(id, cb)
-    client.lists.getContacts(id, opts, cb)
-    client.lists.getRecentContacts(id, opts, cb)
-    client.lists.addContacts(id, contactBody, cb)
+```javascript
+hubspot.lists.get(opts, cb)
+hubspot.lists.getOne(id, cb)
+hubspot.lists.getContacts(id, opts, cb)
+hubspot.lists.getRecentContacts(id, opts, cb)
+hubspot.lists.addContacts(id, contactBody, cb)
+```
 
 ### Files
 
-    client.files.get(cb)
-    client.files.getOne(id, cb)
+```javascript
+hubspot.files.get(cb)
+hubspot.files.getOne(id, cb)
+```
 
 ### Email
 
-    client.subscriptions.get(opts, cb)
+```javascript
+hubspot.subscriptions.get(opts, cb)
+```
+```
 
 ### Email Events
 
-    client.campaigns.get(opts, cb)
-    client.campaigns.getOne(id, appId, cb)
-    client.campaigns.events(opts, cb)
+```javascript
+hubspot.campaigns.get(opts, cb)
+hubspot.campaigns.getOne(id, appId, cb)
+hubspot.campaigns.events(opts, cb)
+```
 
 ### Social Media
 
-    client.broadcasts.get(opts, cb)
+```javascript
+hubspot.broadcasts.get(opts, cb)
+```
 
 ## License
 
@@ -115,11 +160,8 @@ MIT
 ## Contributors
 
 Brian Falk @brainflake
-
 Tim Atkinson @timisbusy
-
 Tejas Manohar @tejasmanohar
-
 Krispin Schulz @kr1sp1n
-
 Filipe Ferreira @iTsFILIPOficial
+Paul Cothenet @pcothenet

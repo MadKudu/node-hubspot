@@ -4,10 +4,10 @@ const expect = chai.expect
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 
-describe('Owners', function () {
+describe('broadcasts', function () {
   describe('get', function () {
-    it('Should return all owners', function () {
-      return hubspot.owners.get().then(data => {
+    it('Should return details on a set of broadcast messages', function () {
+      return hubspot.broadcasts.get().then(data => {
         expect(data).to.be.a('array')
       })
     })

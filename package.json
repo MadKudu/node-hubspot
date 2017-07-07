@@ -1,20 +1,20 @@
 {
   "name": "hubspot",
-  "version": "0.4.6",
+  "version": "1.0.0-beta1",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test  --timeout 15000",
-    "watch-test": "mocha test --timeout 15000 --watch"
+    "test": "npm run lint && npm run mocha",
+    "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
+    "lint": "./node_modules/eslint/bin/eslint.js . --fix",
+    "watch-test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000 --watch"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/brainflake/node-hubspot.git"
   },
   "keywords": [
-    "hubspot",
-    "client",
-    "API"
+    "hubspot"
   ],
   "author": {
     "name": "Brian Falk",
@@ -22,11 +22,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "mocha": "^3.2.0",
-    "object.assign": "^4.0.4",
-    "request": "^2.79.0"
+    "debug": "2.6.8",
+    "lodash": "4.17.4",
+    "request": "^2.79.0",
+    "request-promise": "4.2.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0"
+    "chai": "4.0.2",
+    "eslint": "4.1.1",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.6.1",
+    "eslint-plugin-node": "5.1.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "mocha": "3.4.2"
   }
 }

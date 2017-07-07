@@ -1,155 +1,148 @@
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai')
+const expect = chai.expect
 
-var Client = require('../index.js');
-var client = new Client();
-var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
-client.useKey(api_key);
-
+const Hubspot = require('..')
+const hubspot = new Hubspot({ apiKey: 'demo' })
 
 describe('Deals', function () {
-  describe('Get All Deals', function(){
-    it('Should return deal properties', function (done) {
-      client.deals.get(function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(data).to.be.a('object');
-        expect(data.deals).to.be.a('array');
-        done();
+  describe('get', function () {
+    it('Should return deal properties', function () {
+      return hubspot.deals.get().then(data => {
+        expect(data).to.be.a('object')
+        expect(data.deals).to.be.an('array')
       })
-    });
-  });
+    })
+  })
 
-  describe('Recently Created', function () {
-
-    it('Returns Recently Created Deals', function (done) {
-      client.deals.getRecentlyCreated(function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(data.results).to.be.a('array');
-        expect(data.hasMore).to.equal(false);
-        done();
+  describe('getRecentlyCreated', function () {
+    it('Returns Recently Created Deals', function () {
+      return hubspot.deals.getRecentlyCreated().then(data => {
+        // console.log(data)
+        expect(data.results).to.be.an('array')
+        expect(data.hasMore).to.equal(true)
       })
-    });
+    })
+  })
 
-  });
-
-  describe('Recently Modified', function () {
-
-    it('Returns Recently Modified Deals', function (done) {
-      client.deals.getRecentlyModified(function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(data.results).to.be.a('array');
-        expect(data.hasMore).to.equal(false);
-        done();
+  describe('getRecentlyModified', function () {
+    it('Returns Recently Modified Deals', function () {
+      return hubspot.deals.getRecentlyModified().then(data => {
+        expect(data.results).to.be.an('array')
+        expect(data.hasMore).to.equal(true)
       })
-    });
-  });
+    })
+  })
 
-  describe('Get By Id', function () {
-    it('Returns the entire deal, including all of it\'s properties', function (done) {
-      client.deals.getById(3865198,function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(404);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.equal('Deal does not exist');
-        done();
-      })
-    });
-  });
-  describe('Delete By Id', function () {
-    it('Returns object', function (done) {
-      client.deals.deleteById(10444744,function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(204);
-        done();
-      })
-    });
-  });
+  describe('getById', function () {
+    let deal_id
 
-  describe('Update By Id', function () {
-    it('Returns the entire deal profile', function (done) {
-      client.deals.updateById(10444744, {
-        "properties": [{"name": "amount", "value": "70000"}]
-      }, function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(404);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.equal('No deal found for dealId=10444744 portalId=2837874');
-        done();
+    before(function () {
+      return hubspot.deals.get().then(data => {
+        deal_id = data.deals[0].dealId
       })
-    });
-  });
+    })
+    it('Returns the entire deal, including all of it\'s properties', function () {
+      return hubspot.deals.getById(deal_id).then(data => {
+        expect(data).to.be.an('object')
+      })
+    })
+  })
 
-  describe('Create', function () {
-    it('Returns a 200 with the newly created Deal', function (done) {
-      client.deals.create({
-        "associations": {
-          "associatedCompanyIds": [
-            8954037
-          ],
-          "associatedVids": [
-            27136
-          ]
-        },
-        "portalId": 62515,
-        "properties": [
+  describe('deleteById', function () {
+    let deal_id
+
+    before(function () {
+      return hubspot.deals.get().then(data => {
+        deal_id = data.deals[0].dealId
+      })
+    })
+
+    it('should delete a deal by Id', function () {
+      return hubspot.deals.deleteById(deal_id).then(data => {
+        expect(data).to.be.an('undefined')
+      })
+    })
+  })
+
+  describe('updateById', function () {
+    let deal_id
+
+    before(function () {
+      return hubspot.deals.get().then(data => {
+        deal_id = data.deals[0].dealId
+      })
+    })
+
+    it('Returns the entire deal profile', function () {
+      return hubspot.deals.updateById(deal_id, {
+        'properties': [{'name': 'dealname', 'value': 'MadKudu'}]
+      }).then(data => {
+        expect(data).to.be.an('object')
+      })
+    })
+  })
+
+  describe('create', function () {
+    it('Returns a 200 with the newly created Deal', function () {
+      return hubspot.deals.create({
+        // 'associations': {
+        //   'associatedCompanyIds': [
+        //     8954037
+        //   ],
+        //   'associatedVids': [
+        //     27136
+        //   ]
+        // },
+        'portalId': 62515,
+        'properties': [
           {
-            "value": "Tim's Newer Deal",
-            "name": "dealname"
+            'value': 'MadKudu',
+            'name': 'dealname'
           },
           {
-            "value": "appointmentscheduled",
-            "name": "dealstage"
+            'value': 'appointmentscheduled',
+            'name': 'dealstage'
           },
           {
-            "value": "default",
-            "name": "pipeline"
+            'value': 'default',
+            'name': 'pipeline'
+          },
+          // {
+          //   'value': '24',
+          //   'name': 'hubspot_owner_id'
+          // },
+          {
+            'value': Date.now(),
+            'name': 'closedate'
           },
           {
-            "value": "24",
-            "name": "hubspot_owner_id"
+            'value': '60000',
+            'name': 'amount'
           },
           {
-            "value": 1409443200000,
-            "name": "closedate"
-          },
-          {
-            "value": "60000",
-            "name": "amount"
-          },
-          {
-            "value": "newbusiness",
-            "name": "dealtype"
+            'value': 'newbusiness',
+            'name': 'dealtype'
           }
         ]
-      }, function(err, data) {
-        if (err) { throw err; }
-        expect(data).to.be.a('object');
-        done();
+      }).then(data => {
+        expect(data).to.be.a('object')
       })
-    });
-  });
+    })
+  })
 
-  describe('Associate', function () {
-    it('Returns a 204 response if successful.', function (done) {
-      client.deals.associate(1126609, 'CONTACT', 394455, function(err, data) {
-        if (err) { throw err; }
-        expect(data).to.be.a('object');
-        done();
-      })
-    });
-  });
+  // describe('Associate', function () {
+  //   it('Returns a 204 response if successful.', function () {
+  //     return hubspot.deals.associate(1126609, 'CONTACT', 394455).then(data => {
+  //       expect(data).to.be.a('object')
+  //     })
+  //   })
+  // })
 
-  describe('Remove Association', function () {
-    it('Returns a 200 response if successful.', function (done) {
-      client.deals.removeAssociation(1126609, 'CONTACT', 394455, function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(204);
-        done();
-      })
-    });
-  });
-
-});
+  // describe('Remove Association', function () {
+  //   it('Returns a 200 response if successful.', function () {
+  //     return hubspot.deals.removeAssociation(1126609, 'CONTACT', 394455).then(data => {
+  //       expect(res.statusCode).to.equal(204)
+  //     })
+  //   })
+  // })
+})
