@@ -81,7 +81,16 @@ hubspot.contacts.createOrUpdateBatch(data, cb)
 hubspot.contacts.search(query, cb)
 hubspot.contacts.getRecent(cb)
 hubspot.contacts.createOrUpdate(email, data, cb)
+```
+
+### Contact properties
+
+```javascript
 hubspot.contacts.properties.get(cb)
+hubspot.contacts.properties.getByName(name, cb)
+hubspot.contacts.properties.create(data, cb)
+hubspot.contacts.properties.update(name, data, cb)
+hubspot.contacts.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Deals
