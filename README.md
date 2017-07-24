@@ -71,6 +71,7 @@ npm install hubspot
 
 ### Engagements
 
+    client.engagements.get(ops, cb)
     client.engagements.create(data, cb)
 
 ### Owners
