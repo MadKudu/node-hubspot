@@ -1,6 +1,6 @@
 {
   "name": "hubspot",
-  "version": "1.0.0-beta5",
+  "version": "1.0.0-beta6",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
@@ -22,18 +22,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "debug": "2.6.8",
+    "debug": "3.0.0",
     "lodash": "4.17.4",
+    "request": "2.81.0",
     "request-promise": "4.2.1"
   },
   "devDependencies": {
-    "chai": "4.0.2",
-    "eslint": "4.1.1",
+    "chai": "4.1.1",
+    "eslint": "4.4.1",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.6.1",
-    "eslint-plugin-node": "5.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "5.1.1",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "3.0.1",
-    "mocha": "3.4.2"
+    "mocha": "3.5.0"
   }
 }
