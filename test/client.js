@@ -45,4 +45,29 @@ describe('client', function () {
       })
     })
   })
+
+  describe('OAuth2 - basic', function () {
+    if (!process.env.access_token) { return } // hard to reproduce on CI. local testing only for now
+
+    before(() => {
+      hubspot = new Hubspot({ accessToken: process.env.access_token })
+    })
+
+    // can't figure out the scope for this
+
+    // it('should return the api limit', function () {
+    //   return hubspot.getApiLimit().then(data => {
+    //     // console.log(data)
+    //     expect(data).to.be.an('object')
+    //     expect(data.usageLimit).to.be.a('number')
+    //     expect(data.currentUsage).to.be.a('number')
+    //   })
+    // })
+
+    it('should return the api limit', function () {
+      return hubspot.contacts.get().then(data => { // access_key needs contacts scope
+        expect(data.contacts).to.be.an('array')
+      })
+    })
+  })
 })
