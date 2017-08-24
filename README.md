@@ -1,113 +1,240 @@
 # node-hubspot
 [![Build Status](https://api.travis-ci.org/brainflake/node-hubspot.svg)](https://travis-ci.org/brainflake/node-hubspot)
-[![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
 [![Code Climate](https://codeclimate.com/github/brainflake/node-hubspot/badges/gpa.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
 [![Test Coverage](https://codeclimate.com/github/brainflake/node-hubspot/badges/coverage.svg)](https://codeclimate.com/github/brainflake/node-hubspot/coverage)
 [![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
+[![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
 
-Node.js wrapper for the HubSpot API
+node.js wrapper for the HubSpot API
+
+## Upgrade to 1.0
+
+Version 1.0 was released on 2017-08-23 and included breaking changes. See the [Changelog](./changelog.md) for details.
+If you need help upgrading, please open an issue
 
 ## Installing
 
+```shell
 npm install hubspot
+```
+
+## Instantiate client
+
+```javascript
+const Hubspot = require('hubspot');
+const hubspot = new Hubspot({ apiKey: 'abc' });
+```
+
+You can also authenticate via token:
+
+```javascript
+const hubspot = new Hubspot({ accessToken: 'abc' });
+```
+
+To change the base url
+
+```javascript
+const hubspot = new Hubspot({ accessToken: 'abc', baseUrl: 'https://some-url' });
+```
+
+If you're an app developer, you can also instantiate a client with your app details and a refresh_token and obtain a new accessToken:
+```javascript
+const hubspot = new Hubspot({
+  clientId: ...,
+  clientSecret: ...,
+  redirectUri: ...,
+  refreshToken: ...
+})
+return hubspot.refreshAccessToken()
+  .then(results => {
+    console.log(results.access_token)
+    console.log(hubspot.accessToken) // this assigns the new accessToken to the client, so your client is ready to use
+    return hubspot.contacts.get()
+  })
+```
 
 ## Usage
 
-    var Client = require('hubspot');
+And then use the API method via:
 
-    var client = new Client();
+```javascript
+hubspot.contacts.get(options)
+  .then(results => {
+    console.log(results)
+  }).catch(err => {
+    console.error(err)
+  })
+```
 
-    /*
-     * You can use either a key OR a token
-     */
-    if (config.key) {
-      client.useKey(config.key);
-    } else if (config.token) {
-      client.useToken(config.token);
-    }
+or if you prefer callbacks:
 
-    client.campaigns.get(function(err, res) {
-      if (err) { throw err; }
-      console.log(res);
-    });
+```javascript
+hubspot.contacts.get(function(err, results) {
+  if (err) { console.error(err) }
+  console.log(results);
+});
+```
 
 ## Available Methods
 
 ### Companies
 
-    client.companies.getById(id, cb)
-    client.companies.getRecentlyCreated(opts, cb)
-    client.companies.getByDomain(domain, cb)
-    client.companies.create(data, cb)
-    client.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+```javascript
+hubspot.companies.get(opts, cb)
+hubspot.companies.getById(id, cb)
+hubspot.companies.getRecentlyCreated(opts, cb)
+hubspot.companies.getRecentlyModified(opts, cb)
+hubspot.companies.getByDomain(domain, cb)
+hubspot.companies.create(data, cb)
+hubspot.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+```
 
 ### Contacts
 
-    client.contacts.get(opts, cb)
-    client.contacts.getByEmail(email, cb)
-    client.contacts.getByEmailBatch(emails, cb)
-    client.contacts.getById(id, cb)
-    client.contacts.getByIdBatch(ids, cb)
-    client.contacts.update(id, data, cb)
-    client.contacts.create(data, cb)
-    client.contacts.createOrUpdateBatch(data, cb)
-    client.contacts.search(query, cb)
-    client.contacts.getRecent(cb)
-    client.contacts.createOrUpdate(email, data, cb)
-    client.contacts.properties.get(cb)
+```javascript
+hubspot.contacts.get(opts, cb)
+hubspot.contacts.getByEmail(email, cb)
+hubspot.contacts.getByEmailBatch(emails, cb)
+hubspot.contacts.getById(id, cb)
+hubspot.contacts.getByIdBatch(ids, cb)
+hubspot.contacts.getByToken(utk, cb)
+hubspot.contacts.update(id, data, cb)
+hubspot.contacts.create(data, cb)
+hubspot.contacts.createOrUpdateBatch(data, cb)
+hubspot.contacts.search(query, cb)
+hubspot.contacts.getRecent(cb)
+hubspot.contacts.createOrUpdate(email, data, cb)
+```
+
+### Contact properties
+
+```javascript
+hubspot.contacts.properties.get(cb)
+hubspot.contacts.properties.getByName(name, cb)
+hubspot.contacts.properties.create(data, cb)
+hubspot.contacts.properties.update(name, data, cb)
+hubspot.contacts.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
 
 ### Deals
 
-    client.deals.get(opts, cb)
-    client.deals.getRecentlyModified(opts, cb)
-    client.deals.getRecentlyCreated(opts, cb)
-    client.deals.getById(id, cb)
-    client.deals.deleteById(id, cb)
-    client.deals.updateById(id, data, cb)
-    client.deals.create(data, cb)
-
-    client.deals.associate(id, objectType, associatedObjectId, cb)
-    client.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+```javascript
+hubspot.deals.get(opts, cb)
+hubspot.deals.getRecentlyModified(opts, cb)
+hubspot.deals.getRecentlyCreated(opts, cb)
+hubspot.deals.getById(id, cb)
+hubspot.deals.deleteById(id, cb)
+hubspot.deals.updateById(id, data, cb)
+hubspot.deals.create(data, cb)
+hubspot.deals.associate(id, objectType, associatedObjectId, cb)
+hubspot.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+```
 
 ### Engagements
 
-    client.engagements.get(ops, cb)
-    client.engagements.create(data, cb)
+```javascript
+hubspot.engagements.create(data, cb)
+```
 
 ### Owners
 
-    client.owners.get(opts, cb)
+```javascript
+hubspot.owners.get(opts, cb)
+```
 
 ### Pipelines
 
-    client.pipelines.get(opts, cb)
+```javascript
+hubspot.pipelines.get(opts, cb)
+```
 
 ### Lists
 
-    client.lists.get(opts, cb)
-    client.lists.getOne(id, cb)
-    client.lists.getContacts(id, opts, cb)
-    client.lists.getRecentContacts(id, opts, cb)
-    client.lists.addContacts(id, contactBody, cb)
+```javascript
+hubspot.lists.get(opts, cb)
+hubspot.lists.getOne(id, cb)
+hubspot.lists.getContacts(id, opts, cb)
+hubspot.lists.getRecentContacts(id, opts, cb)
+hubspot.lists.addContacts(id, contactBody, cb)
+```
 
 ### Files
 
-    client.files.get(cb)
-    client.files.getOne(id, cb)
+```javascript
+hubspot.files.get(cb)
+hubspot.files.getOne(id, cb)
+```
 
 ### Email
 
-    client.subscriptions.get(opts, cb)
+```javascript
+hubspot.subscriptions.get(opts, cb)
+```
+```
 
 ### Email Events
 
-    client.campaigns.get(opts, cb)
-    client.campaigns.getOne(id, appId, cb)
-    client.campaigns.events(opts, cb)
+```javascript
+hubspot.campaigns.get(opts, cb)
+hubspot.campaigns.getOne(id, appId, cb)
+hubspot.campaigns.events(opts, cb)
+```
 
 ### Social Media
 
-    client.broadcasts.get(opts, cb)
+```javascript
+hubspot.broadcasts.get(opts, cb)
+```
+
+### OAuth
+
+#### Obtain your authorization url
+
+```javascript
+const params = {
+  client_id: 'your_client_id',
+  scopes: 'some scopes',
+  redirect_uri: 'take_me_to_the_ballpark'
+}
+const uri = hubspot.oauth.getAuthorizationUrl(params)
+```
+
+#### Obtain your authorization url
+
+```javascript
+const params = {
+  client_id: 'your_client_id',
+  scopes: 'some scopes',
+  redirect_uri: 'take_me_to_the_ballpark'
+}
+const uri = hubspot.oauth.getAuthorizationUrl(params)
+```
+
+#### Obtain an access token from an authorization_code
+
+```javascript
+const hubspot = new Hubspot({
+  clientId: '',
+  clientSecret: '',
+  redirectUri: ''
+})
+return hubspot.oauth.getAccessToken({
+  code: 'abc' // the code you received from the oauth flow
+}).then(...)
+```
+
+You can also pass the constructor directly as parameters (although with a slighlty awkward case change)
+
+```javascript
+const params = {
+  code: 'abc' // the code you received from the oauth flow
+  client_id: '',
+  client_secret: '',
+  redirect_uri: ''
+}
+const hubspot = new Hubspot(params)
+return hubspot.oauth.getAccessToken(params).then(...)
+```
 
 ## License
 
@@ -116,11 +243,10 @@ MIT
 ## Contributors
 
 Brian Falk @brainflake
-
 Tim Atkinson @timisbusy
-
 Tejas Manohar @tejasmanohar
-
 Krispin Schulz @kr1sp1n
-
 Filipe Ferreira @iTsFILIPOficial
+Paul Cothenet @pcothenet
+Nick Mason @masonator
+Mikael Puittinen @mpuittinen
