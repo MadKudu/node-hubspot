@@ -242,11 +242,12 @@ MIT
 
 ## Contributors
 
-Brian Falk @brainflake
-Tim Atkinson @timisbusy
-Tejas Manohar @tejasmanohar
-Krispin Schulz @kr1sp1n
-Filipe Ferreira @iTsFILIPOficial
-Paul Cothenet @pcothenet
-Nick Mason @masonator
-Mikael Puittinen @mpuittinen
+- Brian Falk @brainflake
+- Tim Atkinson @timisbusy
+- Tejas Manohar @tejasmanohar
+- Krispin Schulz @kr1sp1n
+- Filipe Ferreira @iTsFILIPOficial
+- Sam Levan @samlevan
+- Paul Cothenet @pcothenet
+- Nick Mason @masonator
+- Mikael Puittinen @mpuittinen
