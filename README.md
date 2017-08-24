@@ -214,7 +214,6 @@ const hubspot = new Hubspot({
   redirectUri: ''
 })
 return hubspot.oauth.getAccessToken({
-  grant_type: 'authorization_code',
   code: 'abc' // the code you received from the oauth flow
 }).then(...)
 ```
@@ -223,7 +222,6 @@ You can also pass the constructor directly as parameters (although with a slighl
 
 ```javascript
 const params = {
-  grant_type: 'authorization_code', // optional (automatically set by the method)
   code: 'abc' // the code you received from the oauth flow
   client_id: '',
   client_secret: '',
