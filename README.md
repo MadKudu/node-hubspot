@@ -5,7 +5,7 @@
 [![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
 [![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
 
-Node.js wrapper for the HubSpot API
+node.js wrapper for the HubSpot API
 
 ## Installing
 
@@ -13,7 +13,7 @@ Node.js wrapper for the HubSpot API
 npm install @madkudu/hubspot
 ```
 
-## Usage
+## Instantiate client
 
 ```javascript
 const Hubspot = require('hubspot');
@@ -31,6 +31,24 @@ To change the base url
 ```javascript
 const hubspot = new Hubspot({ accessToken: 'abc', baseUrl: 'https://some-url' });
 ```
+
+If you're an app developer, you can also instantiate a client with your app details and a refresh_token and obtain a new accessToken:
+```javascript
+const hubspot = new Hubspot({
+  clientId: ...,
+  clientSecret: ...,
+  redirectUri: ...,
+  refreshToken: ...
+})
+return hubspot.refreshAccessToken()
+  .then(results => {
+    console.log(results.access_token)
+    console.log(hubspot.accessToken) // this assigns the new accessToken to the client, so your client is ready to use
+    return hubspot.contacts.get()
+  })
+```
+
+## Usage
 
 And then use the API method via:
 
@@ -161,6 +179,58 @@ hubspot.campaigns.events(opts, cb)
 
 ```javascript
 hubspot.broadcasts.get(opts, cb)
+```
+
+### OAuth
+
+#### Obtain your authorization url
+
+```javascript
+const params = {
+  client_id: 'your_client_id',
+  scopes: 'some scopes',
+  redirect_uri: 'take_me_to_the_ballpark'
+}
+const uri = hubspot.oauth.getAuthorizationUrl(params)
+```
+
+#### Obtain your authorization url
+
+```javascript
+const params = {
+  client_id: 'your_client_id',
+  scopes: 'some scopes',
+  redirect_uri: 'take_me_to_the_ballpark'
+}
+const uri = hubspot.oauth.getAuthorizationUrl(params)
+```
+
+#### Obtain an access token from an authorization_code
+
+```javascript
+const hubspot = new Hubspot({
+  clientId: '',
+  clientSecret: '',
+  redirectUri: ''
+})
+return hubspot.oauth.getAccessToken({
+  grant_type: 'authorization_code',
+  code: 'abc' // the code you received from the oauth flow
+}).then(...)
+```
+
+You can also pass the constructor directly as parameters (although with a slighlty awkward case change)
+
+```javascript
+const params = {
+  grant_type: 'authorization_code', // optional (automatically set by the method)
+  code: 'abc' // the code you received from the oauth flow
+  client_id: '',
+  client_secret: '',
+  redirect_uri: ''
+}
+const hubspot = new Hubspot(params)
+return hubspot.oauth.getAccessToken(params).then(...)
 ```
 
 ## License
