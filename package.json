@@ -1,6 +1,6 @@
 {
   "name": "hubspot",
-  "version": "1.0.0-beta8",
+  "version": "1.0.0-beta9",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
