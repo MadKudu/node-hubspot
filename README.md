@@ -7,10 +7,15 @@
 
 node.js wrapper for the HubSpot API
 
+## Upgrade to 1.0
+
+Version 1.0 was released on 2017-08-23 and included breaking changes. See the [Changelog](./changelog.md) for details.
+If you need help upgrading, please open an issue
+
 ## Installing
 
 ```shell
-npm install @madkudu/hubspot
+npm install hubspot
 ```
 
 ## Instantiate client
@@ -243,3 +248,5 @@ Tejas Manohar @tejasmanohar
 Krispin Schulz @kr1sp1n
 Filipe Ferreira @iTsFILIPOficial
 Paul Cothenet @pcothenet
+Nick Mason @masonator
+Mikael Puittinen @mpuittinen
