@@ -116,6 +116,13 @@ hubspot.contacts.properties.update(name, data, cb)
 hubspot.contacts.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
+### Pages
+
+```javascript
+// more opts can be found at https://developers.hubspot.com/docs/methods/pages/get_pages
+hubspot.pages.get(opts, cb); // eg: opts = {is_draft: false}
+```
+
 ### Deals
 
 ```javascript
