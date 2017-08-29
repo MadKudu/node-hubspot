@@ -177,7 +177,6 @@ hubspot.files.getOne(id, cb)
 ```javascript
 hubspot.subscriptions.get(opts, cb)
 ```
-```
 
 ### Email Events
 
