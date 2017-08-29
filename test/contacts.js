@@ -1,252 +1,278 @@
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai')
+const expect = chai.expect
 
-var Client = require('../index.js');
-var client = new Client();
-var api_key = '5e4e9b8c-9146-4d90-95eb-8fe94edd3175';
-client.useKey(api_key);
+const Hubspot = require('..')
+const hubspot = new Hubspot({ apiKey: 'demo' })
+const _ = require('lodash')
 
-
-describe('Contacts', function () {
-
-
-  describe('Get All Contacts', function(){
-    it('Should return contacts properties', function (done) {
-      client.contacts.get(function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(data).to.be.a('object');
-        expect(data.contacts).to.be.a('array');
-        done();
+describe('contacts', function () {
+  describe('get', function () {
+    it('should return a batch of contacts', function () {
+      return hubspot.contacts.get().then(data => {
+        expect(data).to.be.a('object')
+        expect(data.contacts).to.be.a('array')
+        expect(data.contacts[0]).to.be.an('object')
       })
-    });
-  });
+    })
 
-  describe('Get A Contact By Id', function(){
-    it('Should return a contact based on its id', function (done) {
-      client.contacts.getById(101,function(err, data, res) {
-        if (err) { throw err; }
-        expect(data).to.be.a('object');
-        // console.log(data);
-        expect(data.properties.company.value).to.equal('HubSpot');
-        done();
+    it('should return the number of contacts requested', function () {
+      const count = 10
+      return hubspot.contacts.get({ count: 10 }).then(data => {
+        expect(data).to.be.a('object')
+        expect(data.contacts).to.be.a('array')
+        expect(data.contacts).to.have.length(count)
       })
-    });
-  });
+    })
+  })
 
-    describe('Get A Contact By Id Batch', function(){
-        it('Should return a contact record based on a array of ids', function (done) {
-            client.contacts.getByIdBatch({
-                ids: [1, 2]
-            },function(err, data, res) {
-                if (err) { throw err; }
-                expect(res.statusCode).to.equal(200);
-                expect(res).to.be.defined;
-                done();
-            })
-        });
-    });
-
-    describe('Get A Contact By Email', function(){
-        it('Should return a contact record based on the email', function (done) {
-            client.contacts.getByEmail('testingapis@hubspot.com',function(err, data, res) {
-                if (err) { throw err; }
-                expect(res.statusCode).to.equal(200);
-                expect(data).to.be.a('object');
-                expect(data.properties).to.be.a('object');
-                done();
-            })
-        });
-    });
-
-  describe('Get A Contact By Email Batch', function(){
-    it('Should return a contact record based on a array of emails', function (done) {
-      client.contacts.getByEmailBatch({
-        emails: ['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']
-      },function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(200);
-        expect(res).to.be.a('object');
-        done();
+  describe('getRecentlyModified', function () {
+    it('should return last 100 updated contacts', function () {
+      return hubspot.contacts.getRecentlyModified().then(data => {
+        expect(data.contacts).to.be.an('array')
       })
-    });
-  });
+    })
+  })
 
-  describe('Update A Contact', function(){
-    it('Should update an existing contact', function (done) {
-      client.contacts.update(61571, {
-        "properties": [
+  describe('getRecentlyCreated', function () {
+    it('should return last 100 updated contacts', function () {
+      return hubspot.contacts.getRecentlyCreated().then(data => {
+        expect(data.contacts).to.be.an('array')
+      })
+    })
+  })
+
+  describe('getById', function () {
+    let contactId
+
+    before(function () {
+      return hubspot.contacts.get().then(data => {
+        contactId = data.contacts[0].vid
+      })
+    })
+
+    it('should return a contact based on its id', function () {
+      return hubspot.contacts.getById(contactId).then(data => {
+        expect(data.vid).to.equal(contactId)
+        expect(data.properties.company).to.be.an('object')
+      })
+    })
+  })
+
+  describe('getByIdBatch', function () {
+    let contactIds
+
+    before(function () {
+      return hubspot.contacts.get({ count: 10 }).then(data => {
+        // console.log(data)
+        contactIds = _.map(data.contacts, 'vid')
+      })
+    })
+
+    it('should return a contact record based on a array of ids', function () {
+      // console.log(contactIds)
+      return hubspot.contacts.getByIdBatch(contactIds).then(data => {
+        // console.log(data)
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property(contactIds[0])
+      })
+    })
+  })
+
+  describe('getByEmail', function () {
+    it('should return a contact record based on the email', function () {
+      return hubspot.contacts.getByEmail('testingapis@hubspot.com').then(data => {
+        expect(data).to.be.a('object')
+        expect(data.properties).to.be.a('object')
+      })
+    })
+  })
+
+  describe('getByEmailBatch', function () {
+    it('should return a contact record based on a array of emails', function () {
+      return hubspot.contacts.getByEmailBatch(['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']).then(data => {
+        // console.log(data)
+        expect(data).to.be.an('object')
+      })
+    })
+  })
+
+  describe('update', function () {
+    it('should update an existing contact', function () {
+      let contactId
+
+      before(function () {
+        return hubspot.contacts.get().then(data => {
+          contactId = data.contacts[0].vid
+        })
+      })
+
+      return hubspot.contacts.update(contactId, {
+        'properties': [
           {
-            "property": "email",
-            "value": "new-email@hubspot.com"
+            'property': 'email',
+            'value': 'new-email@hubspot.com'
           },
           {
-            "property": "firstname",
-            "value": "Updated",
-            "timestamp": 1419284759000
+            'property': 'firstname',
+            'value': 'Updated',
+            'timestamp': Date.now()
           },
           {
-            "property": "lastname",
-            "value": "Lead",
-            "timestamp": 1419284759000
+            'property': 'lastname',
+            'value': 'Lead',
+            'timestamp': Date.now()
           },
           {
-            "property": "website",
-            "value": "http://hubspot-updated-lead.com"
+            'property': 'website',
+            'value': 'http://hubspot-updated-lead.com'
           },
           {
-            "property": "lifecyclestage",
-            "value": "customer"
+            'property': 'lifecyclestage',
+            'value': 'customer'
           }
         ]
-      },function(err, data, res) {
-        if (err) { throw err; }
-        expect(data).to.be.a('object');
-        done();
+      }).then(data => {
+        expect(data).to.be.an('undefined')
       })
-    });
-  });
-  describe('Create or update', function(){
-    it('Should Create or Update a contact', function(done){
-      client.contacts.createOrUpdate('test@hubspot.com',
+    })
+  })
+
+  describe('createOrUpdate', function () {
+    it('should Create or Update a contact', function () {
+      return hubspot.contacts.createOrUpdate('test@hubspot.com',
         {
-          "properties": [
+          'properties': [
             {
-              "property": "email",
-              "value": "test@hubspot.com"
+              'property': 'email',
+              'value': 'test@hubspot.com'
             },
             {
-              "property": "firstname",
-              "value": "Matt"
+              'property': 'firstname',
+              'value': 'Matt'
             },
             {
-              "property": "lastname",
-              "value": "Schnitt"
+              'property': 'lastname',
+              'value': 'Schnitt'
             },
             {
-              "property": "website",
-              "value": "http://hubspot.com"
+              'property': 'website',
+              'value': 'http://hubspot.com'
             },
             {
-              "property": "company",
-              "value": "HubSpot"
+              'property': 'company',
+              'value': 'HubSpot'
             },
             {
-              "property": "phone",
-              "value": "555-122-2323"
+              'property': 'phone',
+              'value': '555-122-2323'
             },
             {
-              "property": "address",
-              "value": "25 First Street"
+              'property': 'address',
+              'value': '25 First Street'
             },
             {
-              "property": "city",
-              "value": "Cambridge"
+              'property': 'city',
+              'value': 'Cambridge'
             },
             {
-              "property": "state",
-              "value": "MA"
+              'property': 'state',
+              'value': 'MA'
             },
             {
-              "property": "zip",
-              "value": "02139"
+              'property': 'zip',
+              'value': '02139'
             }
           ]
-        }
-        ,function(err, data, res){
-          if (err) { throw err; }
-          expect(res.statusCode).to.equal(200);
-          expect(data).to.be.a('object');
-          done();
-        })
+        }).then(data => {
+        expect(data).to.be.an('object')
+      })
     })
-  });
+  })
 
-  describe('Create  A Contact', function(){
-    it('Should create a new contact', function (done) {
-      client.contacts.create({
-        "properties": [
+  describe('create', function () {
+    it('should create a new contact', function () {
+      return hubspot.contacts.create({
+        'properties': [
           {
-            "property": "email",
-            "value": "testingapis@hubspot.com"
+            'property': 'email',
+            'value': 'node-hubspot' + Date.now() + '@madkudu.com'
           },
           {
-            "property": "firstname",
-            "value": "Adrian"
+            'property': 'firstname',
+            'value': 'Try'
           },
           {
-            "property": "lastname",
-            "value": "Mott"
+            'property': 'lastname',
+            'value': 'MadKudu'
           },
           {
-            "property": "website",
-            "value": "http://hubspot.com"
+            'property': 'website',
+            'value': 'http://www.madkudu.com'
           },
           {
-            "property": "company",
-            "value": "HubSpot"
-          },
-          {
-            "property": "phone",
-            "value": "555-122-2323"
-          },
-          {
-            "property": "address",
-            "value": "25 First Street"
-          },
-          {
-            "property": "city",
-            "value": "Cambridge"
-          },
-          {
-            "property": "state",
-            "value": "MA"
-          },
-          {
-            "property": "zip",
-            "value": "02139"
+            'property': 'company',
+            'value': 'MadKudu'
           }
         ]
-      },function(err, data, res) {
-        if (err) { throw err; }
-        expect(res.statusCode).to.equal(409);
-        expect(data.status).to.equal('error');
-        expect(data.message).to.equal('Contact already exists');
-        done();
+      }).then(data => {
+        // console.log(data)
+        expect(data).to.be.an('object')
+        expect(data.properties.company.value).to.equal('MadKudu')
       })
-    });
-  });
+    })
 
-  describe('Create or Update Batch', function(){
-    it('should return some recent companies', function (done) {
-      client.contacts.createOrUpdateBatch(
-        [{"email":"testingapis@hubspot.com","properties":[{"property":"firstname","value":"Codey"},{"property":"lastname","value":"Huang"},{"property":"website","value":"http://hubspot.com"},{"property":"company","value":"HubSpot"},{"property":"phone","value":"555-122-2323"},{"property":"address","value":"25 First Street"},{"property":"city","value":"Cambridge"},{"property":"state","value":"MA"},{"property":"zip","value":"02139"}]},{"vid":"259429","properties":[{"property":"firstname","value":"Harper"},{"property":"lastname","value":"Wolfberg"},{"property":"website","value":"http://hubspot.com"},{"property":"company","value":"HubSpot"},{"property":"phone","value":"555-122-2323"},{"property":"address","value":"25 First Street"},{"property":"city","value":"Cambridge"},{"property":"state","value":"MA"},{"property":"zip","value":"02139"}]}],
-        function(err, data, res) {
-          if (err) { throw err; }
-          expect(res.statusCode).to.equal(202);
-          expect(data).to.equal(undefined);
-          done();
-        })
-    });
-  });
+    it('should fail if the contact already exists', function () {
+      return hubspot.contacts.create({
+        'properties': [
+          {
+            'property': 'email',
+            'value': 'node-hubspot@hubspot.com'
+          },
+          {
+            'property': 'firstname',
+            'value': 'Test'
+          }
+        ]
+      }).then(data => {
+        throw new Error('This should have failed')
+      }).catch(err => {
+        // console.log(err)
+        expect(err instanceof Error).to.equal(true)
+        expect(err.error.message).to.equal('Contact already exists')
+      })
+    })
+  })
 
-  describe('Search', function(){
-    it('should return contacts and some data associated with those contacts by the contact\'s email address or name.', function (done) {
-      client.contacts.search('example', function(err, data, res){
-        expect(res.statusCode).to.equal(200);
-        expect(data.contacts).to.be.a('array');
-        expect(data.query).to.equal('example');
-        done();
+  describe('createOrUpdateBatch', function () {
+    // this.timeout(10000)
+
+    let contacts
+
+    before(function () {
+      return hubspot.contacts.get().then(data => {
+        contacts = data.contacts
       })
-    });
-  });
-  describe('Get Recent', function(){
-    it('should return last 100 updated contacts', function (done) {
-      client.contacts.getRecent(function(err, data, res){
-        expect(res.statusCode).to.equal(200);
-        expect(data.contacts).to.be.a('array');
-        done();
+    })
+
+    it('should update a batch of company', function () {
+      const batch = _.map(contacts, contact => {
+        const update = { vid: contact.vid, properties: [ { property: 'company', value: 'MadKudu ' } ] }
+        return update
       })
-    });
-  });
-});
+      // console.log(batch)
+      return hubspot.contacts.createOrUpdateBatch(batch).then(data => {
+        // console.log(data)
+        expect(data).to.equal(undefined)
+      })
+    })
+  })
+
+  describe('search', function () {
+    it('should return contacts and some data associated with those contacts by the contact\'s email address or name.', function () {
+      return hubspot.contacts.search('example').then(data => {
+        expect(data.contacts).to.be.a('array')
+        expect(data.query).to.equal('example')
+      })
+    })
+  })
+})

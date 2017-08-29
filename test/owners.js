@@ -4,12 +4,11 @@ const expect = chai.expect
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 
-describe('Pipelines', function () {
+describe('Owners', function () {
   describe('get', function () {
-    it('Should return all deal pipelines for a given portal', function () {
-      return hubspot.pipelines.get().then(data => {
+    it('Should return all owners', function () {
+      return hubspot.owners.get().then(data => {
         expect(data).to.be.a('array')
-        expect(data[0]).to.have.a.property('pipelineId')
       })
     })
   })
