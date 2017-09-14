@@ -87,6 +87,7 @@ hubspot.companies.getRecentlyModified(opts, cb)
 hubspot.companies.getByDomain(domain, cb)
 hubspot.companies.create(data, cb)
 hubspot.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+hubspot.companies.update(id, data, cb)
 ```
 
 ### Contacts
