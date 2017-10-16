@@ -75,6 +75,12 @@ hubspot.contacts.get(function(err, results) {
 });
 ```
 
+## API limits
+
+HubSpot has relatively stringent API limits (40,000 per day by default).
+To prevent from consuming it all-at-once, this library checks API quotas regularly and will fail requests if the total is too close to the max.
+By default
+
 ## Available Methods
 
 ### Companies
