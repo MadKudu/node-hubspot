@@ -67,4 +67,16 @@ describe('contacts.properties', function () {
       })
     })
   })
+
+  describe('update', function () {
+    property.label = 'MadKudo Customer Fit'
+
+    it('should update the property', function () {
+      return hubspot.contacts.properties.update(property.name, property).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property('name')
+        expect(data.label).to.equal(property.label)
+      })
+    })
+  })
 })
