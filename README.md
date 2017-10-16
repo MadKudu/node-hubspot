@@ -90,6 +90,16 @@ hubspot.companies.addContactToCompany(data, cb); // data = { companyId: 123, con
 hubspot.companies.update(id, data, cb)
 ```
 
+### Company properties
+
+```javascript
+hubspot.companies.properties.get(cb)
+hubspot.companies.properties.getByName(name, cb)
+hubspot.companies.properties.create(data, cb)
+hubspot.companies.properties.update(name, data, cb)
+hubspot.companies.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
+
 ### Contacts
 
 ```javascript
