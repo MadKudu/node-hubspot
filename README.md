@@ -97,7 +97,7 @@ hubspot.companies.properties.get(cb)
 hubspot.companies.properties.getByName(name, cb)
 hubspot.companies.properties.create(data, cb)
 hubspot.companies.properties.update(name, data, cb)
-hubspot.companies.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.companies.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Contacts
@@ -124,7 +124,7 @@ hubspot.contacts.properties.get(cb)
 hubspot.contacts.properties.getByName(name, cb)
 hubspot.contacts.properties.create(data, cb)
 hubspot.contacts.properties.update(name, data, cb)
-hubspot.contacts.properties.update(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.contacts.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Pages
