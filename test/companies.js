@@ -108,7 +108,7 @@ describe('companies', function () {
     })
   })
 
-  describe.only('updateBatch', function () {
+  describe('updateBatch', function () {
     let companies
 
     before(function () {

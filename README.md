@@ -86,8 +86,9 @@ hubspot.companies.getRecentlyCreated(opts, cb)
 hubspot.companies.getRecentlyModified(opts, cb)
 hubspot.companies.getByDomain(domain, cb)
 hubspot.companies.create(data, cb)
-hubspot.companies.addContactToCompany(data, cb); // data = { companyId: 123, contactVid: 123 }
+hubspot.companies.addContactToCompany(data, cb) // data = { companyId: 123, contactVid: 123 }
 hubspot.companies.update(id, data, cb)
+hubspot.companies.updateBatch(data, cb) // data = [{ objectId: 123, properties: [] }]
 ```
 
 ### Company properties
@@ -111,7 +112,7 @@ hubspot.contacts.getByIdBatch(ids, cb)
 hubspot.contacts.getByToken(utk, cb)
 hubspot.contacts.update(id, data, cb)
 hubspot.contacts.create(data, cb)
-hubspot.contacts.createOrUpdateBatch(data, cb)
+hubspot.contacts.createOrUpdateBatch(data, cb) // data = [{ vid/email: '', properties: [] }]
 hubspot.contacts.search(query, cb)
 hubspot.contacts.getRecent(cb)
 hubspot.contacts.createOrUpdate(email, data, cb)
