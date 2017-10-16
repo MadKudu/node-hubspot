@@ -3,6 +3,7 @@ var expect = chai.expect
 
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
+const _ = require('lodash')
 
 describe('companies', function () {
   describe('get', function () {
@@ -103,6 +104,26 @@ describe('companies', function () {
         expect(data).to.have.property('vidOffset')
         expect(data).to.have.property('hasMore')
         expect(data.vids).to.be.an('array')
+      })
+    })
+  })
+
+  describe.only('updateBatch', function () {
+    let companies
+
+    before(function () {
+      return hubspot.companies.get().then(data => {
+        companies = data.companies
+      })
+    })
+
+    it('should update a batch of company', function () {
+      const batch = _.map(companies, company => {
+        const update = { objectId: company.companyId, properties: [ { name: 'about_us', value: 'Thumbs up!' } ] }
+        return update
+      })
+      return hubspot.companies.updateBatch(batch).then(data => {
+        expect(data).to.equal(undefined)
       })
     })
   })
