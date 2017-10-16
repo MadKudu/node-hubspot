@@ -86,6 +86,27 @@ describe('companies', function () {
     })
   })
 
+  describe('getContactIds', function () {
+    let companyId
+
+    before(function () {
+      return hubspot.companies.get().then(data => {
+        companyId = data.companies[0].companyId
+      })
+    })
+
+    it('should return a list of contact vids', function () {
+      const payload = { count: 10 }
+      return hubspot.companies.getContactIds(companyId, payload).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('vids')
+        expect(data).to.have.property('vidOffset')
+        expect(data).to.have.property('hasMore')
+        expect(data.vids).to.be.an('array')
+      })
+    })
+  })
+
   // describe('addContactToCompany', function () {
   //   it('should add contact to a specific company', function () {
   //     return hubspot.companies.addContactToCompany({ companyId: 322620707, contactVid: 123123 }).then(data => {
