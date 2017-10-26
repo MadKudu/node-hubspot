@@ -119,7 +119,8 @@ hubspot.contacts.update(id, data, cb)
 hubspot.contacts.create(data, cb)
 hubspot.contacts.createOrUpdateBatch(data, cb)
 hubspot.contacts.search(query, cb)
-hubspot.contacts.getRecent(cb)
+hubspot.contacts.getRecentlyCreated(cb)
+hubspot.contacts.getRecentlyModified(cb)
 hubspot.contacts.createOrUpdate(email, data, cb)
 ```
 
@@ -158,6 +159,8 @@ hubspot.deals.removeAssociation(id, objectType, associatedObjectId, cb)
 
 ```javascript
 hubspot.engagements.create(data, cb)
+hubspot.engagements.get(opts, cb)
+hubspot.engagements.getAssociated(objectType, objectId, opts, cb)
 ```
 
 ### Owners
