@@ -100,7 +100,7 @@ hubspot.companies.updateBatch(data, cb) // data = [{ objectId: 123, properties: 
 ### Company properties
 
 ```javascript
-hubspot.companies.properties.get(cb)
+hubspot.companies.properties.get(query, cb) // query is optional
 hubspot.companies.properties.getByName(name, cb)
 hubspot.companies.properties.create(data, cb)
 hubspot.companies.properties.update(name, data, cb)
