@@ -39,6 +39,57 @@ describe('contacts.properties', function () {
     })
   })
 
+  describe('groups', () => {
+    describe('getGroups', () => {
+      it('should return groups', function () {
+        return hubspot.contacts.properties.getGroups().then(data => {
+          // console.log(data)
+          expect(data).to.be.an('array')
+          expect(data[0]).to.have.a.property('name')
+        })
+      })
+    })
+
+    describe('createGroup', () => {
+      let name, createdGroup;
+
+      beforeEach(() => {
+        name = 'test_group_' + Date.now();
+
+        return hubspot.contacts.properties.createGroup({
+          name,
+          displayName: 'Test Group'
+        }).then(data => {
+          createdGroup = data
+        })
+
+      });
+
+      afterEach(done => {
+        // ignore error in the case where group was deleted
+        hubspot.contacts.properties.deleteGroup(name).then(() => done(), () => done())
+      });
+
+      it('resolves with the created group', () => {
+        expect(createdGroup).to.be.an('object')
+        expect(createdGroup).to.have.a.property('name')
+        expect(createdGroup).to.have.a.property('displayName')
+      });
+
+      it('can update the group with updateGroup', () => {
+        return hubspot.contacts.properties.updateGroup(name, { displayName: 'Updated display name' }).then(data => {
+          expect(data).to.be.an('object')
+          expect(data).to.have.a.property('name')
+          expect(data).to.have.a.property('displayName')
+        })
+      });
+
+      it('can delete the group with deleteGroup', () => {
+        return hubspot.contacts.properties.deleteGroup(name)
+      });
+    })
+  })
+
   describe('getByName', function () {
     let propertyName
 
