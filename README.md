@@ -133,6 +133,10 @@ hubspot.contacts.properties.getByName(name, cb)
 hubspot.contacts.properties.create(data, cb)
 hubspot.contacts.properties.update(name, data, cb)
 hubspot.contacts.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.contacts.properties.getGroups(cb) // => [ {name: '...', displayName: '...'}, ...]
+hubspot.contacts.properties.createGroup({name, displayName}, cb)
+hubspot.contacts.properties.updateGroup(name, {displayName}, cb)
+hubspot.contacts.properties.deleteGroup(name, cb)
 ```
 
 ### Pages
