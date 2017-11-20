@@ -51,10 +51,10 @@ describe('contacts.properties', function () {
     })
 
     describe('createGroup', () => {
-      let name, createdGroup;
+      let name, createdGroup
 
       beforeEach(() => {
-        name = 'test_group_' + Date.now();
+        name = 'test_group_' + Date.now()
 
         return hubspot.contacts.properties.createGroup({
           name,
@@ -62,19 +62,18 @@ describe('contacts.properties', function () {
         }).then(data => {
           createdGroup = data
         })
-
-      });
+      })
 
       afterEach(done => {
         // ignore error in the case where group was deleted
         hubspot.contacts.properties.deleteGroup(name).then(() => done(), () => done())
-      });
+      })
 
       it('resolves with the created group', () => {
         expect(createdGroup).to.be.an('object')
         expect(createdGroup).to.have.a.property('name')
         expect(createdGroup).to.have.a.property('displayName')
-      });
+      })
 
       it('can update the group with updateGroup', () => {
         return hubspot.contacts.properties.updateGroup(name, { displayName: 'Updated display name' }).then(data => {
@@ -82,11 +81,11 @@ describe('contacts.properties', function () {
           expect(data).to.have.a.property('name')
           expect(data).to.have.a.property('displayName')
         })
-      });
+      })
 
       it('can delete the group with deleteGroup', () => {
         return hubspot.contacts.properties.deleteGroup(name)
-      });
+      })
     })
   })
 
