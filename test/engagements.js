@@ -15,6 +15,17 @@ describe('Engagements', function () {
     })
   })
 
+  describe('Get Recent Engagements', function () {
+    it('Should return engagement properties', function () {
+      return hubspot.engagements.getRecentlyModified().then(data => {
+        expect(data).to.be.an('object')
+        expect(data.results).to.be.a('array')
+        expect(data.results[0]).to.have.a.property('engagement')
+        expect(data.total).to.be.above(0)
+      })
+    })
+  })
+
   describe('Get Associated Engagements', function () {
     let contactId
 
