@@ -22,19 +22,19 @@
   },
   "license": "MIT",
   "dependencies": {
-    "debug": "3.0.0",
+    "debug": "^3.1.0",
     "lodash": "4.17.4",
-    "request": "2.81.0",
-    "request-promise": "4.2.1"
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "chai": "4.1.1",
-    "eslint": "4.4.1",
+    "chai": "^4.1.2",
+    "eslint": "^4.11.0",
     "eslint-config-standard": "10.2.1",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-node": "5.1.1",
-    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "3.0.1",
-    "mocha": "3.5.0"
+    "mocha": "^4.0.1"
   }
 }
