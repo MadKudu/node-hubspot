@@ -5,7 +5,7 @@
 [![Issue Count](https://codeclimate.com/github/brainflake/node-hubspot/badges/issue_count.svg)](https://codeclimate.com/github/brainflake/node-hubspot)
 [![Dependencies](https://david-dm.org/brainflake/node-hubspot.svg)](https://david-dm.org/brainflake/node-hubspot)
 
-node.js wrapper for the HubSpot API
+Javascript / node.js wrapper for the [HubSpot API](https://developers.hubspot.com/docs/overview)
 
 ## Upgrade to 1.0
 
