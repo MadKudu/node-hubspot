@@ -87,6 +87,15 @@ describe('companies', function () {
     })
   })
 
+  describe('delete', function () {
+    it('can delete', function () {
+      const payload = { 'properties': [{'name': 'name', 'value': 'A company name'}, {'name': 'description', 'value': 'A company description'}] }
+      return hubspot.companies.create(payload).then(data => {
+        return hubspot.companies.delete(data.companyId)
+      })
+    })
+  })
+
   describe('getContactIds', function () {
     let companyId
 
