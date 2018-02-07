@@ -243,6 +243,37 @@ describe('contacts', function () {
     })
   })
 
+  describe('delete', function () {
+    it('can delete', function () {
+      return hubspot.contacts.create({
+        'properties': [
+          {
+            'property': 'email',
+            'value': 'node-hubspot' + Date.now() + '@madkudu.com'
+          },
+          {
+            'property': 'firstname',
+            'value': 'Try'
+          },
+          {
+            'property': 'lastname',
+            'value': 'MadKudu'
+          },
+          {
+            'property': 'website',
+            'value': 'http://www.madkudu.com'
+          },
+          {
+            'property': 'company',
+            'value': 'MadKudu'
+          }
+        ]
+      }).then(data => {
+        return hubspot.contacts.delete(data.vid)
+      })
+    })
+  })
+
   describe('createOrUpdateBatch', function () {
     // this.timeout(10000)
 

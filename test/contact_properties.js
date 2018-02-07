@@ -118,6 +118,27 @@ describe('contacts.properties', function () {
     })
   })
 
+  describe('delete', function () {
+    const testDeleteProperty = {
+      name: 'delete_test_property_' + Date.now(),
+      label: 'node-hubspot test property',
+      groupName: 'contactinformation',
+      description: 'Test property',
+      type: 'string',
+      fieldType: 'text',
+      formField: false,
+      displayOrder: -1,
+      options: []
+    }
+    it('can delete', function () {
+      return hubspot.contacts.properties.upsert(testDeleteProperty).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property('name')
+        return hubspot.contacts.properties.delete(testDeleteProperty.name)
+      })
+    })
+  })
+
   describe('update', function () {
     property.label = 'MadKudo Customer Fit'
 

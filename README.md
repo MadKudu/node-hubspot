@@ -95,6 +95,7 @@ hubspot.companies.create(data, cb)
 hubspot.companies.addContactToCompany(data, cb) // data = { companyId: 123, contactVid: 123 }
 hubspot.companies.update(id, data, cb)
 hubspot.companies.updateBatch(data, cb) // data = [{ objectId: 123, properties: [] }]
+hubspot.companies.delete(id, cb)
 ```
 
 ### Company properties
@@ -123,6 +124,7 @@ hubspot.contacts.search(query, cb)
 hubspot.contacts.getRecentlyCreated(cb)
 hubspot.contacts.getRecentlyModified(cb)
 hubspot.contacts.createOrUpdate(email, data, cb)
+hubspot.contacts.delete(id, cb)
 ```
 
 ### Contact properties
@@ -137,6 +139,7 @@ hubspot.contacts.properties.getGroups(cb) // => [ {name: '...', displayName: '..
 hubspot.contacts.properties.createGroup({name, displayName}, cb)
 hubspot.contacts.properties.updateGroup(name, {displayName}, cb)
 hubspot.contacts.properties.deleteGroup(name, cb)
+hubspot.contacts.properties.delete(name, cb)
 ```
 
 ### Pages
