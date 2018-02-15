@@ -48,6 +48,17 @@ describe('Deals', function () {
     })
   })
 
+  describe('getAssociated', function () {
+    it('Returns the deals associated to the object', function () {
+      return hubspot.deals.getAssociated('CONTACT', 394455).then(data => {
+        expect(data).to.be.an('object')
+        expect(data.hasMore).to.equal(false)
+        expect(data.deals).to.be.an('array')
+        expect(data.deals).to.have.length(0)
+      })
+    })
+  })
+
   describe('deleteById', function () {
     let dealId
 
