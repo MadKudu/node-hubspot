@@ -276,7 +276,14 @@ return hubspot.oauth.getAccessToken(params).then(...)
 
 MIT
 
-## Contributors
+## Contributing
+
+### Tests
+
+Tests are written using the HubSpot API sandbox. As such, resources get added and deleted all the time.
+Don't harcode record values when fetching / updating / deleting (because those tend to disappear). Instead, fetch first an array of available records, then use of the returned ID in your test.
+
+### Contributors
 
 - Brian Falk @brainflake
 - Tim Atkinson @timisbusy
@@ -287,3 +294,8 @@ MIT
 - Paul Cothenet @pcothenet
 - Nick Mason @masonator
 - Mikael Puittinen @mpuittinen
+- @davidmfoley
+- @jayprakash1
+- @alexatdivvy
+- @forstermatth
+- @amit777
