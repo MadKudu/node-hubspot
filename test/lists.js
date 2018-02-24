@@ -5,8 +5,8 @@ const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 
 describe('Lists', function () {
-  describe('Get List', function () {
-    it('Should return contact list', function () {
+  describe('Get Lists', function () {
+    it('Should return contact lists', function () {
       return hubspot.lists.get().then(data => {
         expect(data).to.be.a('object')
         expect(data.lists).to.be.a('array')
@@ -24,8 +24,17 @@ describe('Lists', function () {
   })
 
   describe('Get Contacts In A List', function () {
+    let listId
+
+    // obtain a valid listID
+    before(function () {
+      return hubspot.lists.get().then(data => {
+        listId = data.lists[0].listId
+      })
+    })
+
     it('Should return all contacts in a list', function () {
-      return hubspot.lists.getContacts(1).then(data => {
+      return hubspot.lists.getContacts(listId).then(data => {
         expect(data).to.be.a('object')
         expect(data.contacts).to.be.a('array')
       })
@@ -33,8 +42,17 @@ describe('Lists', function () {
   })
 
   describe('Get recently updated and created contacts', function () {
+    let listId
+
+    // obtain a valid listID
+    before(function () {
+      return hubspot.lists.get().then(data => {
+        listId = data.lists[0].listId
+      })
+    })
+
     it('Should a list of recently_updated contacts', function () {
-      return hubspot.lists.getRecentContacts(1).then(data => {
+      return hubspot.lists.getRecentContacts(listId).then(data => {
         expect(data).to.be.a('object')
         expect(data.contacts).to.be.a('array')
       })
