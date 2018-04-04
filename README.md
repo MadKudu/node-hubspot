@@ -301,3 +301,4 @@ Don't harcode record values when fetching / updating / deleting (because those t
 - @alexatdivvy
 - @forstermatth
 - @amit777
+- Stas Nikiforov @stasnikiforov
