@@ -108,6 +108,15 @@ hubspot.companies.properties.update(name, data, cb)
 hubspot.companies.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
+### Company properties groups
+
+```javascript
+hubspot.companies.properties.groups.get(query, cb) // query is optional
+hubspot.companies.properties.groups.create(data, cb)
+hubspot.companies.properties.groups.update(name, data, cb)
+hubspot.companies.properties.groups.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
+
 ### Contacts
 
 ```javascript
