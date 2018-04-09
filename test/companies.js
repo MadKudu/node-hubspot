@@ -117,6 +117,27 @@ describe('companies', function () {
     })
   })
 
+  describe('getContacts', function () {
+    let companyId
+
+    before(function () {
+      return hubspot.companies.get().then(data => {
+        companyId = data.companies[0].companyId
+      })
+    })
+
+    it('should return a list of contact objects', function () {
+      const payload = { count: 10 }
+      return hubspot.companies.getContacts(companyId, payload).then(data => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('contacts')
+        expect(data).to.have.property('vidOffset')
+        expect(data).to.have.property('hasMore')
+        expect(data.contacts).to.be.an('array')
+      })
+    })
+  })
+
   describe('updateBatch', function () {
     let companies
 
