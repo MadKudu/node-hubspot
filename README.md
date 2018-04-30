@@ -93,6 +93,8 @@ hubspot.companies.getRecentlyModified(opts, cb)
 hubspot.companies.getByDomain(domain, cb)
 hubspot.companies.create(data, cb)
 hubspot.companies.addContactToCompany(data, cb) // data = { companyId: 123, contactVid: 123 }
+hubspot.companies.getContactIds(id, options, cb)
+hubspot.companies.getContacts(id, options, cb)
 hubspot.companies.update(id, data, cb)
 hubspot.companies.updateBatch(data, cb) // data = [{ objectId: 123, properties: [] }]
 hubspot.companies.delete(id, cb)
@@ -106,6 +108,15 @@ hubspot.companies.properties.getByName(name, cb)
 hubspot.companies.properties.create(data, cb)
 hubspot.companies.properties.update(name, data, cb)
 hubspot.companies.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
+
+### Company properties groups
+
+```javascript
+hubspot.companies.properties.groups.get(query, cb) // query is optional
+hubspot.companies.properties.groups.create(data, cb)
+hubspot.companies.properties.groups.update(name, data, cb)
+hubspot.companies.properties.groups.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Contacts
@@ -318,3 +329,4 @@ Don't harcode record values when fetching / updating / deleting (because those t
 - @alexatdivvy
 - @forstermatth
 - @amit777
+- Stas Nikiforov @stasnikiforov
