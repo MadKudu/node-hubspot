@@ -175,6 +175,25 @@ hubspot.deals.associate(id, objectType, associatedObjectId, cb)
 hubspot.deals.removeAssociation(id, objectType, associatedObjectId, cb)
 ```
 
+### Deals properties
+
+```javascript
+hubspot.deals.properties.get(query, cb) // query is optional
+hubspot.deals.properties.getByName(name, cb)
+hubspot.deals.properties.create(data, cb)
+hubspot.deals.properties.update(name, data, cb)
+hubspot.deals.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
+
+### Deals properties groups
+
+```javascript
+hubspot.deals.properties.groups.get(query, cb) // query is optional
+hubspot.deals.properties.groups.create(data, cb)
+hubspot.deals.properties.groups.update(name, data, cb)
+hubspot.deals.properties.groups.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+```
+
 ### Engagements
 
 ```javascript
