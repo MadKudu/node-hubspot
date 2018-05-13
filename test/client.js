@@ -12,7 +12,7 @@ describe('client', function () {
     })
 
     it('should instantiate all methods', function () {
-      it('should heck to see if client has all endpoints defined', function () {
+      it('should check to see if client has all endpoints defined', function () {
         expect(hubspot.campaigns).to.be.a('object')
         expect(hubspot.subscriptions).to.be.a('object')
         expect(hubspot.contacts).to.be.a('object')
@@ -23,6 +23,7 @@ describe('client', function () {
         expect(hubspot.lists).to.be.a('object')
         expect(hubspot.files).to.be.a('object')
         expect(hubspot.engagements).to.be.a('object')
+        expect(hubspot.workflows).to.be.a('object')
         expect(hubspot.self).to.be.a('object')
       })
     })
@@ -30,7 +31,6 @@ describe('client', function () {
     describe('getApiLimit', function () {
       it('should return the api limit', function () {
         return hubspot.getApiLimit().then(data => {
-        // console.log(data)
           expect(data).to.be.an('object')
           expect(data.usageLimit).to.be.a('number')
           expect(data.currentUsage).to.be.a('number')
