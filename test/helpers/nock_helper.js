@@ -5,7 +5,6 @@ class NockHelper {
     nock.disableNetConnect()
     nock('http://api.hubapi.com', { encodedQueryParams: true })
       .get('/integrations/v1/limit/daily')
-      .query({ hapikey: 'demo' })
       .reply(200, [
         {
           name: 'api-calls-daily',
@@ -26,6 +25,23 @@ class NockHelper {
         .query({ hapikey: 'demo' })
         .reply(200, data)
     }
+  }
+
+  mockPostEndpoint(path, data) {
+    return () => {
+      this.mockRateLimit()
+      nock('http://api.hubapi.com', { encodedQueryParams: true })
+        .post(path)
+        .reply(200, data)
+    }
+  }
+
+  mockOAuth() {
+    nock('http://api.hubapi.com')
+      .post('/oauth/v1/token')
+      .reply(200, {
+        access_token: 'qwerty782912',
+      })
   }
 
   resetNock() {
