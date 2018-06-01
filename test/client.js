@@ -47,13 +47,15 @@ describe('client', function () {
   })
 
   describe('bad apiKey', function () {
-    it('should instantiate all methods', function () {
+    it('should instantiate all methods', async () => {
       const hubspot = new Hubspot({ apiKey: 'bad' })
-      return hubspot.getApiLimit().then(data => {
-        expect(data).to.be.an('object')
-        expect(data.usageLimit).to.be.a('number')
-        expect(data.currentUsage).to.be.a('number')
-      })
+      try {
+        await hubspot.getApiLimit()
+      } catch (e) {
+        expect(e instanceof Error).to.equal(true)
+        expect(e.name).to.equal('StatusCodeError')
+        expect(e.statusCode).to.equal(401)
+      }
     })
   })
 
