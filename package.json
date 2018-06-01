@@ -25,7 +25,7 @@
     "bottleneck": "^2.3.0",
     "debug": "^3.1.0",
     "lodash": "^4.17.5",
-    "request": "^2.83.0",
+    "request": "^2.87.0",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
