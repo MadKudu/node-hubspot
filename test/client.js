@@ -4,6 +4,7 @@ const expect = chai.expect
 const Hubspot = require('..')
 
 describe('client', function () {
+  this.timeout(10000)
   let hubspot
 
   describe('apiKey', function () {
@@ -41,6 +42,17 @@ describe('client', function () {
           expect(data.usageLimit).to.be.a('number')
           expect(data.currentUsage).to.be.a('number')
         })
+      })
+    })
+  })
+
+  describe('bad apiKey', function () {
+    it('should instantiate all methods', function () {
+      const hubspot = new Hubspot({ apiKey: 'bad' })
+      return hubspot.getApiLimit().then(data => {
+        expect(data).to.be.an('object')
+        expect(data.usageLimit).to.be.a('number')
+        expect(data.currentUsage).to.be.a('number')
       })
     })
   })

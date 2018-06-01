@@ -6,6 +6,8 @@ const hubspot = new Hubspot({ apiKey: 'demo' })
 const _ = require('lodash')
 
 describe('contacts', function () {
+  this.timeout(10000)
+
   describe('get', function () {
     it('should return a batch of contacts', function () {
       return hubspot.contacts.get().then(data => {
@@ -132,6 +134,7 @@ describe('contacts', function () {
           }
         ]
       }).then(data => {
+        console.log(data)
         expect(data).to.be.an('undefined')
       })
     })
