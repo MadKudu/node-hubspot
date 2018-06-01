@@ -12,20 +12,17 @@ describe('client', function () {
     })
 
     it('should instantiate all methods', function () {
-      it('should check to see if client has all endpoints defined', function () {
-        expect(hubspot.campaigns).to.be.a('object')
-        expect(hubspot.subscriptions).to.be.a('object')
-        expect(hubspot.contacts).to.be.a('object')
-        expect(hubspot.companies).to.be.a('object')
-        expect(hubspot.deals).to.be.a('object')
-        expect(hubspot.pipelines).to.be.a('object')
-        expect(hubspot.broadcasts).to.be.a('object')
-        expect(hubspot.lists).to.be.a('object')
-        expect(hubspot.files).to.be.a('object')
-        expect(hubspot.engagements).to.be.a('object')
-        expect(hubspot.workflows).to.be.a('object')
-        expect(hubspot.self).to.be.a('object')
-      })
+      expect(hubspot.campaigns).to.be.an('object')
+      expect(hubspot.subscriptions).to.be.an('object')
+      expect(hubspot.contacts).to.be.an('object')
+      expect(hubspot.companies).to.be.an('object')
+      expect(hubspot.deals).to.be.an('object')
+      expect(hubspot.pipelines).to.be.an('object')
+      expect(hubspot.broadcasts).to.be.an('object')
+      expect(hubspot.lists).to.be.an('object')
+      expect(hubspot.files).to.be.an('object')
+      expect(hubspot.engagements).to.be.an('object')
+      expect(hubspot.workflows).to.be.an('object')
     })
 
     describe('getApiLimit', function () {
