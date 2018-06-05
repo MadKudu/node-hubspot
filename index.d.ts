@@ -29,6 +29,13 @@ export interface AccessTokenOptions extends BaseOptions {
   accessToken: string;
 }
 
+export interface HubspotError {
+  status: string;
+  message: string;
+  correlationId: string;
+  requestId: string;
+}
+
 declare class Hubspot {
   constructor(options?: ApiOptions | AccessTokenOptions);
   companies: Company;

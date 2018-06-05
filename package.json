@@ -4,7 +4,7 @@
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && npm run mocha",
+    "test": "npm run lint && npm run mocha && npm run tsc",
     "tsc": "tsc",
     "ts-node": "ts-node test/typescript/hubspot.ts",
     "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
