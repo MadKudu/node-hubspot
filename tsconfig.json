@@ -5,6 +5,7 @@
           "es6"
       ],
       "baseUrl": "./",
+      "noEmit": true,
       "typeRoots": [
           "./"
       ],
