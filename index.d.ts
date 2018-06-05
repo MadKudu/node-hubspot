@@ -1,24 +1,48 @@
 // Type definitions for hubspot 1.3.0
 // Project: https://github.com/brainflake/node-hubspot
 
-import * as request from 'request-promise';
+import { RequestCallback } from 'request';
+import { RequestPromise } from 'request-promise';
 
-declare namespace hubspot {
+import { Company } from './lib/typescript/company';
+import { Contact } from './lib/typescript/contact';
+import { Page } from './lib/typescript/page';
+import { Deal } from './lib/typescript/deal';
+import { Engagement } from './lib/typescript/engagement';
+import { Owner } from './lib/typescript/owner';
+import { Pipeline } from './lib/typescript/pipeline';
+import { List } from './lib/typescript/list';
+import { File } from './lib/typescript/file';
+import { Subscription } from './lib/typescript/subscription';
+import { Campaign } from './lib/typescript/campaign';
+import { Broadcast } from './lib/typescript/broadcast';
 
-  class Contact {
-    getById(id: string): request.RequestPromise
-  }
-
-  interface HubspotOptions {
-    apiKey?: string;
-    accessToken?: string;
-    baseUrl?: string;
-  }
-
-  export class Hubspot {
-    constructor(options?: HubspotOptions);
-    contacts: Contact
-  }
+interface BaseOptions {
+  baseUrl?: string;
 }
 
-export = hubspot
+export interface ApiOptions extends BaseOptions {
+  apiKey: string;
+}
+
+export interface AccessTokenOptions extends BaseOptions {
+  accessToken: string;
+}
+
+declare class Hubspot {
+  constructor(options?: ApiOptions | AccessTokenOptions);
+  companies: Company;
+  contacts: Contact;
+  pages: Page;
+  deals: Deal;
+  engagements: Engagement;
+  owners: Owner;
+  pipelines: Pipeline;
+  lists: List;
+  files: File;
+  subscriptions: Subscription;
+  campaigns: Campaign;
+  broadcasts: Broadcast;
+}
+
+export default Hubspot

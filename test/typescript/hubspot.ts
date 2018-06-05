@@ -1,8 +1,23 @@
-import { Hubspot, HubspotOptions } from '../../index';
+import Hubspot, {
+  ApiOptions,
+  AccessTokenOptions,
+} from '../..';
 
-const apiKeyOptions: HubspotOptions = { apiKey: 'demo' };
-const tokenOptions: HubspotOptions = { accessToken: 'token' };
-const baseUrlOptions: HubspotOptions = { accessToken: 'token', baseUrl: 'http://some-url' };
+const apiKeyOptions: ApiOptions = { apiKey: 'demo' };
+const tokenOptions: AccessTokenOptions = { accessToken: 'token' };
+const baseUrlOptions: AccessTokenOptions = { accessToken: 'token', baseUrl: 'http://some-url' };
 
-const client = new Hubspot(apiKeyOptions);
-client.contacts.getById('id').then(console.log).catch(console.error);
+const hubspot = new Hubspot(apiKeyOptions);
+
+// Promise
+hubspot.companies.get( { limit: 1 }).then(results => {
+  console.log(results);
+}).catch((err) => {
+  console.error(err);
+});
+
+// Callback
+hubspot.companies.properties.groups.get((err, results) => {
+  if (err) { console.error(err) }
+  console.log(results);
+});

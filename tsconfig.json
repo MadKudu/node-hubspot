@@ -1,25 +1,17 @@
-
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": [
-      "es6"
-    ],
-    "target": "es6",
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
-    "baseUrl": "./",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules"
-    ],
-    "types": ["node"],
-    "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+      "module": "commonjs",
+      "lib": [
+          "es6"
+      ],
+      "baseUrl": "./",
+      "typeRoots": [
+          "./"
+      ],
+      "types": []
   },
   "files": [
-    "index.d.ts",
-    "test/typescript/hubspot.ts"
+      "index.d.ts",
+      "test/typescript/hubspot.ts"
   ]
 }

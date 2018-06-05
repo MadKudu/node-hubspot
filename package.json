@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npm run lint && npm run mocha",
     "tsc": "tsc",
+    "ts-node": "ts-node test/typescript/hubspot.ts",
     "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
     "lint": "./node_modules/eslint/bin/eslint.js . --fix",
     "watch-test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000 --watch"
@@ -23,11 +24,13 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/request": "^2.47.0",
     "bottleneck": "^2.3.0",
     "debug": "^3.1.0",
     "lodash": "^4.17.5",
     "request": "^2.87.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "ts-node": "^6.1.0"
   },
   "devDependencies": {
     "@types/request-promise": "^4.1.41",
