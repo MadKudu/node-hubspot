@@ -4,7 +4,9 @@
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && npm run mocha",
+    "test": "npm run lint && npm run mocha && npm run tsc",
+    "tsc": "tsc",
+    "ts-node": "ts-node test/typescript/hubspot.ts",
     "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
     "lint": "./node_modules/eslint/bin/eslint.js . --fix",
     "watch-test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000 --watch"
@@ -26,9 +28,12 @@
     "debug": "^3.1.0",
     "lodash": "^4.17.5",
     "request": "^2.87.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "ts-node": "^6.1.0"
   },
   "devDependencies": {
+    "@types/request": "^2.47.0",
+    "@types/request-promise": "^4.1.41",
     "chai": "^4.1.2",
     "eslint": "^4.18.1",
     "eslint-config-standard": "10.2.1",
@@ -36,6 +41,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "3.0.1",
-    "mocha": "^5.0.1"
+    "mocha": "^5.0.1",
+    "typescript": "^2.9.1"
   }
 }

@@ -302,6 +302,15 @@ const hubspot = new Hubspot(params)
 return hubspot.oauth.getAccessToken(params).then(...)
 ```
 
+## Typescript
+
+You may use this library in your Typescript project via:
+
+```
+import Hubspot from 'hubspot';
+const hubspot = new Hubspot({ apiKey: 'key' });
+```
+
 ## License
 
 MIT
