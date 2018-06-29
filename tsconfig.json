@@ -1,18 +1,20 @@
 {
   "compilerOptions": {
-      "module": "commonjs",
-      "lib": [
-          "es6"
-      ],
-      "baseUrl": "./",
-      "noEmit": true,
-      "typeRoots": [
-          "./"
-      ],
-      "types": []
+    "module": "commonjs",
+    "lib": [
+      "es6"
+    ],
+    "baseUrl": "./",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "typeRoots": [
+      "./"
+    ],
+    "types": []
   },
   "files": [
-      "index.d.ts",
-      "test/typescript/hubspot.ts"
+    "index.d.ts",
+    "test/typescript/hubspot.ts"
   ]
 }

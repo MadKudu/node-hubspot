@@ -1,13 +1,10 @@
 import Hubspot, {
   ApiOptions,
-  AccessTokenOptions,
   HubspotError,
 } from '../..';
 import { RequestError } from 'request-promise/errors';
 
-const apiKeyOptions: ApiOptions = { apiKey: 'apiKey' };
-const tokenOptions: AccessTokenOptions = { accessToken: 'token' };
-const baseUrlOptions: AccessTokenOptions = { accessToken: 'token', baseUrl: 'http://some-url' };
+const apiKeyOptions: ApiOptions = { apiKey: 'demo' };
 
 const handleResponse = (response) => {
   console.log(response);
