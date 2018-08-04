@@ -26,6 +26,16 @@ describe('Engagements', function () {
     })
   })
 
+  describe('Get Call Dispositions', function () {
+    it('Should return a list of call dispositions', function () {
+      return hubspot.engagements.getCallDispositions().then(data => {
+        expect(data).to.be.an('array')
+        expect(data[0]).to.have.a.property('id')
+        expect(data[0]).to.have.a.property('label')
+      })
+    })
+  })
+
   // Test too brittle. First contactId doesn't necessarily has engagement
 
   // describe('Get Associated Engagements', function () {
