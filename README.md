@@ -250,6 +250,7 @@ hubspot.engagements.create(data, cb)
 hubspot.engagements.get(opts, cb)
 hubspot.engagements.getRecentlyModified(opts, cb)
 hubspot.engagements.getAssociated(objectType, objectId, opts, cb)
+hubspot.engagements.getCallDispositions(cb)
 ```
 
 ### Owners
