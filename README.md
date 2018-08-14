@@ -107,7 +107,7 @@ hubspot.companies.properties.get(query, cb) // query is optional
 hubspot.companies.properties.getByName(name, cb)
 hubspot.companies.properties.create(data, cb)
 hubspot.companies.properties.update(name, data, cb)
-hubspot.companies.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.companies.properties.upsert(data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Company properties groups
@@ -116,7 +116,7 @@ hubspot.companies.properties.upsert(name, data) // not an official API, wrapper 
 hubspot.companies.properties.groups.get(query, cb) // query is optional
 hubspot.companies.properties.groups.create(data, cb)
 hubspot.companies.properties.groups.update(name, data, cb)
-hubspot.companies.properties.groups.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.companies.properties.groups.upsert(data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Contacts
@@ -145,7 +145,7 @@ hubspot.contacts.properties.get(cb)
 hubspot.contacts.properties.getByName(name, cb)
 hubspot.contacts.properties.create(data, cb)
 hubspot.contacts.properties.update(name, data, cb)
-hubspot.contacts.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.contacts.properties.upsert(data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 hubspot.contacts.properties.getGroups(cb) // => [ {name: '...', displayName: '...'}, ...]
 hubspot.contacts.properties.createGroup({name, displayName}, cb)
 hubspot.contacts.properties.updateGroup(name, {displayName}, cb)
@@ -182,7 +182,7 @@ hubspot.deals.properties.get(query, cb) // query is optional
 hubspot.deals.properties.getByName(name, cb)
 hubspot.deals.properties.create(data, cb)
 hubspot.deals.properties.update(name, data, cb)
-hubspot.deals.properties.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.deals.properties.upsert(data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Deals properties groups
@@ -191,7 +191,7 @@ hubspot.deals.properties.upsert(name, data) // not an official API, wrapper doin
 hubspot.deals.properties.groups.get(query, cb) // query is optional
 hubspot.deals.properties.groups.create(data, cb)
 hubspot.deals.properties.groups.update(name, data, cb)
-hubspot.deals.properties.groups.upsert(name, data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
+hubspot.deals.properties.groups.upsert(data) // not an official API, wrapper doing two API calls. Callbacks not supported at this time
 ```
 
 ### Engagements
