@@ -7,6 +7,7 @@ import { RequestPromise } from 'request-promise';
 import { Company } from './lib/typescript/company';
 import { Contact } from './lib/typescript/contact';
 import { Page } from './lib/typescript/page';
+import { OAuth } from './lib/typescript/oauth';
 import { Deal } from './lib/typescript/deal';
 import { Engagement } from './lib/typescript/engagement';
 import { Owner } from './lib/typescript/owner';
@@ -44,6 +45,7 @@ declare class Hubspot {
   deals: Deal;
   engagements: Engagement;
   owners: Owner;
+  oauth: OAuth;
   pipelines: Pipeline;
   lists: List;
   files: File;
