@@ -74,6 +74,24 @@ hubspot.contacts.get(function(err, results) {
   console.log(results);
 });
 ```
+## {EXAMPLE} Create Contact
+```javascript
+const contactObject = {
+            "properties":
+            [
+                { "property": "firstname","value": yourvalue },
+                { "property": "lastname", "value": yourvalue }
+            ]
+        };
+
+          const hubspot = new Hubspot({ apiKey: YOUR API KEY });
+          const hubspotContact = await hubspot.contacts.create(contactObj);
+```
+## {EXAMPLE} If you need to insert mulitple values. each value must have a semi colon after each value
+
+```json
+{ "property": "foo", "value": "value1;value2;value3;value4" }
+```
 
 ## API limits
 
