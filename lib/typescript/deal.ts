@@ -34,8 +34,8 @@ declare class Deal {
   associate(id: number, objectType: string, associatedObjectId: number): RequestPromise;
   associate(id: number, objectType: string, associatedObjectId: number, cb: RequestCallback): RequestPromise;
 
-  remoteAssociation(id: number, objectType: string, associatedObjectId: number): RequestPromise;
-  remoteAssociation(id: number, objectType: string, associatedObjectId: number, cb: RequestCallback): RequestPromise;
+  removeAssociation(id: number, objectType: string, associatedObjectId: number): RequestPromise;
+  removeAssociation(id: number, objectType: string, associatedObjectId: number, cb: RequestCallback): RequestPromise;
 
   properties: Properties;
 }
