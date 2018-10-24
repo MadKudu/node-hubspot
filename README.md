@@ -81,19 +81,6 @@ const contactObject = {
             [
                 { "property": "firstname","value": yourvalue },
                 { "property": "lastname", "value": yourvalue },
-                { "property": "email", "value": yourvalue },
-                { "property": "phone", "value": yourvalue },
-                { "property": "state", "value": yourvalue },
-                { "property": "non_us", "value": yourvalue },
-                { "property": "company", "value": yourvalue },
-                { "property": "hubspot_owner_id", "value": yourvalue },
-                { "property": "lifecyclestage", "value": yourvalue },
-                { "property": "hs_lead_status", "value": yourvalue },
-                { "property": "type", "value": yourvalue },
-                { "property": "source", "value": yourvalue },
-                { "property": "jobtitle", "value": yourvalue },
-                { "property": "address", "value": yourvalue },
-                { "property": "city", "value": yourvalue }
             ]
         };
 
@@ -101,11 +88,11 @@ const contactObject = {
           const hubspotContact = await hubspot.contacts.create(contactObj);
 ```
 ## {EXAMPLE} If you need to insert mulitple values. each value must have a semi colon after each value
-```javascript
-const arrayOfValues = ["value1", "value2", "value3", "value4"];
-arrayOfValues.join(";");
-// "value1;value2;value3;value4"
+
+```json
+{ "property": "foo", "value": "value1;value2;value3;value4" }
 ```
+
 ## API limits
 
 HubSpot has relatively stringent API limits (40,000 per day by default).
