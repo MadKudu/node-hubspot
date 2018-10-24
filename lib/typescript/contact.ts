@@ -28,8 +28,8 @@ declare class Contact {
   create(data: {}): RequestPromise;
   create(data: {}, cb: RequestCallback): void
 
-  createOrUpdateBatch(data: {}[]): RequestPromise;
-  createOrUpdateBatch(data: {}[], cb: RequestCallback): void
+  createOrUpdateBatch(data: any[]): RequestPromise;
+  createOrUpdateBatch(data: any[], cb: RequestCallback): void
 
   search(query: string): RequestPromise;
   search(query: string, cb: RequestCallback): void
@@ -42,8 +42,8 @@ declare class Contact {
   getRecentlyModified(cb: RequestCallback): void;
   getRecentlyModified(opts: {}, cb: RequestCallback): void;
 
-  createOrUpdate(email: string, data: {}[]): RequestPromise;
-  createOrUpdate(email: string, data: {}[], cb: RequestCallback): void
+  createOrUpdate(email: string, data: any[]): RequestPromise;
+  createOrUpdate(email: string, data: any[], cb: RequestCallback): void
 
   delete(id: number): RequestPromise;
   delete(id: number, cb: RequestCallback): void
