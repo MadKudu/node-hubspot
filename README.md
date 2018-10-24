@@ -80,7 +80,7 @@ const contactObject = {
             "properties":
             [
                 { "property": "firstname","value": yourvalue },
-                { "property": "lastname", "value": yourvalue },
+                { "property": "lastname", "value": yourvalue }
             ]
         };
 
