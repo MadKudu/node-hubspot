@@ -3,15 +3,15 @@ const expect = chai.expect
 
 const Hubspot = require('..')
 
-describe('oauth', function () {
+describe('oauth', function() {
   let hubspot
 
-  describe('getAuthorizationUrl', function () {
+  describe('getAuthorizationUrl', function() {
     beforeEach(() => {
       hubspot = new Hubspot()
     })
 
-    it('should return the correct authorizationUrl for a given app', function () {
+    it('should return the correct authorizationUrl for a given app', function() {
       const params = {
         client_id: 'fake_client_id',
         scopes: 'some scopes',
@@ -23,8 +23,8 @@ describe('oauth', function () {
     })
   })
 
-  describe('refreshAccessToken', function () {
-    it('should return (and refresh) an accessToken, given a refreshToken - constructor', function () {
+  describe('refreshAccessToken', function() {
+    it('should return (and refresh) an accessToken, given a refreshToken - constructor', function() {
       const params = {
         clientId: process.env.clientId,
         clientSecret: process.env.clientSecret,
@@ -32,7 +32,9 @@ describe('oauth', function () {
         refreshToken: process.env.refreshToken
       }
       const hubspot = new Hubspot(params)
-      if (!process.env.refreshToken) { return } // hard to reproduce on CI. local testing only for now
+      if (!process.env.refreshToken) {
+        return
+      } // hard to reproduce on CI. local testing only for now
       return hubspot.oauth.refreshAccessToken().then(res => {
         expect(res.refresh_token).to.equal(params.refreshToken)
         expect(res).to.have.a.property('access_token')
@@ -40,9 +42,11 @@ describe('oauth', function () {
       })
     })
 
-    it('should return (and refresh) an accessToken, given a refreshToken - params', function () {
+    it('should return (and refresh) an accessToken, given a refreshToken - params', function() {
       const hubspot = new Hubspot({ accessToken: process.env.accessToken })
-      if (!process.env.refreshToken) { return } // hard to reproduce on CI. local testing only for now
+      if (!process.env.refreshToken) {
+        return
+      } // hard to reproduce on CI. local testing only for now
       const params = {
         client_id: process.env.clientId,
         client_secret: process.env.clientSecret,

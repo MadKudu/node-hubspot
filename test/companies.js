@@ -5,16 +5,16 @@ const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 const _ = require('lodash')
 
-describe('companies', function () {
-  describe('get', function () {
-    it('should return all companies', function () {
+describe('companies', function() {
+  describe('get', function() {
+    it('should return all companies', function() {
       return hubspot.companies.get().then(data => {
         expect(data).to.be.an('object')
         expect(data.companies).to.be.a('array')
       })
     })
 
-    it('should return a limited number of companies', function () {
+    it('should return a limited number of companies', function() {
       return hubspot.companies.get({ limit: 5 }).then(data => {
         expect(data).to.be.an('object')
         expect(data.companies).to.be.a('array')
@@ -23,32 +23,34 @@ describe('companies', function () {
       })
     })
 
-    it('should return the requested properties', function () {
-      return hubspot.companies.get({ limit: 5, properties: ['name', 'country', 'city'] }).then(data => {
-        expect(data.companies).to.be.a('array')
-        expect(data.companies[0].properties.name.value).to.be.a('string')
-      })
+    it('should return the requested properties', function() {
+      return hubspot.companies
+        .get({ limit: 5, properties: ['name', 'country', 'city'] })
+        .then(data => {
+          expect(data.companies).to.be.a('array')
+          expect(data.companies[0].properties.name.value).to.be.a('string')
+        })
     })
   })
 
-  describe('getById', function () {
+  describe('getById', function() {
     let companyId
 
-    before(function () {
+    before(function() {
       return hubspot.companies.get().then(data => {
         companyId = data.companies[0].companyId
       })
     })
 
-    it('should return a company', function () {
+    it('should return a company', function() {
       return hubspot.companies.getById(companyId).then(data => {
         expect(data).to.be.an('object')
       })
     })
   })
 
-  describe('getRecentlyCreated', function () {
-    it('should return recently created companies', function () {
+  describe('getRecentlyCreated', function() {
+    it('should return recently created companies', function() {
       return hubspot.companies.getRecentlyCreated().then(data => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
@@ -56,8 +58,8 @@ describe('companies', function () {
     })
   })
 
-  describe('getRecentlyModified', function () {
-    it('should return recently modified companies', function () {
+  describe('getRecentlyModified', function() {
+    it('should return recently modified companies', function() {
       return hubspot.companies.getRecentlyModified().then(data => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
@@ -65,8 +67,8 @@ describe('companies', function () {
     })
   })
 
-  describe('getByDomain', function () {
-    it('should returns a list of all companies that have a matching domain to the specified domain in the request URL', function () {
+  describe('getByDomain', function() {
+    it('should returns a list of all companies that have a matching domain to the specified domain in the request URL', function() {
       this.timeout(10000)
       return hubspot.companies.getByDomain('example.com').then(data => {
         // console.log(data)
@@ -76,9 +78,14 @@ describe('companies', function () {
     })
   })
 
-  describe('create', function () {
-    it('should create a company in a given portal', function () {
-      const payload = { 'properties': [{'name': 'name', 'value': 'A company name'}, {'name': 'description', 'value': 'A company description'}] }
+  describe('create', function() {
+    it('should create a company in a given portal', function() {
+      const payload = {
+        properties: [
+          { name: 'name', value: 'A company name' },
+          { name: 'description', value: 'A company description' }
+        ]
+      }
       return hubspot.companies.create(payload).then(data => {
         expect(data).to.be.an('object')
         // console.log(data)
@@ -87,25 +94,30 @@ describe('companies', function () {
     })
   })
 
-  describe('delete', function () {
-    it('can delete', function () {
-      const payload = { 'properties': [{'name': 'name', 'value': 'A company name'}, {'name': 'description', 'value': 'A company description'}] }
+  describe('delete', function() {
+    it('can delete', function() {
+      const payload = {
+        properties: [
+          { name: 'name', value: 'A company name' },
+          { name: 'description', value: 'A company description' }
+        ]
+      }
       return hubspot.companies.create(payload).then(data => {
         return hubspot.companies.delete(data.companyId)
       })
     })
   })
 
-  describe('getContactIds', function () {
+  describe('getContactIds', function() {
     let companyId
 
-    before(function () {
+    before(function() {
       return hubspot.companies.get().then(data => {
         companyId = data.companies[0].companyId
       })
     })
 
-    it('should return a list of contact vids', function () {
+    it('should return a list of contact vids', function() {
       const payload = { count: 10 }
       return hubspot.companies.getContactIds(companyId, payload).then(data => {
         expect(data).to.be.an('object')
@@ -117,16 +129,16 @@ describe('companies', function () {
     })
   })
 
-  describe('getContacts', function () {
+  describe('getContacts', function() {
     let companyId
 
-    before(function () {
+    before(function() {
       return hubspot.companies.get().then(data => {
         companyId = data.companies[0].companyId
       })
     })
 
-    it('should return a list of contact objects', function () {
+    it('should return a list of contact objects', function() {
       const payload = { count: 10 }
       return hubspot.companies.getContacts(companyId, payload).then(data => {
         expect(data).to.be.an('object')
@@ -138,18 +150,21 @@ describe('companies', function () {
     })
   })
 
-  describe('updateBatch', function () {
+  describe('updateBatch', function() {
     let companies
 
-    before(function () {
+    before(function() {
       return hubspot.companies.get().then(data => {
         companies = data.companies
       })
     })
 
-    it('should update a batch of company', function () {
+    it('should update a batch of company', function() {
       const batch = _.map(companies, company => {
-        const update = { objectId: company.companyId, properties: [ { name: 'about_us', value: 'Thumbs up!' } ] }
+        const update = {
+          objectId: company.companyId,
+          properties: [{ name: 'about_us', value: 'Thumbs up!' }]
+        }
         return update
       })
       return hubspot.companies.updateBatch(batch).then(data => {
