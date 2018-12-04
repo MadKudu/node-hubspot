@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run lint && npm run mocha && npm run tsc",
+    "coverage": "nyc --reporter=lcov mocha --timeout=10000",
     "lint": "npm run prettier && npm run eslint",
     "tsc": "tsc",
     "ts-node": "ts-node test/typescript/hubspot.ts",
@@ -46,6 +47,7 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "4.0.0",
     "mocha": "^5.0.1",
+    "nyc": "^13.1.0",
     "prettier": "^1.15.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.3"
