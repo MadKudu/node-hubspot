@@ -11,7 +11,7 @@
     "ts-node": "ts-node test/typescript/hubspot.ts",
     "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
     "eslint": "./node_modules/eslint/bin/eslint.js . --fix",
-    "prettier": "./node_modules/prettier/bin-prettier.js --write '{lib,test}/**/*.js'",
+    "prettier": "./node_modules/prettier/bin-prettier.js --write '{lib,test}/**/*.{j,t}s'",
     "watch-test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000 --watch"
   },
   "repository": {
