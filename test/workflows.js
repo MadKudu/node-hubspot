@@ -6,8 +6,16 @@ const hubspot = new Hubspot({ apiKey: 'demo' })
 
 describe('workflows', function () {
   let workflowId = 2641273
-  let contactId = 860974
-  let contactEmail = 'test@gmail.com'
+  let contactId
+  let contactEmail
+
+  before(function () {
+    return hubspot.contacts.get().then(data => {
+      const firstContact = data.contacts[0]
+      contactId = firstContact.vid
+      contactEmail = firstContact['identity-profiles'][0].identities.find(obj => obj.type === 'EMAIL').value
+    })
+  })
 
   describe('get', function () {
     it('Should get all workflows', function () {
