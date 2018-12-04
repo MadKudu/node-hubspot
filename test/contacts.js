@@ -65,15 +65,12 @@ describe('contacts', function () {
 
     before(function () {
       return hubspot.contacts.get({ count: 10 }).then(data => {
-        // console.log(data)
         contactIds = _.map(data.contacts, 'vid')
       })
     })
 
     it('should return a contact record based on a array of ids', function () {
-      // console.log(contactIds)
       return hubspot.contacts.getByIdBatch(contactIds).then(data => {
-        // console.log(data)
         expect(data).to.be.an('object')
         expect(data).to.have.a.property(contactIds[0])
       })
@@ -92,27 +89,26 @@ describe('contacts', function () {
   describe('getByEmailBatch', function () {
     it('should return a contact record based on a array of emails', function () {
       return hubspot.contacts.getByEmailBatch(['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']).then(data => {
-        // console.log(data)
         expect(data).to.be.an('object')
       })
     })
   })
 
   describe('update', function () {
-    it('should update an existing contact', function () {
-      let contactId
+    let contactId
 
-      before(function () {
-        return hubspot.contacts.get().then(data => {
-          contactId = data.contacts[0].vid
-        })
+    before(function () {
+      return hubspot.contacts.get().then(data => {
+        contactId = data.contacts[0].vid
       })
+    })
 
+    it('should update an existing contact', function () {
       return hubspot.contacts.update(contactId, {
         'properties': [
           {
             'property': 'email',
-            'value': 'new-email@hubspot.com'
+            'value': `new-email${Date.now()}@hubspot.com`
           },
           {
             'property': 'firstname',
@@ -134,7 +130,6 @@ describe('contacts', function () {
           }
         ]
       }).then(data => {
-        console.log(data)
         expect(data).to.be.an('undefined')
       })
     })
@@ -218,7 +213,6 @@ describe('contacts', function () {
           }
         ]
       }).then(data => {
-        // console.log(data)
         expect(data).to.be.an('object')
         expect(data.properties.company.value).to.equal('MadKudu')
       })
@@ -239,7 +233,6 @@ describe('contacts', function () {
       }).then(data => {
         throw new Error('This should have failed')
       }).catch(err => {
-        // console.log(err)
         expect(err instanceof Error).to.equal(true)
         expect(err.error.message).to.equal('Contact already exists')
       })
@@ -293,9 +286,7 @@ describe('contacts', function () {
         const update = { vid: contact.vid, properties: [ { property: 'company', value: 'MadKudu ' } ] }
         return update
       })
-      // console.log(batch)
       return hubspot.contacts.createOrUpdateBatch(batch).then(data => {
-        // console.log(data)
         expect(data).to.equal(undefined)
       })
     })
