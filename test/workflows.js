@@ -7,7 +7,7 @@ const hubspot = new Hubspot({ apiKey: 'demo' })
 describe('workflows', function () {
   let workflowId = 2641273
   let contactId = 860974
-  let contactEmail = 'test@gmai.com'
+  let contactEmail = 'test@gmail.com'
 
   describe('get', function () {
     it('Should get all workflows', function () {
