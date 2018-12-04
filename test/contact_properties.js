@@ -2,7 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: 'demo' })
+const hubspot = new Hubspot({ apiKey: process.env.API_KEY || 'demo' })
 
 const property = {
   name: 'mk_customer_fit_segment',
