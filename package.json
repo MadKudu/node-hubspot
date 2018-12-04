@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/brainflake/node-hubspot.git"
+    "url": "git://github.com/MadKudu/node-hubspot.git"
   },
   "keywords": [
     "hubspot"
