@@ -1,6 +1,5 @@
 const { expect } = require('chai')
 const nockHelper = require('./helpers/nock_helper')
-
 const Hubspot = require('..')
 
 describe('broadcasts', function() {
