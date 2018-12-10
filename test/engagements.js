@@ -4,9 +4,9 @@ const expect = chai.expect
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 
-describe('Engagements', function () {
-  describe('Get All Engagements', function () {
-    it('Should return engagement properties', function () {
+describe('Engagements', function() {
+  describe('Get All Engagements', function() {
+    it('Should return engagement properties', function() {
       return hubspot.engagements.get().then(data => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
@@ -15,13 +15,23 @@ describe('Engagements', function () {
     })
   })
 
-  describe('Get Recent Engagements', function () {
-    it('Should return engagement properties', function () {
+  describe('Get Recent Engagements', function() {
+    it('Should return engagement properties', function() {
       return hubspot.engagements.getRecentlyModified().then(data => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
         expect(data.results[0]).to.have.a.property('engagement')
         expect(data.total).to.be.above(0)
+      })
+    })
+  })
+
+  describe('Get Call Dispositions', function () {
+    it('Should return a list of call dispositions', function () {
+      return hubspot.engagements.getCallDispositions().then(data => {
+        expect(data).to.be.an('array')
+        expect(data[0]).to.have.a.property('id')
+        expect(data[0]).to.have.a.property('label')
       })
     })
   })

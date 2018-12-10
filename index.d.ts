@@ -1,55 +1,57 @@
 // Type definitions for hubspot 1.3.0
-// Project: https://github.com/brainflake/node-hubspot
+// Project: https://github.com/MadKudu/node-hubspot
 
-import { RequestCallback } from 'request';
-import { RequestPromise } from 'request-promise';
+import { RequestCallback } from 'request'
+import { RequestPromise } from 'request-promise'
 
-import { Company } from './lib/typescript/company';
-import { Contact } from './lib/typescript/contact';
-import { Page } from './lib/typescript/page';
-import { Deal } from './lib/typescript/deal';
-import { Engagement } from './lib/typescript/engagement';
-import { Owner } from './lib/typescript/owner';
-import { Pipeline } from './lib/typescript/pipeline';
-import { List } from './lib/typescript/list';
-import { File } from './lib/typescript/file';
-import { Subscription } from './lib/typescript/subscription';
-import { Campaign } from './lib/typescript/campaign';
-import { Broadcast } from './lib/typescript/broadcast';
+import { Company } from './lib/typescript/company'
+import { Contact } from './lib/typescript/contact'
+import { Page } from './lib/typescript/page'
+import { OAuth } from './lib/typescript/oauth'
+import { Deal } from './lib/typescript/deal'
+import { Engagement } from './lib/typescript/engagement'
+import { Owner } from './lib/typescript/owner'
+import { Pipeline } from './lib/typescript/pipeline'
+import { List } from './lib/typescript/list'
+import { File } from './lib/typescript/file'
+import { Subscription } from './lib/typescript/subscription'
+import { Campaign } from './lib/typescript/campaign'
+import { Broadcast } from './lib/typescript/broadcast'
 
 interface BaseOptions {
-  baseUrl?: string;
+  baseUrl?: string
 }
 
 export interface ApiOptions extends BaseOptions {
-  apiKey: string;
+  apiKey: string
 }
 
 export interface AccessTokenOptions extends BaseOptions {
-  accessToken: string;
+  accessToken: string
 }
 
 export interface HubspotError {
-  status: string;
-  message: string;
-  correlationId: string;
-  requestId: string;
+  status: string
+  message: string
+  correlationId: string
+  requestId: string
 }
 
 declare class Hubspot {
-  constructor(options?: ApiOptions | AccessTokenOptions);
-  companies: Company;
-  contacts: Contact;
-  pages: Page;
-  deals: Deal;
-  engagements: Engagement;
-  owners: Owner;
-  pipelines: Pipeline;
-  lists: List;
-  files: File;
-  subscriptions: Subscription;
-  campaigns: Campaign;
-  broadcasts: Broadcast;
+  constructor(options?: ApiOptions | AccessTokenOptions)
+  companies: Company
+  contacts: Contact
+  pages: Page
+  deals: Deal
+  engagements: Engagement
+  owners: Owner
+  oauth: OAuth
+  pipelines: Pipeline
+  lists: List
+  files: File
+  subscriptions: Subscription
+  campaigns: Campaign
+  broadcasts: Broadcast
 }
 
 export default Hubspot
