@@ -4,11 +4,13 @@ const Hubspot = require('..')
 
 describe('broadcasts', function() {
   describe('get', function() {
-    before(nockHelper.mockEndpoint('/broadcast/v1/broadcasts', []))
+    before(nockHelper.mockOauthEndpoint('/broadcast/v1/broadcasts', []))
     after(nockHelper.resetNock)
 
     it('Should return details on a set of broadcast messages', function() {
-      const hubspot = new Hubspot({ apiKey: 'demo' })
+      const hubspot = new Hubspot({
+        accessToken: process.env.ACCESS_TOKEN || 'fake-token',
+      })
 
       return hubspot.broadcasts
         .get()
@@ -17,11 +19,13 @@ describe('broadcasts', function() {
   })
 
   describe('get with a callback', function() {
-    before(nockHelper.mockEndpoint('/broadcast/v1/broadcasts', []))
+    before(nockHelper.mockOauthEndpoint('/broadcast/v1/broadcasts', []))
     after(nockHelper.resetNock)
 
     it('Should invoke the callback with the broadcasts', function() {
-      const hubspot = new Hubspot({ apiKey: 'demo' })
+      const hubspot = new Hubspot({
+        accessToken: process.env.ACCESS_TOKEN || 'fake-token',
+      })
       let result
       const fakeCallback = (_error, receivedValue) => (result = receivedValue)
 
