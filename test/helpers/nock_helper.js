@@ -17,13 +17,14 @@ class NockHelper {
       ])
   }
 
-  mockEndpoint(path, data) {
+  mockEndpoint(path, data, query = {}) {
+    query.hapikey = 'demo'
     return () => {
       nock.disableNetConnect()
       this.mockRateLimit()
       nock('http://api.hubapi.com', { encodedQueryParams: true })
         .get(path)
-        .query({ hapikey: 'demo' })
+        .query(query)
         .reply(200, data)
     }
   }

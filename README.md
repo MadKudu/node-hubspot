@@ -291,8 +291,9 @@ hubspot.subscriptions.get(opts, cb)
 ### Email Events
 
 ```javascript
+hubspot.campaigns.getById(cb)
 hubspot.campaigns.get(opts, cb)
-hubspot.campaigns.getOne(id, appId, cb)
+hubspot.campaigns.getOne(id, cb)
 hubspot.campaigns.events(opts, cb)
 ```
 
