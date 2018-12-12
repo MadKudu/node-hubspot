@@ -302,6 +302,38 @@ hubspot.campaigns.events(opts, cb)
 hubspot.broadcasts.get(opts, cb)
 ```
 
+### Timeline
+
+```javascript
+hubspot.timelines.createEventType(applicationId, userId, data, cb)
+hubspot.timelines.updateEventType(applicationId, eventTypeId, data, cb)
+hubspot.timelines.createEventTypeProperty(
+  applicationId,
+  eventTypeId,
+  userId,
+  data,
+  cb,
+)
+hubspot.timelines.updateEventTypeProperty(
+  applicationId,
+  eventTypeId,
+  propertyId,
+  data,
+  cb,
+)
+hubspot.timelines.createTimelineEvent(applicationId, eventTypeId, data, cb)
+```
+
+NOTE: From the [documentation] for createTimelineEvent:
+
+> Returns a 204 response on success. Otherwise, you'll receive a 4xx error, with
+> more details about the specific error in the body of the response.
+
+So on success the body is empty or `undefined` and you will not get a result
+passed to a provided callback function
+
+[documentation]: https://developers.hubspot.com/docs/methods/timeline/create-or-update-event
+
 ### OAuth
 
 #### Obtain your authorization url

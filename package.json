@@ -4,7 +4,7 @@
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run lint && npm run mocha && npm run tsc",
+    "test": "NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
     "coverage": "nyc --reporter=lcov mocha --timeout=10000",
     "lint": "npm run prettier && npm run eslint",
     "tsc": "tsc",
@@ -38,6 +38,7 @@
     "@types/request": "^2.47.0",
     "@types/request-promise": "^4.1.41",
     "chai": "^4.1.2",
+    "dotenv": "^6.2.0",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-config-standard": "12.0.0",
