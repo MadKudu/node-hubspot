@@ -335,6 +335,12 @@ passed to a provided callback function
 
 [documentation]: https://developers.hubspot.com/docs/methods/timeline/create-or-update-event
 
+### Transactional Emails
+
+```javascript
+hubspot.emails.sendTransactionalEmail(data, cb)
+```
+
 ### OAuth
 
 #### Obtain your authorization url
