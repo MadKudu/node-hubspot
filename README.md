@@ -398,29 +398,72 @@ MIT
 
 ## Contributing
 
-### Tests
+Before submitting a pull request, please make sure the following is done:
 
-Tests are written using the HubSpot API sandbox. As such, resources get added
-and deleted all the time.
+1. Fork the repository and create your branch from master.
+1. Run `npm build`. This will:
+   a. Run `npm install` in the repository root.
+   a. Ensure the test suite passes with`npm test`.
+   a. Format your code with prettier and eslint using `npm run lint`.
 
-Don't hard-code record values when fetching / updating / deleting (because those
-tend to disappear). Instead, fetch first an array of available records, then use
-of the returned ID in your test.
+1. If you’ve fixed a bug or added code that should be tested, add tests!
 
-### Contributors
+Tip: `npm run mocha -- --grep "test name"` is helpful in development.
 
-- Brian Falk @brainflake
-- Tim Atkinson @timisbusy
-- Tejas Manohar @tejasmanohar
-- Krispin Schulz @kr1sp1n
-- Filipe Ferreira @iTsFILIPOficial
-- Sam Levan @samlevan
-- Paul Cothenet @pcothenet
-- Nick Mason @masonator
-- Mikael Puittinen @mpuittinen
-- @davidmfoley
-- @jayprakash1
-- @alexatdivvy
-- @forstermatth
-- @amit777
-- Stas Nikiforov @stasnikiforov
+## Development Workflow
+
+After cloning this repo, run `npm install` to fetch dependencies. Then run the
+test suite with `npm test`. From master, this should be green. Our tests mock
+out requests to HubSpot's api using [nock]. We then recommend running the test
+suite without mocking api requests with `NOCK_OFF=true npm run mocha`. This
+should fail as you'll need some [environment variables] for real requests to
+pass.
+
+[nock]: https://github.com/nock/nock
+[environment variables]: https://github.com/motdotla/dotenv
+
+If you haven't already, create a [developer account] on hubspot. You'll want to
+[create an app] and a [test account] as well. Then, create a new file, `.env` in
+the root of the repo. Inside you'll need to add an [app id], a HubSpot user id,
+an [api key] and an [oauth access token];
+
+NOTE: Your HubSpot user ID; This can be found in the same place as your
+Developer HAPIkey in your Developer portal.
+
+[developer account]: https://developer.hubspot.com
+[create an app]: https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot
+[test account]: https://developers.hubspot.com/docs/faq/how-do-i-create-a-test-account
+[app id]: https://developers.hubspot.com/docs/faq/how-do-i-find-the-app-id
+[api key]: https://knowledge.hubspot.com/articles/kcs_article/integrations/how-do-i-get-my-hubspot-api-key
+[oauth access token]: https://developers.hubspot.com/docs/methods/oauth2/oauth2-overview
+
+```.env
+API_KEY="11111111-5555-kkkk-qqqq-999999999999"
+APPLICATION_ID=111111
+USER_ID=2222222
+ACCESS_TOKEN=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA_BBB_CCCC_____-D_EEEEEEEEEEEEEEEEEEEEEEE_fffffff-gggggg"
+```
+
+To get an access token, you should follow the [instructions here] after cloning
+the oauth-quickstart-nodejs project. Make sure to modify `index.js` to include
+all the required scopes as shown in this [pull-request].
+
+[instructions here]: https://github.com/HubSpot/oauth-quickstart-nodejs
+[pull-request]: https://github.com/HubSpot/oauth-quickstart-nodejs/pull/1
+
+Once you have a green test suite with mocking turned off (run
+`NOCK_OFF=true npm run mocha` to confirm) you can write a test for the new
+feature or bug fix hitting the live API. Once that test is passing try mocking
+out the endpoint using the fakeHubspotApi test helper.
+
+Push to your fork. Write a [good commit message][commit]. Submit a pull request.
+
+[commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+
+Others will give constructive feedback. This is a time for discussion and
+improvements, and making the necessary changes will be required before we can
+merge the contribution.
+
+Thank you to all our [contributors].
+
+[contributors]: https://github.com/MadKudu/node-hubspot/graphs/contributors

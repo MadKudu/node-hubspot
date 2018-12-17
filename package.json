@@ -4,6 +4,7 @@
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
+    "build": "npm install && npm test && npm run lint",
     "test": "NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
     "coverage": "nyc --reporter=lcov mocha --timeout=10000",
     "lint": "npm run prettier && npm run eslint",
