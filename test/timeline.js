@@ -1,18 +1,18 @@
 const { expect } = require('chai')
-const nockHelper = require('./helpers/nock_helper')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const Hubspot = require('..')
 
 const userId = process.env.USER_ID || 23456
 const applicationId = process.env.APPLICATION_ID || 12345
 
 describe('timeline', function() {
-  const hubspot = new Hubspot({
-    accessToken: process.env.ACCESS_TOKEN || 'some-fake-token',
-  })
   const headerTemplate =
     '# Title for event {{id}}\nThis is an event for {{objectType}}'
   const detailTemplate =
     'This event happened on {{#formatDate timestamp}}{{/formatDate}}'
+  const hubspot = new Hubspot({
+    accessToken: process.env.ACCESS_TOKEN || 'some-fake-token',
+  })
   const createEventType = () =>
     hubspot.timelines.createEventType(applicationId, userId, {
       name: 'Test Event Type',
@@ -32,19 +32,17 @@ describe('timeline', function() {
     )
 
   describe('createEventType', () => {
-    beforeEach(
-      nockHelper.mockPostOauthEndpoint(
-        `/integrations/v1/${applicationId}/timeline/event-types`,
-        {
-          name: 'Test Event Type',
-          headerTemplate,
-          detailTemplate,
-          applicationId,
-        },
-        { userId },
-      ),
-    )
-    afterEach(nockHelper.resetNock)
+    const createEventTypeEndpoint = {
+      path: `/integrations/v1/${applicationId}/timeline/event-types`,
+      response: {
+        name: 'Test Event Type',
+        headerTemplate,
+        detailTemplate,
+        applicationId,
+      },
+      query: { userId },
+    }
+    fakeHubspotApi.setupServer({ postEndpoints: [createEventTypeEndpoint] })
 
     it('should create an event type', async () => {
       return hubspot.timelines
@@ -61,24 +59,23 @@ describe('timeline', function() {
   })
 
   describe('updateEventType', () => {
-    let eventTypeId
+    let eventTypeId = 123
+    const updateEventTypeEndpoint = {
+      path: `/integrations/v1/${applicationId}/timeline/event-types/${eventTypeId}`,
+      response: {
+        name: 'Edited Event Type',
+        headerTemplate,
+        detailTemplate,
+        applicationId,
+      },
+    }
+    fakeHubspotApi.setupServer({ putEndpoints: [updateEventTypeEndpoint] })
+
     beforeEach(() => {
       if (process.env.NOCK_OFF) {
         return createEventType().then(data => (eventTypeId = data.id))
-      } else {
-        eventTypeId = 123
-        return nockHelper.mockPutOauthEndpoint(
-          `/integrations/v1/${applicationId}/timeline/event-types/123`,
-          {
-            name: 'Edited Event Type',
-            headerTemplate,
-            detailTemplate,
-            applicationId,
-          },
-        )()
       }
     })
-    afterEach(nockHelper.resetNock)
 
     it('should update an event type', async () => {
       return hubspot.timelines
@@ -94,24 +91,25 @@ describe('timeline', function() {
   })
 
   describe('createEventTypeProperty', () => {
-    let eventTypeId
+    let eventTypeId = 123
+    const createEventTypePropertyEndpoint = {
+      path: `/integrations/v1/${applicationId}/timeline/event-types/${eventTypeId}/properties`,
+      response: {
+        name: 'NumericProperty',
+        label: 'Numeric Property',
+        propertyType: 'Numeric',
+      },
+      query: { userId },
+    }
+    fakeHubspotApi.setupServer({
+      postEndpoints: [createEventTypePropertyEndpoint],
+    })
+
     beforeEach(() => {
       if (process.env.NOCK_OFF) {
         return createEventType().then(data => (eventTypeId = data.id))
-      } else {
-        eventTypeId = 123
-        return nockHelper.mockPostOauthEndpoint(
-          `/integrations/v1/${applicationId}/timeline/event-types/123/properties`,
-          {
-            name: 'NumericProperty',
-            label: 'Numeric Property',
-            propertyType: 'Numeric',
-          },
-          { userId },
-        )()
       }
     })
-    afterEach(nockHelper.resetNock)
 
     it('should create an event type property', async () => {
       return hubspot.timelines
@@ -127,8 +125,21 @@ describe('timeline', function() {
   })
 
   describe('updateEventTypeProperty', () => {
-    let eventTypeId
-    let eventTypePropertyId
+    let eventTypeId = 123
+    let eventTypePropertyId = 234
+    const updateEventTypePropertyEndpoint = {
+      path: `/integrations/v1/${applicationId}/timeline/event-types/${eventTypeId}/properties`,
+      response: {
+        name: 'NumericProperty',
+        label: 'A new label',
+        propertyType: 'Numeric',
+        id: eventTypePropertyId,
+      },
+    }
+    fakeHubspotApi.setupServer({
+      putEndpoints: [updateEventTypePropertyEndpoint],
+    })
+
     beforeEach(() => {
       if (process.env.NOCK_OFF) {
         return createEventType().then(data => {
@@ -137,21 +148,8 @@ describe('timeline', function() {
             data => (eventTypePropertyId = data.id),
           )
         })
-      } else {
-        eventTypeId = 123
-        eventTypePropertyId = 234
-        return nockHelper.mockPutOauthEndpoint(
-          `/integrations/v1/${applicationId}/timeline/event-types/123/properties`,
-          {
-            name: 'NumericProperty',
-            label: 'A new label',
-            propertyType: 'Numeric',
-            id: eventTypePropertyId,
-          },
-        )()
       }
     })
-    afterEach(nockHelper.resetNock)
 
     it('should update an event type property', async () => {
       return hubspot.timelines
@@ -172,23 +170,27 @@ describe('timeline', function() {
   })
 
   describe('createTimelineEvent', () => {
-    let eventTypeId
+    let eventTypeId = 123
+    const createTimelineEventEndpoint = {
+      path: `/integrations/v1/${applicationId}/timeline/event`,
+      request: body => {
+        return (
+          !!body.id &&
+          body.email === 'test@test.com' &&
+          body.eventTypeId === eventTypeId
+        )
+      },
+      statusCode: 204,
+    }
+    fakeHubspotApi.setupServer({
+      putEndpoints: [createTimelineEventEndpoint],
+    })
+
     beforeEach(() => {
       if (process.env.NOCK_OFF) {
         return createEventType().then(data => (eventTypeId = data.id))
-      } else {
-        eventTypeId = 123
-        return nockHelper.mockFuzzyPutOauthEndpoint(
-          `/integrations/v1/${applicationId}/timeline/event`,
-          body =>
-            !!body.id &&
-            body.email === 'test@test.com' &&
-            body.eventTypeId === eventTypeId,
-          undefined,
-        )()
       }
     })
-    afterEach(nockHelper.resetNock)
 
     it('should create an event', async () => {
       return hubspot.timelines

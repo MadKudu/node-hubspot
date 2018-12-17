@@ -1,12 +1,12 @@
 const { expect } = require('chai')
-const nockHelper = require('./helpers/nock_helper')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const Hubspot = require('..')
 
 describe('Owners', function() {
-  describe('get', function() {
-    before(nockHelper.mockEndpoint('/owners/v2/owners', []))
-    after(nockHelper.resetNock)
+  const ownersGetEndpoint = { path: '/owners/v2/owners', response: [] }
+  fakeHubspotApi.setupServer({ demo: true, getEndpoints: [ownersGetEndpoint] })
 
+  describe('get', function() {
     it('Should return all owners', function() {
       const hubspot = new Hubspot({ apiKey: 'demo' })
 
@@ -17,9 +17,6 @@ describe('Owners', function() {
   })
 
   describe('get with a callback', function() {
-    before(nockHelper.mockEndpoint('/owners/v2/owners', []))
-    after(nockHelper.resetNock)
-
     it('Should invoke the callback with the owners', function() {
       const hubspot = new Hubspot({ apiKey: 'demo' })
       let result

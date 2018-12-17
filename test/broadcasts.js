@@ -1,12 +1,15 @@
 const { expect } = require('chai')
-const nockHelper = require('./helpers/nock_helper')
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 
 describe('broadcasts', function() {
-  describe('get', function() {
-    before(nockHelper.mockOauthEndpoint('/broadcast/v1/broadcasts', []))
-    after(nockHelper.resetNock)
+  const broadcastsGetEndpoint = {
+    path: '/broadcast/v1/broadcasts',
+    response: [],
+  }
+  fakeHubspotApi.setupServer({ getEndpoints: [broadcastsGetEndpoint] })
 
+  describe('get', function() {
     it('Should return details on a set of broadcast messages', function() {
       const hubspot = new Hubspot({
         accessToken: process.env.ACCESS_TOKEN || 'fake-token',
@@ -19,9 +22,6 @@ describe('broadcasts', function() {
   })
 
   describe('get with a callback', function() {
-    before(nockHelper.mockOauthEndpoint('/broadcast/v1/broadcasts', []))
-    after(nockHelper.resetNock)
-
     it('Should invoke the callback with the broadcasts', function() {
       const hubspot = new Hubspot({
         accessToken: process.env.ACCESS_TOKEN || 'fake-token',

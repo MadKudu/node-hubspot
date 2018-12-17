@@ -1,11 +1,29 @@
 const nock = require('nock')
 
+const mockEndpoint = ({
+  path,
+  response,
+  verb,
+  request,
+  query = {},
+  statusCode = 200,
+}) => {
+  nock('http://api.hubapi.com', { encodedQueryParams: true })
+    .intercept(path, verb, request)
+    .query(query)
+    .reply(statusCode, response)
+}
+
 class NockHelper {
+  disableNetConnect() {
+    nock.disableNetConnect()
+  }
+
   mockRateLimit() {
-    nock('http://api.hubapi.com', { encodedQueryParams: true })
-      .get('/integrations/v1/limit/daily')
-      .query({ hapikey: 'demo' })
-      .reply(200, [
+    mockEndpoint({
+      path: '/integrations/v1/limit/daily',
+      verb: 'GET',
+      response: [
         {
           name: 'api-calls-daily',
           usageLimit: 160000,
@@ -14,58 +32,24 @@ class NockHelper {
           fetchStatus: 'CACHED',
           resetsAt: Date.now() + 24 * 60 * 60 * 1000,
         },
-      ])
+      ],
+      query: { hapikey: 'demo' },
+    })
   }
 
-  mockEndpoint(path, data, query = {}) {
-    query.hapikey = 'demo'
-    return () => {
-      nock.disableNetConnect()
-      this.mockRateLimit()
-      nock('http://api.hubapi.com', { encodedQueryParams: true })
-        .get(path)
-        .query(query)
-        .reply(200, data)
-    }
+  mockGetEndpoint(parameters) {
+    parameters.verb = 'GET'
+    mockEndpoint(parameters)
   }
 
-  mockOauthEndpoint(path, data) {
-    return () => {
-      nock.disableNetConnect()
-      nock('http://api.hubapi.com')
-        .get(path)
-        .reply(200, data)
-    }
+  mockPostEndpoint(parameters) {
+    parameters.verb = 'POST'
+    mockEndpoint(parameters)
   }
 
-  mockPostOauthEndpoint(path, data, query = {}) {
-    return () => {
-      nock.disableNetConnect()
-      nock('http://api.hubapi.com', { encodedQueryParams: true })
-        .post(path, data)
-        .query(query)
-        .reply(200, data)
-    }
-  }
-
-  mockPutOauthEndpoint(path, data, query = {}) {
-    return () => {
-      nock.disableNetConnect()
-      nock('http://api.hubapi.com', { encodedQueryParams: true })
-        .put(path, data)
-        .query(query)
-        .reply(200, data)
-    }
-  }
-
-  mockFuzzyPutOauthEndpoint(path, regex, data, query = {}) {
-    return () => {
-      nock.disableNetConnect()
-      nock('http://api.hubapi.com', { encodedQueryParams: true })
-        .put(path, regex)
-        .query(query)
-        .reply(200, data)
-    }
+  mockPutEndpoint(parameters) {
+    parameters.verb = 'PUT'
+    mockEndpoint(parameters)
   }
 
   resetNock() {

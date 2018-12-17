@@ -1,6 +1,6 @@
-const { expect } = require('chai')
-const nockHelper = require('./helpers/nock_helper')
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
+const { expect } = require('chai')
 const hubspot = () =>
   new Hubspot({
     accessToken: process.env.ACCESS_TOKEN || 'fake-token',
@@ -8,12 +8,11 @@ const hubspot = () =>
 
 describe('campaigns', function() {
   describe('get', function() {
-    beforeEach(
-      nockHelper.mockOauthEndpoint('/email/public/v1/campaigns', {
-        campaigns: [],
-      }),
-    )
-    afterEach(nockHelper.resetNock)
+    const campaignsGetEndpoint = {
+      path: '/email/public/v1/campaigns',
+      response: { campaigns: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [campaignsGetEndpoint] })
 
     it('Should return campaigns with IDs', function() {
       return hubspot()
@@ -37,21 +36,23 @@ describe('campaigns', function() {
     const hubspotDemo = new Hubspot({ apiKey: 'demo' })
 
     describe('successfully', function() {
-      let campaignId
+      let campaignId = 345
+      const campaignGetEndpoint = {
+        path: `/email/public/v1/campaigns/${campaignId}`,
+        response: { id: campaignId },
+      }
+      fakeHubspotApi.setupServer({
+        demo: true,
+        getEndpoints: [campaignGetEndpoint],
+      })
 
       beforeEach(() => {
         if (process.env.NOCK_OFF) {
           return hubspotDemo.campaigns.get().then(data => {
             campaignId = data.campaigns[0].id
           })
-        } else {
-          campaignId = 123
-          nockHelper.mockEndpoint('/email/public/v1/campaigns/123', {
-            id: campaignId,
-          })()
         }
       })
-      afterEach(nockHelper.resetNock)
 
       it('Should return a campaign', function() {
         return hubspotDemo.campaigns.getOne(campaignId).then(data => {
@@ -90,12 +91,11 @@ describe('campaigns', function() {
   })
 
   describe('getById', function() {
-    beforeEach(
-      nockHelper.mockOauthEndpoint('/email/public/v1/campaigns/by-id', {
-        campaigns: [],
-      }),
-    )
-    afterEach(nockHelper.resetNock)
+    const campaignsByIdEndpoint = {
+      path: '/email/public/v1/campaigns/by-id',
+      response: { campaigns: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [campaignsByIdEndpoint] })
 
     it('Should return a campaign', function() {
       return hubspot()
@@ -116,12 +116,11 @@ describe('campaigns', function() {
   })
 
   describe('events', function() {
-    beforeEach(
-      nockHelper.mockOauthEndpoint('/email/public/v1/events', {
-        events: [],
-      }),
-    )
-    afterEach(nockHelper.resetNock)
+    const eventsGetEndpoint = {
+      path: '/email/public/v1/events',
+      response: { events: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [eventsGetEndpoint] })
 
     it('Should return events', function() {
       return hubspot()
