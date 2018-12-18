@@ -17,16 +17,7 @@ const handleError = (requestError: RequestError) => {
 
 const hubspot = new Hubspot(apiKeyOptions)
 
-// Promise
 hubspot.companies
   .get({ limit: 1 })
   .then(handleResponse)
   .catch(handleError)
-
-// Callback
-hubspot.companies.properties.groups.get((err: HubspotError, results) => {
-  if (err) {
-    console.error(err)
-  }
-  console.log(results)
-})

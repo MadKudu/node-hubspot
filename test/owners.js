@@ -15,16 +15,4 @@ describe('Owners', function() {
       })
     })
   })
-
-  describe('get with a callback', function() {
-    it('Should invoke the callback with the owners', function() {
-      const hubspot = new Hubspot({ apiKey: 'demo' })
-      let result
-      const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-      return hubspot.owners
-        .get(fakeCallback)
-        .then(() => expect(result).to.be.a('array'))
-    })
-  })
 })

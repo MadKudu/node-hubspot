@@ -8,13 +8,6 @@
 
 Javascript / node.js wrapper for the [HubSpot API](https://developers.hubspot.com/docs/overview)
 
-## Upgrade to 1.0
-
-Version 1.0 was released on 2017-08-23 and included breaking changes. See the
-[Changelog](./changelog.md) for details.
-
-If you need help upgrading, please open an issue
-
 ## Installing
 
 ```shell
@@ -63,7 +56,8 @@ return hubspot.refreshAccessToken()
 
 ## Usage
 
-And then use the API method via:
+All methods return a [promise]. The success case includes the returned object
+from the response. Use the API method via:
 
 ```javascript
 hubspot.contacts
@@ -76,16 +70,7 @@ hubspot.contacts
   })
 ```
 
-or if you prefer callbacks:
-
-```javascript
-hubspot.contacts.get(function(err, results) {
-  if (err) {
-    console.error(err)
-  }
-  console.log(results)
-})
-```
+[promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 ## {EXAMPLE} Create Contact
 
@@ -121,29 +106,29 @@ and will fail requests if the total is too close to the max. By default
 ### Companies
 
 ```javascript
-hubspot.companies.get(opts, cb)
-hubspot.companies.getById(id, cb)
-hubspot.companies.getRecentlyCreated(opts, cb)
-hubspot.companies.getRecentlyModified(opts, cb)
-hubspot.companies.getByDomain(domain, cb)
-hubspot.companies.create(data, cb)
-hubspot.companies.addContactToCompany(data, cb)
+hubspot.companies.get(opts)
+hubspot.companies.getById(id)
+hubspot.companies.getRecentlyCreated(opts)
+hubspot.companies.getRecentlyModified(opts)
+hubspot.companies.getByDomain(domain)
+hubspot.companies.create(data)
+hubspot.companies.addContactToCompany(data)
 // data = { companyId: 123, contactVid: 123 }
-hubspot.companies.getContactIds(id, options, cb)
-hubspot.companies.getContacts(id, options, cb)
-hubspot.companies.update(id, data, cb)
-hubspot.companies.updateBatch(data, cb)
+hubspot.companies.getContactIds(id, options)
+hubspot.companies.getContacts(id, options)
+hubspot.companies.update(id, data)
+hubspot.companies.updateBatch(data)
 // data = [{ objectId: 123, properties: [] }]
-hubspot.companies.delete(id, cb)
+hubspot.companies.delete(id)
 ```
 
 ### Company properties
 
 ```javascript
-hubspot.companies.properties.get(query, cb) // query is optional
-hubspot.companies.properties.getByName(name, cb)
-hubspot.companies.properties.create(data, cb)
-hubspot.companies.properties.update(name, data, cb)
+hubspot.companies.properties.get(query) // query is optional
+hubspot.companies.properties.getByName(name)
+hubspot.companies.properties.create(data)
+hubspot.companies.properties.update(name, data)
 hubspot.companies.properties.upsert(data)
 // not an official API, wrapper doing two API calls. Callbacks not supported
 // at this time.
@@ -152,9 +137,9 @@ hubspot.companies.properties.upsert(data)
 ### Company properties groups
 
 ```javascript
-hubspot.companies.properties.groups.get(query, cb) // query is optional
-hubspot.companies.properties.groups.create(data, cb)
-hubspot.companies.properties.groups.update(name, data, cb)
+hubspot.companies.properties.groups.get(query) // query is optional
+hubspot.companies.properties.groups.create(data)
+hubspot.companies.properties.groups.update(name, data)
 hubspot.companies.properties.groups.upsert(data)
 // not an official API, wrapper doing two API calls. Callbacks not supported at
 // this time
@@ -163,70 +148,70 @@ hubspot.companies.properties.groups.upsert(data)
 ### Contacts
 
 ```javascript
-hubspot.contacts.get(opts, cb)
-hubspot.contacts.getByEmail(email, cb)
-hubspot.contacts.getByEmailBatch(emails, cb)
-hubspot.contacts.getById(id, cb)
-hubspot.contacts.getByIdBatch(ids, cb)
-hubspot.contacts.getByToken(utk, cb)
-hubspot.contacts.update(id, data, cb)
-hubspot.contacts.create(data, cb)
-hubspot.contacts.createOrUpdateBatch(data, cb)
+hubspot.contacts.get(opts)
+hubspot.contacts.getByEmail(email)
+hubspot.contacts.getByEmailBatch(emails)
+hubspot.contacts.getById(id)
+hubspot.contacts.getByIdBatch(ids)
+hubspot.contacts.getByToken(utk)
+hubspot.contacts.update(id, data)
+hubspot.contacts.create(data)
+hubspot.contacts.createOrUpdateBatch(data)
 // data = [{ vid/email: '', properties: [] }]
-hubspot.contacts.search(query, cb)
-hubspot.contacts.getRecentlyCreated(cb)
-hubspot.contacts.getRecentlyModified(cb)
-hubspot.contacts.createOrUpdate(email, data, cb)
-hubspot.contacts.delete(id, cb)
+hubspot.contacts.search(query)
+hubspot.contacts.getRecentlyCreated()
+hubspot.contacts.getRecentlyModified()
+hubspot.contacts.createOrUpdate(email, data)
+hubspot.contacts.delete(id)
 ```
 
 ### Contact properties
 
 ```javascript
-hubspot.contacts.properties.get(cb)
-hubspot.contacts.properties.getByName(name, cb)
-hubspot.contacts.properties.create(data, cb)
-hubspot.contacts.properties.update(name, data, cb)
+hubspot.contacts.properties.get()
+hubspot.contacts.properties.getByName(name)
+hubspot.contacts.properties.create(data)
+hubspot.contacts.properties.update(name, data)
 hubspot.contacts.properties.upsert(data)
 // not an official API, wrapper doing two API calls.
 // Callbacks not supported at this time
-hubspot.contacts.properties.getGroups(cb)
+hubspot.contacts.properties.getGroups()
 // => [ {name: '...', displayName: '...'}, ...]
-hubspot.contacts.properties.createGroup({ name, displayName }, cb)
-hubspot.contacts.properties.updateGroup(name, { displayName }, cb)
-hubspot.contacts.properties.deleteGroup(name, cb)
-hubspot.contacts.properties.delete(name, cb)
+hubspot.contacts.properties.createGroup({ name, displayName })
+hubspot.contacts.properties.updateGroup(name, { displayName })
+hubspot.contacts.properties.deleteGroup(name)
+hubspot.contacts.properties.delete(name)
 ```
 
 ### Pages
 
 ```javascript
 // more opts can be found at https://developers.hubspot.com/docs/methods/pages/get_pages
-hubspot.pages.get(opts, cb) // eg: opts = {is_draft: false}
+hubspot.pages.get(opts) // eg: opts = {is_draft: false}
 ```
 
 ### Deals
 
 ```javascript
-hubspot.deals.get(opts, cb)
-hubspot.deals.getRecentlyModified(opts, cb)
-hubspot.deals.getRecentlyCreated(opts, cb)
-hubspot.deals.getById(id, cb)
-hubspot.deals.getAssociated(objectType, objectId, opts, cb)
-hubspot.deals.deleteById(id, cb)
-hubspot.deals.updateById(id, data, cb)
-hubspot.deals.create(data, cb)
-hubspot.deals.associate(id, objectType, associatedObjectId, cb)
-hubspot.deals.removeAssociation(id, objectType, associatedObjectId, cb)
+hubspot.deals.get(opts)
+hubspot.deals.getRecentlyModified(opts)
+hubspot.deals.getRecentlyCreated(opts)
+hubspot.deals.getById(id)
+hubspot.deals.getAssociated(objectType, objectId, opts)
+hubspot.deals.deleteById(id)
+hubspot.deals.updateById(id, data)
+hubspot.deals.create(data)
+hubspot.deals.associate(id, objectType, associatedObjectId)
+hubspot.deals.removeAssociation(id, objectType, associatedObjectId)
 ```
 
 ### Deals properties
 
 ```javascript
-hubspot.deals.properties.get(query, cb) // query is optional
-hubspot.deals.properties.getByName(name, cb)
-hubspot.deals.properties.create(data, cb)
-hubspot.deals.properties.update(name, data, cb)
+hubspot.deals.properties.get(query) // query is optional
+hubspot.deals.properties.getByName(name)
+hubspot.deals.properties.create(data)
+hubspot.deals.properties.update(name, data)
 hubspot.deals.properties.upsert(data)
 // not an official API, wrapper doing two API calls. Callbacks not supported at
 // this time
@@ -235,9 +220,9 @@ hubspot.deals.properties.upsert(data)
 ### Deals properties groups
 
 ```javascript
-hubspot.deals.properties.groups.get(query, cb) // query is optional
-hubspot.deals.properties.groups.create(data, cb)
-hubspot.deals.properties.groups.update(name, data, cb)
+hubspot.deals.properties.groups.get(query) // query is optional
+hubspot.deals.properties.groups.create(data)
+hubspot.deals.properties.groups.update(name, data)
 hubspot.deals.properties.groups.upsert(data)
 // not an official API, wrapper doing two API calls. Callbacks not supported at
 // this time
@@ -246,85 +231,83 @@ hubspot.deals.properties.groups.upsert(data)
 ### Engagements
 
 ```javascript
-hubspot.engagements.create(data, cb)
-hubspot.engagements.get(opts, cb)
-hubspot.engagements.getRecentlyModified(opts, cb)
-hubspot.engagements.getAssociated(objectType, objectId, opts, cb)
-hubspot.engagements.getCallDispositions(cb)
+hubspot.engagements.create(data)
+hubspot.engagements.get(opts)
+hubspot.engagements.getRecentlyModified(opts)
+hubspot.engagements.getAssociated(objectType, objectId, opts)
+hubspot.engagements.getCallDispositions()
 ```
 
 ### Owners
 
 ```javascript
-hubspot.owners.get(opts, cb)
+hubspot.owners.get(opts)
 ```
 
 ### Pipelines
 
 ```javascript
-hubspot.pipelines.get(opts, cb)
+hubspot.pipelines.get(opts)
 ```
 
 ### Lists
 
 ```javascript
-hubspot.lists.get(opts, cb)
-hubspot.lists.getOne(id, cb)
-hubspot.lists.getContacts(id, opts, cb)
-hubspot.lists.getRecentContacts(id, opts, cb)
-hubspot.lists.addContacts(id, contactBody, cb)
+hubspot.lists.get(opts)
+hubspot.lists.getOne(id)
+hubspot.lists.getContacts(id, opts)
+hubspot.lists.getRecentContacts(id, opts)
+hubspot.lists.addContacts(id, contactBody)
 ```
 
 ### Files
 
 ```javascript
-hubspot.files.get(cb)
-hubspot.files.getOne(id, cb)
+hubspot.files.get()
+hubspot.files.getOne(id)
 ```
 
 ### Email
 
 ```javascript
-hubspot.subscriptions.get(opts, cb)
+hubspot.subscriptions.get(opts)
 ```
 
 ### Email Events
 
 ```javascript
-hubspot.campaigns.getById(cb)
-hubspot.campaigns.get(opts, cb)
-hubspot.campaigns.getOne(id, cb)
-hubspot.campaigns.events(opts, cb)
+hubspot.campaigns.getById()
+hubspot.campaigns.get(opts)
+hubspot.campaigns.getOne(id)
+hubspot.campaigns.events(opts)
 ```
 
 ### Social Media
 
 ```javascript
-hubspot.broadcasts.get(opts, cb)
+hubspot.broadcasts.get(opts)
 ```
 
 ### Timeline
 
 ```javascript
 // setup for timeline events
-hubspot.timelines.createEventType(applicationId, userId, data, cb)
-hubspot.timelines.updateEventType(applicationId, eventTypeId, data, cb)
+hubspot.timelines.createEventType(applicationId, userId, data)
+hubspot.timelines.updateEventType(applicationId, eventTypeId, data)
 hubspot.timelines.createEventTypeProperty(
   applicationId,
   eventTypeId,
   userId,
   data,
-  cb,
 )
 hubspot.timelines.updateEventTypeProperty(
   applicationId,
   eventTypeId,
   propertyId,
   data,
-  cb,
 )
 // creating timeline events
-hubspot.timelines.createTimelineEvent(applicationId, eventTypeId, data, cb)
+hubspot.timelines.createTimelineEvent(applicationId, eventTypeId, data)
 ```
 
 NOTE: From the [documentation] for createTimelineEvent:
@@ -333,14 +316,14 @@ NOTE: From the [documentation] for createTimelineEvent:
 > more details about the specific error in the body of the response.
 
 So on success the body is empty or `undefined` and you will not get a result
-passed to a provided callback function
+from the resolved promise.
 
 [documentation]: https://developers.hubspot.com/docs/methods/timeline/create-or-update-event
 
 ### Transactional Emails
 
 ```javascript
-hubspot.emails.sendTransactionalEmail(data, cb)
+hubspot.emails.sendTransactionalEmail(data)
 ```
 
 ### OAuth

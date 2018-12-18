@@ -20,18 +20,4 @@ describe('broadcasts', function() {
         .then(data => expect(data).to.be.a('array'))
     })
   })
-
-  describe('get with a callback', function() {
-    it('Should invoke the callback with the broadcasts', function() {
-      const hubspot = new Hubspot({
-        accessToken: process.env.ACCESS_TOKEN || 'fake-token',
-      })
-      let result
-      const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-      return hubspot.broadcasts
-        .get(fakeCallback)
-        .then(() => expect(result).to.be.a('array'))
-    })
-  })
 })

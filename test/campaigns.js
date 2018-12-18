@@ -21,15 +21,6 @@ describe('campaigns', function() {
           expect(data.campaigns).to.be.an('array')
         })
     })
-
-    it('Should invoke a callback', function() {
-      let result
-      const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-      return hubspot()
-        .campaigns.get(fakeCallback)
-        .then(() => expect(result.campaigns).to.be.a('array'))
-    })
   })
 
   describe('getOne', function() {
@@ -59,29 +50,9 @@ describe('campaigns', function() {
           expect(data.id).to.eq(campaignId)
         })
       })
-
-      it('Should take a callback as the second argument', function() {
-        let result
-        const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-        return hubspotDemo.campaigns
-          .getOne(campaignId, fakeCallback)
-          .then(() => {
-            expect(result.id).to.eq(campaignId)
-          })
-      })
     })
 
     describe('unsuccessfully', function() {
-      it('Should error when passed a callback as the first argument', function() {
-        let result
-        const fakeCallback = error => (result = error)
-
-        return hubspotDemo.campaigns.getOne(fakeCallback).catch(() => {
-          expect(result.message).to.eq('id parameter must be provided.')
-        })
-      })
-
       it('Should error when not passed an id', function() {
         return hubspotDemo.campaigns.getOne().catch(error => {
           expect(error.message).to.eq('id parameter must be provided.')
@@ -104,15 +75,6 @@ describe('campaigns', function() {
           expect(data.campaigns).to.be.an('array')
         })
     })
-
-    it('Should invoke a callback', function() {
-      let result
-      const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-      return hubspot()
-        .campaigns.getById(fakeCallback)
-        .then(() => expect(result.campaigns).to.be.a('array'))
-    })
   })
 
   describe('events', function() {
@@ -128,15 +90,6 @@ describe('campaigns', function() {
         .then(data => {
           expect(data.events).to.be.an('array')
         })
-    })
-
-    it('Should invoke a callback', function() {
-      let result
-      const fakeCallback = (_error, receivedValue) => (result = receivedValue)
-
-      return hubspot()
-        .campaigns.events(fakeCallback)
-        .then(() => expect(result.events).to.be.a('array'))
     })
   })
 })
