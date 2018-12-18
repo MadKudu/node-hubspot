@@ -6,6 +6,7 @@ class FakeHubSpotApi {
     getEndpoints = [],
     postEndpoints = [],
     putEndpoints = [],
+    deleteEndpoints = [],
   } = {}) {
     let maybeAddHapiKeyToQuery = x => x
     if (demo) {
@@ -22,6 +23,9 @@ class FakeHubSpotApi {
       getEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockGetEndpoint)
       postEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPostEndpoint)
       putEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPutEndpoint)
+      deleteEndpoints
+        .map(maybeAddHapiKeyToQuery)
+        .map(nockHelper.mockDeleteEndpoint)
     })
 
     afterEach(function() {

@@ -3,15 +3,23 @@ const nock = require('nock')
 const mockEndpoint = ({
   path,
   response,
+  responseError,
   verb,
   request,
   query = {},
   statusCode = 200,
 }) => {
-  nock('http://api.hubapi.com', { encodedQueryParams: true })
-    .intercept(path, verb, request)
-    .query(query)
-    .reply(statusCode, response)
+  if (responseError) {
+    nock('http://api.hubapi.com', { encodedQueryParams: true })
+      .intercept(path, verb, request)
+      .query(query)
+      .replyWithError(responseError)
+  } else {
+    nock('http://api.hubapi.com', { encodedQueryParams: true })
+      .intercept(path, verb, request)
+      .query(query)
+      .reply(statusCode, response)
+  }
 }
 
 class NockHelper {
@@ -49,6 +57,11 @@ class NockHelper {
 
   mockPutEndpoint(parameters) {
     parameters.verb = 'PUT'
+    mockEndpoint(parameters)
+  }
+
+  mockDeleteEndpoint(parameters) {
+    parameters.verb = 'DELETE'
     mockEndpoint(parameters)
   }
 
