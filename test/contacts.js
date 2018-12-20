@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const fakeHubspotApi = require('./helpers/fake_hubspot_api')
+const { createTestContact, deleteTestContact } = require('./helpers/factories')
 
 const Hubspot = require('..')
 const emailsFromContacts = contacts =>
@@ -14,32 +15,6 @@ describe('contacts', function() {
   const hubspot = new Hubspot({
     accessToken: process.env.ACCESS_TOKEN || 'fake-token',
   })
-  const createTestContact = () =>
-    hubspot.contacts.create({
-      properties: [
-        {
-          property: 'email',
-          value: 'node-hubspot' + Date.now() + '@madkudu.com',
-        },
-        {
-          property: 'firstname',
-          value: 'Try',
-        },
-        {
-          property: 'lastname',
-          value: 'MadKudu',
-        },
-        {
-          property: 'website',
-          value: 'http://www.madkudu.com',
-        },
-        {
-          property: 'company',
-          value: 'MadKudu',
-        },
-      ],
-    })
-  const deleteTestContact = contactId => hubspot.contacts.delete(contactId)
 
   describe('get', function() {
     const count = 10
@@ -114,12 +89,12 @@ describe('contacts', function() {
 
     before(function() {
       if (process.env.NOCK_OFF) {
-        return createTestContact().then(data => (contactId = data.vid))
+        return createTestContact(hubspot).then(data => (contactId = data.vid))
       }
     })
     after(function() {
       if (process.env.NOCK_OFF) {
-        return deleteTestContact(contactId)
+        return deleteTestContact(hubspot, contactId)
       }
     })
 
@@ -400,7 +375,7 @@ describe('contacts', function() {
 
     before(function() {
       if (process.env.NOCK_OFF) {
-        return createTestContact().then(data => (contactId = data.vid))
+        return createTestContact(hubspot).then(data => (contactId = data.vid))
       }
     })
 
