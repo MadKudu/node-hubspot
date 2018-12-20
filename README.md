@@ -408,7 +408,7 @@ pass.
 If you haven't already, create a [developer account] on hubspot. You'll want to
 [create an app] and a [test account] as well. Then, create a new file, `.env` in
 the root of the repo. Inside you'll need to add an [app id], a HubSpot user id,
-an [api key] and an [oauth access token];
+and an [oauth access token];
 
 NOTE: Your HubSpot user ID; This can be found in the same place as your
 Developer HAPIkey in your Developer portal.
@@ -417,11 +417,9 @@ Developer HAPIkey in your Developer portal.
 [create an app]: https://developers.hubspot.com/docs/faq/how-do-i-create-an-app-in-hubspot
 [test account]: https://developers.hubspot.com/docs/faq/how-do-i-create-a-test-account
 [app id]: https://developers.hubspot.com/docs/faq/how-do-i-find-the-app-id
-[api key]: https://knowledge.hubspot.com/articles/kcs_article/integrations/how-do-i-get-my-hubspot-api-key
 [oauth access token]: https://developers.hubspot.com/docs/methods/oauth2/oauth2-overview
 
 ```.env
-API_KEY="11111111-5555-kkkk-qqqq-999999999999"
 APPLICATION_ID=111111
 USER_ID=2222222
 ACCESS_TOKEN=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA_BBB_CCCC_____-D_EEEEEEEEEEEEEEEEEEEEEEE_fffffff-gggggg"
