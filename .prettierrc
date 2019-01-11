@@ -3,4 +3,5 @@
   "semi": false,
   "printWidth": 80,
   "trailingComma": "all",
+  "endOfLine": "crlf"
 }
