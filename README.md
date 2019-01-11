@@ -18,7 +18,10 @@ npm install hubspot
 
 ```javascript
 const Hubspot = require('hubspot')
-const hubspot = new Hubspot({ apiKey: 'abc' })
+const hubspot = new Hubspot({ 
+  apiKey: 'abc',
+  checkLimit: false // (Optional) Specify whether or not to check the API limit on each call. Default: true 
+})
 ```
 
 You can also authenticate via token:
