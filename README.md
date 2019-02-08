@@ -84,7 +84,7 @@ const contactObject = {
         };
 
           const hubspot = new Hubspot({ apiKey: YOUR API KEY });
-          const hubspotContact = await hubspot.contacts.create(contactObj);
+          const hubspotContact = await hubspot.contacts.create(contactObject);
 ```
 
 ## {EXAMPLE} If you need to insert multiple values
