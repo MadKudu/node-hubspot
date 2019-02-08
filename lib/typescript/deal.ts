@@ -21,13 +21,13 @@ declare class Deal {
   associate(
     id: number,
     objectType: string,
-    associatedObjectId: number,
+    associatedObjectId: number
   ): RequestPromise
 
   removeAssociation(
     id: number,
     objectType: string,
-    associatedObjectId: number,
+    associatedObjectId: number
   ): RequestPromise
 
   properties: Properties

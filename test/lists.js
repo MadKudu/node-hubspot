@@ -38,7 +38,7 @@ describe('lists', function() {
       before(function() {
         if (process.env.NOCK_OFF) {
           return createTestList(listProperties).then(
-            data => (listId = data.listId),
+            data => (listId = data.listId)
           )
         }
       })
@@ -104,7 +104,7 @@ describe('lists', function() {
     before(function() {
       if (process.env.NOCK_OFF) {
         return createTestList(listProperties).then(
-          data => (listId = data.listId),
+          data => (listId = data.listId)
         )
       }
     })
@@ -128,7 +128,7 @@ describe('lists', function() {
       before(function() {
         if (process.env.NOCK_OFF) {
           return createTestList(listProperties).then(
-            data => (listId = data.listId),
+            data => (listId = data.listId)
           )
         }
       })
@@ -172,7 +172,7 @@ describe('lists', function() {
       before(function() {
         if (process.env.NOCK_OFF) {
           return createTestList(listProperties).then(
-            data => (listId = data.listId),
+            data => (listId = data.listId)
           )
         }
       })
@@ -263,7 +263,7 @@ describe('lists', function() {
           })
           .catch(error => {
             expect(error.message).to.equal(
-              'contactBody parameter must be provided.',
+              'contactBody parameter must be provided.'
             )
           })
       })
