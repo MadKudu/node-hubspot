@@ -14,7 +14,7 @@ describe('workflows', function() {
       const firstContact = data.contacts[0]
       contactId = firstContact.vid
       contactEmail = firstContact['identity-profiles'][0].identities.find(
-        obj => obj.type === 'EMAIL',
+        obj => obj.type === 'EMAIL'
       ).value
     })
   })

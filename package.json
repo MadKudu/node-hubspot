@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install && npm test && npm run lint",
-    "test": "NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
+    "test": "cross-env NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
     "coverage": "nyc --reporter=lcov mocha --timeout=10000",
     "lint": "npm run prettier && npm run eslint",
     "tsc": "tsc",
     "ts-node": "ts-node test/typescript/hubspot.ts",
-    "mocha": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000",
-    "eslint": "./node_modules/eslint/bin/eslint.js . --fix",
-    "prettier": "./node_modules/prettier/bin-prettier.js --write '{lib,test}/**/*.{j,t}s'",
-    "watch-test": "./node_modules/mocha/bin/mocha --recursive test/ --timeout 15000 --watch"
+    "mocha": "mocha --recursive test/ --timeout 15000",
+    "eslint": "eslint . --fix",
+    "prettier": "prettier --write {lib,test}/**/*.{js,ts}",
+    "watch-test": "mocha --recursive test/ --timeout 15000 --watch"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "@types/request": "^2.47.0",
     "@types/request-promise": "^4.1.41",
     "chai": "^4.1.2",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "eslint": "^5.7.0",
     "eslint-config-prettier": "^3.3.0",

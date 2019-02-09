@@ -183,7 +183,7 @@ describe('contacts.properties', function() {
           .upsert(contactPropertyProperties)
           .then(data => {
             expect(data.description).to.eq(
-              contactPropertyProperties.description,
+              contactPropertyProperties.description
             )
           })
       })

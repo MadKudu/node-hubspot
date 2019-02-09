@@ -18,7 +18,10 @@ npm install hubspot
 
 ```javascript
 const Hubspot = require('hubspot')
-const hubspot = new Hubspot({ apiKey: 'abc' })
+const hubspot = new Hubspot({ 
+  apiKey: 'abc',
+  checkLimit: false // (Optional) Specify whether or not to check the API limit on each call. Default: true 
+})
 ```
 
 You can also authenticate via token:
@@ -27,7 +30,7 @@ You can also authenticate via token:
 const hubspot = new Hubspot({ accessToken: 'abc' })
 ```
 
-To change the base url
+To change the base url:
 
 ```javascript
 const hubspot = new Hubspot({ accessToken: 'abc', baseUrl: 'https://some-url' })
@@ -75,16 +78,15 @@ hubspot.contacts
 ## {EXAMPLE} Create Contact
 
 ```javascript
-const contactObject = {
-            "properties":
-            [
-                { "property": "firstname","value": yourvalue },
-                { "property": "lastname", "value": yourvalue }
-            ]
-        };
+const contactObj = {
+  "properties": [
+    { "property": "firstname","value": yourvalue },
+    { "property": "lastname", "value": yourvalue }
+  ]
+};
 
-          const hubspot = new Hubspot({ apiKey: YOUR API KEY });
-          const hubspotContact = await hubspot.contacts.create(contactObject);
+const hubspot = new Hubspot({ apiKey: YOUR_API_KEY });
+const hubspotContact = await hubspot.contacts.create(contactObj);
 ```
 
 ## {EXAMPLE} If you need to insert multiple values
@@ -372,9 +374,9 @@ return hubspot.oauth.getAccessToken(params).then(...)
 
 You may use this library in your Typescript project via:
 
-```
+```typescript
 import Hubspot from 'hubspot';
-const hubspot = new Hubspot({ apiKey: 'key' });
+const hubspot = new Hubspot({ apiKey: YOUR_API_KEY });
 ```
 
 ## License
