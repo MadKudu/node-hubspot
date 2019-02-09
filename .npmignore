@@ -1,0 +1,6 @@
+.codeclimate.yml
+.editorconfig
+.env.template
+.eslintrc.js
+.prettierrc
+.travis.yml

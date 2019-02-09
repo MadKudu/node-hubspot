@@ -28,7 +28,7 @@ describe('timeline', function() {
         name: 'NumericProperty',
         label: 'Numeric Property',
         propertyType: 'Numeric',
-      },
+      }
     )
 
   describe('createEventType', () => {
@@ -145,7 +145,7 @@ describe('timeline', function() {
         return createEventType().then(data => {
           eventTypeId = data.id
           return createEventTypeProperty(eventTypeId).then(
-            data => (eventTypePropertyId = data.id),
+            data => (eventTypePropertyId = data.id)
           )
         })
       }
@@ -161,7 +161,7 @@ describe('timeline', function() {
             name: 'NumericProperty',
             label: 'A new label',
             propertyType: 'Numeric',
-          },
+          }
         )
         .then(data => {
           expect(data.label).to.eq('A new label')

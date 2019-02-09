@@ -7,8 +7,8 @@ const emailsFromContacts = contacts =>
   contacts.flatMap(contact =>
     contact['identity-profiles'].map(
       profile =>
-        profile.identities.find(identity => identity.type === 'EMAIL').value,
-    ),
+        profile.identities.find(identity => identity.type === 'EMAIL').value
+    )
   )
 
 describe('contacts', function() {
