@@ -27,13 +27,13 @@ const hubspot = new Hubspot({
 You can also authenticate via token:
 
 ```javascript
-const hubspot = new Hubspot({ accessToken: 'abc' })
+const hubspot = new Hubspot({ accessToken: YOUR_ACCESS_TOKEN })
 ```
 
 To change the base url:
 
 ```javascript
-const hubspot = new Hubspot({ accessToken: 'abc', baseUrl: 'https://some-url' })
+const hubspot = new Hubspot({ accessToken: YOUR_ACCESS_TOKEN, baseUrl: 'https://some-url' })
 ```
 
 If you're an app developer, you can also instantiate a client with your app
@@ -55,6 +55,20 @@ return hubspot.refreshAccessToken()
     console.log(hubspot.accessToken)
     return hubspot.contacts.get()
   })
+```
+
+### Changing rate limiter options
+
+[Bottleneck](https://github.com/SGrondin/bottleneck) is used for rate limiting. To override the default settings, pass a `limiter` object when instantiating the client. Bottleneck options can be found [here](https://github.com/SGrondin/bottleneck#constructor).
+
+```javascript
+const hubspot = new Hubspot({
+  apiKey: YOUR_API_KEY,
+  limiter: {
+    maxConcurrent: 2,
+    minTime: 1000 / 9,
+  }
+})
 ```
 
 ## Usage
