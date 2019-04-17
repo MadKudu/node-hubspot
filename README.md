@@ -285,6 +285,20 @@ hubspot.files.get()
 hubspot.files.getOne(id)
 ```
 
+### Forms
+
+```javascript
+hubspot.forms.get(opts)
+hubspot.forms.getById(id)
+hubspot.forms.getSingleField(guid, fieldname) 
+hubspot.forms.getSubmissions(guid, opts)
+hubspot.forms.create(data)
+hubspot.forms.update(id, data)
+hubspot.forms.delete(id)
+
+hubspot.forms.submit(portalId, formId, data)
+```
+
 ### Email
 
 ```javascript
