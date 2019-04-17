@@ -93,4 +93,104 @@ describe('forms', function() {
       })
     })
   })
+
+  describe('create', function() {
+    it('should create a form', function() {
+      const payload = {
+        name: 'CREATE: A test form',
+        submitText: 'Submit',
+        formFieldGroups: [
+          {
+            fields: [
+              {
+                name: 'firstname',
+                label: 'First name',
+                defaultValue: '',
+                placeholder: 'Enter first name',
+              },
+            ],
+          },
+        ],
+      }
+
+      return hubspot.forms.create(payload).then(data => {
+        expect(data.name).to.eq('CREATE: A test form')
+        expect(data.submitText).to.eq('Submit')
+        return hubspot.forms.delete(data.guid)
+      })
+    })
+  })
+
+  describe('update', function() {
+    let formGuid
+
+    before(function() {
+      const payload = {
+        name: 'UPDATE: A new name',
+        submitText: 'Submit',
+        formFieldGroups: [
+          {
+            fields: [
+              {
+                name: 'firstname',
+                label: 'First name',
+                defaultValue: '',
+                placeholder: 'Enter first name',
+              },
+            ],
+          },
+        ],
+      }
+
+      return hubspot.forms.create(payload).then(data => {
+        formGuid = data.guid
+      })
+    })
+    after(function() {
+      return hubspot.forms.delete(formGuid)
+    })
+
+    it('can update a form', function() {
+      const payload = {
+        name: 'UPDATE: A new name',
+        redirect: 'http://hubspot.com',
+      }
+
+      return hubspot.forms.update(formGuid, payload).then(data => {
+        expect(data.name).to.eq('UPDATE: A new name')
+        expect(data.redirect).to.eq('http://hubspot.com')
+      })
+    })
+  })
+
+  describe('delete', function() {
+    let formGuid
+
+    before(function() {
+      const payload = {
+        name: 'DELETE: A new name',
+        submitText: 'Submit',
+        formFieldGroups: [
+          {
+            fields: [
+              {
+                name: 'firstname',
+                label: 'First name',
+                defaultValue: '',
+                placeholder: 'Enter first name',
+              },
+            ],
+          },
+        ],
+      }
+
+      return hubspot.forms.create(payload).then(data => {
+        formGuid = data.guid
+      })
+    })
+
+    it('can delete a form', function() {
+      return hubspot.forms.delete(formGuid)
+    })
+  })
 })
