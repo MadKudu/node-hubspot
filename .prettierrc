@@ -3,5 +3,5 @@
   "semi": false,
   "printWidth": 80,
   "trailingComma": "es5",
-  "endOfLine": "crlf"
+  "endOfLine": "lf"
 }
