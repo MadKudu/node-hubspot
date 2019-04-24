@@ -44,7 +44,7 @@ describe('timeline', function() {
     }
     fakeHubspotApi.setupServer({ postEndpoints: [createEventTypeEndpoint] })
 
-    it('should create an event type', async () => {
+    it('should create an event type', function() {
       return hubspot.timelines
         .createEventType(applicationId, userId, {
           name: 'Test Event Type',
@@ -58,7 +58,7 @@ describe('timeline', function() {
     })
   })
 
-  describe('updateEventType', () => {
+  describe('updateEventType', function() {
     let eventTypeId = 123
     const updateEventTypeEndpoint = {
       path: `/integrations/v1/${applicationId}/timeline/event-types/${eventTypeId}`,
@@ -77,7 +77,7 @@ describe('timeline', function() {
       }
     })
 
-    it('should update an event type', async () => {
+    it('should update an event type', function() {
       return hubspot.timelines
         .updateEventType(applicationId, eventTypeId, {
           name: 'Edited Event Type',
@@ -90,7 +90,7 @@ describe('timeline', function() {
     })
   })
 
-  describe('createEventTypeProperty', () => {
+  describe('createEventTypeProperty', function() {
     let eventTypeId = 123
     const createEventTypePropertyEndpoint = {
       path: `/integrations/v1/${applicationId}/timeline/event-types/${eventTypeId}/properties`,
@@ -105,26 +105,28 @@ describe('timeline', function() {
       postEndpoints: [createEventTypePropertyEndpoint],
     })
 
-    beforeEach(() => {
+    beforeEach(function() {
       if (process.env.NOCK_OFF) {
-        return createEventType().then(data => (eventTypeId = data.id))
+        return createEventType().then(function(data) {
+          eventTypeId = data.id
+        })
       }
     })
 
-    it('should create an event type property', async () => {
+    it('should create an event type property', function() {
       return hubspot.timelines
         .createEventTypeProperty(applicationId, eventTypeId, userId, {
           name: 'NumericProperty',
           label: 'Numeric Property',
           propertyType: 'Numeric',
         })
-        .then(data => {
+        .then(function(data) {
           expect(data.name).to.eq('NumericProperty')
         })
     })
   })
 
-  describe('updateEventTypeProperty', () => {
+  describe('updateEventTypeProperty', function() {
     let eventTypeId = 123
     let eventTypePropertyId = 234
     const updateEventTypePropertyEndpoint = {
@@ -140,18 +142,18 @@ describe('timeline', function() {
       putEndpoints: [updateEventTypePropertyEndpoint],
     })
 
-    beforeEach(() => {
+    beforeEach(function() {
       if (process.env.NOCK_OFF) {
-        return createEventType().then(data => {
+        return createEventType().then(function(data) {
           eventTypeId = data.id
-          return createEventTypeProperty(eventTypeId).then(
-            data => (eventTypePropertyId = data.id)
-          )
+          return createEventTypeProperty(eventTypeId).then(function(data) {
+            eventTypePropertyId = data.id
+          })
         })
       }
     })
 
-    it('should update an event type property', async () => {
+    it('should update an event type property', function() {
       return hubspot.timelines
         .updateEventTypeProperty(
           applicationId,
@@ -163,13 +165,13 @@ describe('timeline', function() {
             propertyType: 'Numeric',
           }
         )
-        .then(data => {
+        .then(function(data) {
           expect(data.label).to.eq('A new label')
         })
     })
   })
 
-  describe('createTimelineEvent', () => {
+  describe('createTimelineEvent', function() {
     let eventTypeId = 123
     const createTimelineEventEndpoint = {
       path: `/integrations/v1/${applicationId}/timeline/event`,
@@ -186,18 +188,20 @@ describe('timeline', function() {
       putEndpoints: [createTimelineEventEndpoint],
     })
 
-    beforeEach(() => {
+    beforeEach(function() {
       if (process.env.NOCK_OFF) {
-        return createEventType().then(data => (eventTypeId = data.id))
+        return createEventType().then(function(data) {
+          eventTypeId = data.id
+        })
       }
     })
 
-    it('should create an event', async () => {
+    it('should create an event', function() {
       return hubspot.timelines
         .createTimelineEvent(applicationId, eventTypeId, {
           email: 'test@test.com',
         })
-        .then(data => {
+        .then(function(data) {
           expect(data).to.be.an('undefined')
         })
     })

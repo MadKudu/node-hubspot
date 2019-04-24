@@ -137,7 +137,7 @@ describe('contacts.properties', function() {
       path: `/properties/v1/contacts/properties/named/${
         contactPropertyProperties.name
       }`,
-      response: { ...contactPropertyProperties, description },
+      response: Object.assign({}, contactPropertyProperties, { description }),
     }
     fakeHubspotApi.setupServer({ putEndpoints: [updateEndpoint] })
 
@@ -154,10 +154,11 @@ describe('contacts.properties', function() {
 
     it('should update the property', function() {
       return hubspot.contacts.properties
-        .update(contactPropertyProperties.name, {
-          ...contactPropertyProperties,
-          description,
-        })
+        .update(
+          contactPropertyProperties.name,
+          Object.assign({}, contactPropertyProperties, { description })
+        )
+
         .then(data => {
           expect(data.description).to.eq(description)
         })
@@ -199,7 +200,7 @@ describe('contacts.properties', function() {
         path: `/properties/v1/contacts/properties/named/${
           contactPropertyProperties.name
         }`,
-        response: { ...contactPropertyProperties, description },
+        response: Object.assign({}, contactPropertyProperties, { description }),
       }
       fakeHubspotApi.setupServer({
         postEndpoints: [createEndpoint],
@@ -219,7 +220,7 @@ describe('contacts.properties', function() {
 
       it('should update the property', function() {
         return hubspot.contacts.properties
-          .upsert({ ...contactPropertyProperties, description })
+          .upsert(Object.assign({}, contactPropertyProperties, { description }))
           .then(data => {
             expect(data.description).to.eq(description)
           })
