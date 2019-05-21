@@ -3,9 +3,12 @@ const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const { createTestContact, deleteTestContact } = require('./helpers/factories')
 
 const Hubspot = require('..')
+
 const emailsFromContacts = contacts =>
   contacts.flatMap(contact =>
-    contact['identity-profiles'].map(
+    contact['identity-profiles'].filter( function (el) {
+      return el.identities.length > 0
+    }).map(
       profile =>
         profile.identities.find(identity => identity.type === 'EMAIL').value
     )
