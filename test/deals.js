@@ -221,7 +221,7 @@ describe('deals', function() {
     })
   })
 
-  describe.only('updateBatch', function() {
+  describe('updateBatch', function() {
     const dealIds = [123, 234, 345]
     let updateBatch = dealIds.map(objectId => ({
       objectId,
