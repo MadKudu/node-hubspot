@@ -17,6 +17,7 @@ import { File } from './lib/typescript/file'
 import { Subscription } from './lib/typescript/subscription'
 import { Campaign } from './lib/typescript/campaign'
 import { Broadcast } from './lib/typescript/broadcast'
+import { CRM } from './lib/typescript/crm'
 
 interface BaseOptions {
   baseUrl?: string
@@ -52,6 +53,7 @@ declare class Hubspot {
   subscriptions: Subscription
   campaigns: Campaign
   broadcasts: Broadcast
+  crm: CRM
 }
 
 export default Hubspot
