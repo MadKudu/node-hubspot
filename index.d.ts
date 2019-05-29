@@ -23,11 +23,28 @@ interface BaseOptions {
   baseUrl?: string
 }
 
-export interface ApiOptions extends BaseOptions {
+export interface BottleneckOptions {
+  maxConcurrent?: number | null;
+  minTime?: number;
+  highWater?: number | null;
+  reservoir?: number | null;
+  reservoirRefreshInterval?: number | null;
+  reservoirRefreshAmount?: number | null;
+  reservoirIncreaseInterval?: number | null;
+  reservoirIncreaseAmount?: number | null;
+  reservoirIncreaseMaximum?: number | null;
+  [key: string]: any;
+}
+
+export interface LimiterOptions {
+  limiter?: BottleneckOptions
+}
+
+export interface ApiOptions extends BaseOptions, LimiterOptions {
   apiKey: string
 }
 
-export interface AccessTokenOptions extends BaseOptions {
+export interface AccessTokenOptions extends BaseOptions, LimiterOptions {
   accessToken: string
 }
 
