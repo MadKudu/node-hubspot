@@ -10,7 +10,7 @@ import { Page } from './lib/typescript/page'
 import { OAuth } from './lib/typescript/oauth'
 import { Deal } from './lib/typescript/deal'
 import { Engagement } from './lib/typescript/engagement'
-import { Integration } from './lib/typescript/integration'
+import { Integrations } from './lib/typescript/integrations'
 import { Owner } from './lib/typescript/owner'
 import { Pipeline } from './lib/typescript/pipeline'
 import { List } from './lib/typescript/list'
@@ -52,7 +52,7 @@ declare class Hubspot {
   pages: Page
   deals: Deal
   engagements: Engagement
-  integration: Integration
+  integrations: Integrations
   owners: Owner
   oauth: OAuth
   pipelines: Pipeline
