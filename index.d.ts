@@ -30,6 +30,13 @@ export interface AccessTokenOptions extends BaseOptions {
   accessToken: string
 }
 
+export interface AppOptions extends BaseOptions {
+  clientId: string
+  clientSecret: string
+  redirectUri: string
+  refreshToken: string
+}
+
 export interface HubspotError {
   status: string
   message: string
