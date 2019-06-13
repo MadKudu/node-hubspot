@@ -45,7 +45,7 @@ export interface HubspotError {
 }
 
 declare class Hubspot {
-  constructor(options?: ApiOptions | AccessTokenOptions)
+  constructor(options?: ApiOptions | AccessTokenOptions | AppOptions)
   companies: Company
   contacts: Contact
   pages: Page
