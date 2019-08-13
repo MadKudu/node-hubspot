@@ -2,10 +2,10 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: 'demo' })
+const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY })
 
 describe('workflows', function() {
-  let workflowId = 2641273
+  let workflowId = process.env.TEST_WORKFLOW_ID
   let contactId
   let contactEmail
 

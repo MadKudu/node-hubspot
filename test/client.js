@@ -9,7 +9,7 @@ describe('client', function() {
 
   describe('apiKey', function() {
     before(() => {
-      hubspot = new Hubspot({ apiKey: 'demo' })
+      hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY })
     })
 
     it('should instantiate all methods', function() {

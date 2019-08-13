@@ -2,7 +2,7 @@ var chai = require('chai')
 var expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: 'demo' })
+const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY })
 const _ = require('lodash')
 
 describe('companies', function() {
@@ -15,6 +15,7 @@ describe('companies', function() {
     })
 
     it('should return a limited number of companies', function() {
+      // you need to run the tests at least 6 times to have enough companies for this test to pass
       return hubspot.companies.get({ limit: 5 }).then(data => {
         expect(data).to.be.an('object')
         expect(data.companies).to.be.a('array')

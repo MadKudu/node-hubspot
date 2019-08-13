@@ -11,6 +11,7 @@
     "tsc": "tsc",
     "ts-node": "ts-node test/typescript/hubspot.ts",
     "mocha": "mocha --recursive test/ --timeout 15000",
+    "mocha-debug": "mocha --inspect=9229 test/",
     "eslint": "eslint . --fix",
     "prettier": "prettier --write {lib,test}/**/*.{js,ts}",
     "watch-test": "mocha --recursive test/ --timeout 15000 --watch"
