@@ -3,9 +3,12 @@ const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const { createTestContact, deleteTestContact } = require('./helpers/factories')
 
 const Hubspot = require('..')
+
 const emailsFromContacts = contacts =>
   contacts.flatMap(contact =>
-    contact['identity-profiles'].map(
+    contact['identity-profiles'].filter( function (el) {
+      return el.identities.length > 0
+    }).map(
       profile =>
         profile.identities.find(identity => identity.type === 'EMAIL').value
     )
@@ -433,6 +436,41 @@ describe('contacts', function() {
         expect(data.contacts).to.be.a('array')
         expect(data.query).to.equal('example')
       })
+    })
+  })
+
+  describe('merge', function() {
+    let primaryVid = 12345
+    let secondaryVid = 3456
+    let mergeData = { primaryVid: primaryVid, secondaryVid: secondaryVid }
+
+    let c = []
+
+    const mergeEndpoint = {
+      path: '/contacts/v1/contact/merge-vids/',
+      statusCode: 200,
+      request: mergeData,
+    }
+    fakeHubspotApi.setupServer({
+      postEndpoints: [mergeEndpoint],
+    })
+
+    before(function() {
+      if (process.env.NOCK_OFF) {
+        return hubspot.contacts.get({count: 2}).then(data => {
+          c = data.contacts.map(a => a.vid)
+          primaryVid = c[0]
+          secondaryVid = c[1]
+        })
+      }
+    })
+
+    it('should merge the {primaryVid} contact in {secondaryVid} contact ', function () {
+      return hubspot.contacts
+          .merge(primaryVid, secondaryVid)
+          .then(data => {
+            expect(data).to.equal("SUCCESS")
+          })
     })
   })
 })

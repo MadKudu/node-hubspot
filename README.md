@@ -179,6 +179,7 @@ hubspot.contacts.getRecentlyCreated()
 hubspot.contacts.getRecentlyModified()
 hubspot.contacts.createOrUpdate(email, data)
 hubspot.contacts.delete(id)
+hubspot.contacts.merge(primaryId, secondaryId)
 ```
 
 ### Contact properties
