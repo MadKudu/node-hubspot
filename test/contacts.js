@@ -447,7 +447,7 @@ describe('contacts', function() {
     let c = []
 
     const mergeEndpoint = {
-      path: '/contacts/v1/contact/merge-vids/',
+      path: `/contacts/v1/contact/merge-vids/${primaryVid}`,
       statusCode: 200,
       request: mergeData,
     }
