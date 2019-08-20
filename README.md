@@ -179,6 +179,7 @@ hubspot.contacts.getRecentlyCreated()
 hubspot.contacts.getRecentlyModified()
 hubspot.contacts.createOrUpdate(email, data)
 hubspot.contacts.delete(id)
+hubspot.contacts.merge(primaryId, secondaryId)
 ```
 
 ### Contact properties
@@ -283,6 +284,20 @@ hubspot.lists.addContacts(id, contactBody)
 ```javascript
 hubspot.files.get()
 hubspot.files.getOne(id)
+```
+
+### Forms
+
+```javascript
+hubspot.forms.get(opts)
+hubspot.forms.getById(id)
+hubspot.forms.getSingleField(guid, fieldname) 
+hubspot.forms.getSubmissions(guid, opts)
+hubspot.forms.create(data)
+hubspot.forms.update(id, data)
+hubspot.forms.delete(id)
+
+hubspot.forms.submit(portalId, formId, data)
 ```
 
 ### Email

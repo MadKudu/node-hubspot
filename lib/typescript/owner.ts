@@ -2,7 +2,6 @@ import { RequestPromise } from 'request-promise'
 
 export declare class Owner {
   get(opts?: {}): RequestPromise
-
   getById(ownerId: number | string, opts?: {}): RequestPromise
 }
 

@@ -10,6 +10,7 @@ import { Page } from './lib/typescript/page'
 import { OAuth } from './lib/typescript/oauth'
 import { Deal } from './lib/typescript/deal'
 import { Engagement } from './lib/typescript/engagement'
+import { Integrations } from './lib/typescript/integrations'
 import { Owner } from './lib/typescript/owner'
 import { Pipeline } from './lib/typescript/pipeline'
 import { List } from './lib/typescript/list'
@@ -17,6 +18,8 @@ import { File } from './lib/typescript/file'
 import { Subscription } from './lib/typescript/subscription'
 import { Campaign } from './lib/typescript/campaign'
 import { Broadcast } from './lib/typescript/broadcast'
+import { Emails } from './lib/typescript/emails'
+
 
 interface BaseOptions {
   baseUrl?: string
@@ -30,6 +33,13 @@ export interface AccessTokenOptions extends BaseOptions {
   accessToken: string
 }
 
+export interface AppOptions extends BaseOptions {
+  clientId: string
+  clientSecret: string
+  redirectUri: string
+  refreshToken: string
+}
+
 export interface HubspotError {
   status: string
   message: string
@@ -38,12 +48,13 @@ export interface HubspotError {
 }
 
 declare class Hubspot {
-  constructor(options?: ApiOptions | AccessTokenOptions)
+  constructor(options?: ApiOptions | AccessTokenOptions | AppOptions)
   companies: Company
   contacts: Contact
   pages: Page
   deals: Deal
   engagements: Engagement
+  integrations: Integrations
   owners: Owner
   oauth: OAuth
   pipelines: Pipeline
@@ -52,6 +63,7 @@ declare class Hubspot {
   subscriptions: Subscription
   campaigns: Campaign
   broadcasts: Broadcast
+  emails: Emails
 }
 
 export default Hubspot
