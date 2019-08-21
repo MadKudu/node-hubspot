@@ -8,7 +8,7 @@ declare class Deal {
 
   getRecentlyModified(opts?: {}): RequestPromise
 
-  getById(id: number): RequestPromise
+  getById(id: number, opts?: {}): RequestPromise
 
   getAssociated(objectType: string, objectId: number, opts?: {}): RequestPromise
 
