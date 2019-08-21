@@ -18,6 +18,8 @@ declare class Deal {
 
   create(data: {}): RequestPromise
 
+  updateBatch(data: {}[]): RequestPromise
+
   associate(
     id: number,
     objectType: string,
