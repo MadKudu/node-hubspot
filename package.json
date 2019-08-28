@@ -1,6 +1,6 @@
 {
   "name": "hubspot",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
