@@ -57,9 +57,7 @@ describe('contacts.properties', function() {
 
   describe('getByName', function() {
     const getByNameEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       response: contactPropertyProperties,
     }
     fakeHubspotApi.setupServer({ getEndpoints: [getByNameEndpoint] })
@@ -87,9 +85,7 @@ describe('contacts.properties', function() {
 
   describe('delete', function() {
     const deleteEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       statusCode: 204,
     }
     fakeHubspotApi.setupServer({ deleteEndpoints: [deleteEndpoint] })
@@ -134,9 +130,7 @@ describe('contacts.properties', function() {
   describe('update', function() {
     const description = 'Updated display name'
     const updateEndpoint = {
-      path: `/properties/v1/contacts/properties/named/${
-        contactPropertyProperties.name
-      }`,
+      path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
       response: Object.assign({}, contactPropertyProperties, { description }),
     }
     fakeHubspotApi.setupServer({ putEndpoints: [updateEndpoint] })
@@ -197,9 +191,7 @@ describe('contacts.properties', function() {
         statusCode: 409,
       }
       const updateEndpoint = {
-        path: `/properties/v1/contacts/properties/named/${
-          contactPropertyProperties.name
-        }`,
+        path: `/properties/v1/contacts/properties/named/${contactPropertyProperties.name}`,
         response: Object.assign({}, contactPropertyProperties, { description }),
       }
       fakeHubspotApi.setupServer({
