@@ -5,7 +5,7 @@ const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: 'demo' })
 
 describe('workflows', function() {
-  let workflowId = 2641273
+  const workflowId = 2641273
   let contactId
   let contactEmail
 

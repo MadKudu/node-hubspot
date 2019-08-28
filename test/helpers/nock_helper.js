@@ -10,12 +10,12 @@ const mockEndpoint = ({
   statusCode = 200,
 }) => {
   if (responseError) {
-    nock('http://api.hubapi.com', { encodedQueryParams: true })
+    nock('https://api.hubapi.com', { encodedQueryParams: true })
       .intercept(path, verb, request)
       .query(query)
       .replyWithError(responseError)
   } else {
-    nock('http://api.hubapi.com', { encodedQueryParams: true })
+    nock('https://api.hubapi.com', { encodedQueryParams: true })
       .intercept(path, verb, request)
       .query(query)
       .reply(statusCode, response)
