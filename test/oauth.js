@@ -98,4 +98,40 @@ describe('oauth', function() {
       })
     }
   })
+
+
+  describe('getPortalInfo', function() {
+    beforeEach(() => {
+      hubspot = new Hubspot()
+    })
+    
+    const accessToken = "fake_access_token"
+    const getPortalInfoEndpoint = {
+      path: `/oauth/v1/token/${accessToken}`,
+      response: {
+        "token": accessToken,
+        "user": "test@hubspot.com",
+        "hub_domain": "demo.hubapi.com",
+        "scopes": [
+          "contacts",
+          "automation",
+          "oauth"
+        ],
+        "hub_id": 62515,
+        "app_id": 456,
+        "expires_in": 21588,
+        "user_id": 123,
+        "token_type": "access"
+      }
+    }
+    fakeHubspotApi.setupServer({ postEndpoints: [getPortalInfoEndpoint] })
+
+    it('should return the Portal metadata for a given portal', function() {
+      return hubspot.oauth.getPortalInfo(accessToken).then(response => {
+        console.log(response)
+        expect(response).to.be.a('object')
+        expect(response).to.contain('hub_id')
+      })
+    })
+  })
 })
