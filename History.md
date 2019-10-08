@@ -1,3 +1,8 @@
+# 2.2.1
+
+- Add getPortalInfo for OAuth
+- Update getByDomain method
+
 # 2.0.0 / 2018-12-19
 
 - Begins migration of test suite to mocked api calls instead of hitting HubSpot

@@ -1,6 +1,6 @@
 {
   "name": "hubspot",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "A node wrapper for the HubSpot API",
   "main": "index.js",
   "scripts": {
@@ -35,25 +35,25 @@
     "request-promise": "^4.2.4"
   },
   "devDependencies": {
-    "@types/node": "^12.7.2",
-    "@types/request": "^2.48.2",
+    "@types/node": "^12.7.11",
+    "@types/request": "^2.48.3",
     "@types/request-promise": "^4.1.44",
     "chai": "^4.2.0",
-    "cross-env": "^5.2.0",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.1.0",
-    "eslint": "^6.2.2",
-    "eslint-config-prettier": "^6.1.0",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
     "eslint-config-standard": "14.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "mocha": "^6.2.0",
-    "nock": "^10.0.6",
+    "mocha": "^6.2.1",
+    "nock": "^11.4.0",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.6.2"
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   }
 }
