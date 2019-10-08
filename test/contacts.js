@@ -6,12 +6,14 @@ const Hubspot = require('..')
 
 const emailsFromContacts = contacts =>
   contacts.flatMap(contact =>
-    contact['identity-profiles'].filter( function (el) {
-      return el.identities.length > 0
-    }).map(
-      profile =>
-        profile.identities.find(identity => identity.type === 'EMAIL').value
-    )
+    contact['identity-profiles']
+      .filter(function(el) {
+        return el.identities.length > 0
+      })
+      .map(
+        profile =>
+          profile.identities.find(identity => identity.type === 'EMAIL').value
+      )
   )
 
 describe('contacts', function() {
@@ -457,7 +459,7 @@ describe('contacts', function() {
 
     before(function() {
       if (process.env.NOCK_OFF) {
-        return hubspot.contacts.get({count: 2}).then(data => {
+        return hubspot.contacts.get({ count: 2 }).then(data => {
           c = data.contacts.map(a => a.vid)
           primaryVid = c[0]
           secondaryVid = c[1]
@@ -465,12 +467,10 @@ describe('contacts', function() {
       }
     })
 
-    it('should merge the {primaryVid} contact in {secondaryVid} contact ', function () {
-      return hubspot.contacts
-          .merge(primaryVid, secondaryVid)
-          .then(data => {
-            expect(data).to.equal("SUCCESS")
-          })
+    it('should merge the {primaryVid} contact in {secondaryVid} contact ', function() {
+      return hubspot.contacts.merge(primaryVid, secondaryVid).then(data => {
+        expect(data).to.equal('SUCCESS')
+      })
     })
   })
 })
