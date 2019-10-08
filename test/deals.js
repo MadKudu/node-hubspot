@@ -221,6 +221,40 @@ describe('deals', function() {
     })
   })
 
+  describe('updateBatch', function() {
+    const dealIds = [123, 234, 345]
+    let updateBatch = dealIds.map(objectId => ({
+      objectId,
+      dealProperties,
+    }))
+
+    const updateBatchEndpoint = {
+      path: '/deals/v1/batch-async/update',
+      statusCode: 202,
+      request: updateBatch,
+    }
+    fakeHubspotApi.setupServer({
+      postEndpoints: [updateBatchEndpoint],
+    })
+
+    before(function() {
+      if (process.env.NOCK_OFF) {
+        return hubspot.deals.get({ count: 3 }).then(data => {
+          updateBatch = data.contacts.map(({ objectId }) => ({
+            objectId,
+            dealProperties,
+          }))
+        })
+      }
+    })
+
+    it('should update a batch of deals', function() {
+      return hubspot.deals.updateBatch(updateBatch).then(data => {
+        expect(data).to.equal(undefined)
+      })
+    })
+  })
+
   describe('create', function() {
     let dealId
     const createDealEndpoint = {

@@ -26,7 +26,7 @@ declare class Contact {
 
   getRecentlyModified(opts: {}): RequestPromise
 
-  createOrUpdate(email: string, data: any[]): RequestPromise
+  createOrUpdate(email: string, data: {}): RequestPromise
 
   delete(id: number): RequestPromise
 

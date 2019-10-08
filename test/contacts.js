@@ -444,7 +444,7 @@ describe('contacts', function() {
   describe('merge', function() {
     let primaryVid = 12345
     let secondaryVid = 3456
-    let mergeData = { primaryVid: primaryVid, secondaryVid: secondaryVid }
+    const mergeData = { primaryVid: primaryVid, secondaryVid: secondaryVid }
 
     let c = []
 

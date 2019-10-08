@@ -200,6 +200,17 @@ hubspot.contacts.properties.deleteGroup(name)
 hubspot.contacts.properties.delete(name)
 ```
 
+### CRM associations
+
+```javascript
+hubspot.crm.associations.create(data)
+hubspot.crm.associations.createBatch(data)
+hubspot.crm.associations.delete(data)
+hubspot.crm.associations.deleteBatch(data)
+// not an official API, wrapper doing two API calls. Callbacks not supported at
+// this time
+```
+
 ### Pages
 
 ```javascript
@@ -217,6 +228,7 @@ hubspot.deals.getById(id)
 hubspot.deals.getAssociated(objectType, objectId, opts)
 hubspot.deals.deleteById(id)
 hubspot.deals.updateById(id, data)
+hubspot.deals.updateBatch(data)
 hubspot.deals.create(data)
 hubspot.deals.associate(id, objectType, associatedObjectId)
 hubspot.deals.removeAssociation(id, objectType, associatedObjectId)
