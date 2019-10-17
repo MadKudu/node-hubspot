@@ -378,7 +378,7 @@ hubspot.emails.sendTransactionalEmail(data)
 ```javascript
 const params = {
   client_id: 'your_client_id',
-  scopes: 'some scopes',
+  scope: 'some scopes',
   redirect_uri: 'take_me_to_the_ballpark',
 }
 const uri = hubspot.oauth.getAuthorizationUrl(params)
