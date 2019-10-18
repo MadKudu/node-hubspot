@@ -1,7 +1,10 @@
 {
   "singleQuote": true,
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
+  "arrowParens": "always",
   "semi": false,
-  "printWidth": 80,
+  "printWidth": 100,
   "trailingComma": "es5",
-  "endOfLine": "crlf"
+  "endOfLine": "lf"
 }
