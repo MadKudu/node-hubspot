@@ -70,11 +70,22 @@ describe('companies', function() {
   describe('getByDomain', function() {
     it('should returns a list of all companies that have a matching domain to the specified domain in the request URL', function() {
       this.timeout(10000)
-      return hubspot.companies.getByDomain('example.com').then(data => {
-        // console.log(data)
-        expect(data).to.be.an('array')
-        expect(data[0].properties.domain.value).to.equal('example.com')
-      })
+      const payload = {
+        limit: 2,
+        requestOptions: {
+          properties: ['domain', 'createdate', 'name', 'hs_lastmodifieddate'],
+        },
+        offset: {
+          isPrimary: true,
+          companyId: 0,
+        },
+      }
+      return hubspot.companies.getByDomain('example.com', payload).then(data => {
+          // console.log(data)
+          expect(data).to.be.an('object')
+          expect(data.results).to.be.an('array')
+          expect(data.results[0].properties.domain.value).to.equal('example.com')
+        })
     })
   })
 
