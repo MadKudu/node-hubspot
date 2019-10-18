@@ -2,7 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY })
+const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 const group = {
   displayName: 'GROUP DIPLAY NAME',

@@ -2,7 +2,7 @@ var chai = require('chai')
 var expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY })
+const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 const _ = require('lodash')
 
 describe('companies', function() {

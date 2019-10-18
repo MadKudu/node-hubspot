@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: 'demo' })
+const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 describe('forms', function() {
   describe('getAll', function() {

@@ -41,7 +41,7 @@ class NockHelper {
           resetsAt: Date.now() + 24 * 60 * 60 * 1000,
         },
       ],
-      query: { hapikey: 'demo' },
+      query: { hapikey: process.env.HUBSPOT_API_KEY || 'demo' },
     })
   }
 
