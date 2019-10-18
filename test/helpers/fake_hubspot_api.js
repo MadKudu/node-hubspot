@@ -8,16 +8,16 @@ class FakeHubSpotApi {
     putEndpoints = [],
     deleteEndpoints = [],
   } = {}) {
-    let maybeAddHapiKeyToQuery = x => x
+    let maybeAddHapiKeyToQuery = (x) => x
     if (demo) {
-      maybeAddHapiKeyToQuery = parameters => {
+      maybeAddHapiKeyToQuery = (parameters) => {
         parameters.query = parameters.query || {}
         parameters.query.hapikey = parameters.query.hapikey || 'demo'
         return parameters
       }
     }
 
-    beforeEach(function() {
+    beforeEach(() => {
       nockHelper.disableNetConnect()
       nockHelper.mockRateLimit()
       getEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockGetEndpoint)
@@ -28,7 +28,7 @@ class FakeHubSpotApi {
         .map(nockHelper.mockDeleteEndpoint)
     })
 
-    afterEach(function() {
+    afterEach(() => {
       nockHelper.resetNock()
     })
   }

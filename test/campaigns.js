@@ -6,27 +6,29 @@ const hubspot = () =>
     accessToken: process.env.ACCESS_TOKEN || 'fake-token',
   })
 
-describe('campaigns', function() {
-  describe('get', function() {
+describe('campaigns', () => {
+  describe('get', () => {
     const campaignsGetEndpoint = {
       path: '/email/public/v1/campaigns',
       response: { campaigns: [] },
     }
     fakeHubspotApi.setupServer({ getEndpoints: [campaignsGetEndpoint] })
 
-    it('Should return campaigns with IDs', function() {
+    it('Should return campaigns with IDs', () => {
       return hubspot()
         .campaigns.get()
-        .then(data => {
+        .then((data) => {
           expect(data.campaigns).to.be.an('array')
         })
     })
   })
 
-  describe('getOne', function() {
-    const hubspotDemo = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
+  describe('getOne', () => {
+    const hubspotDemo = new Hubspot({
+      apiKey: process.env.HUBSPOT_API_KEY || 'demo',
+    })
 
-    describe('successfully', function() {
+    describe('successfully', () => {
       let campaignId = 345
       const campaignGetEndpoint = {
         path: `/email/public/v1/campaigns/${campaignId}`,
@@ -39,55 +41,55 @@ describe('campaigns', function() {
 
       beforeEach(() => {
         if (process.env.NOCK_OFF) {
-          return hubspotDemo.campaigns.get().then(data => {
+          return hubspotDemo.campaigns.get().then((data) => {
             campaignId = data.campaigns[0].id
           })
         }
       })
 
-      it('Should return a campaign', function() {
-        return hubspotDemo.campaigns.getOne(campaignId).then(data => {
+      it('Should return a campaign', () => {
+        return hubspotDemo.campaigns.getOne(campaignId).then((data) => {
           expect(data.id).to.eq(campaignId)
         })
       })
     })
 
-    describe('unsuccessfully', function() {
-      it('Should error when not passed an id', function() {
-        return hubspotDemo.campaigns.getOne().catch(error => {
+    describe('unsuccessfully', () => {
+      it('Should error when not passed an id', () => {
+        return hubspotDemo.campaigns.getOne().catch((error) => {
           expect(error.message).to.eq('id parameter must be provided.')
         })
       })
     })
   })
 
-  describe('getById', function() {
+  describe('getById', () => {
     const campaignsByIdEndpoint = {
       path: '/email/public/v1/campaigns/by-id',
       response: { campaigns: [] },
     }
     fakeHubspotApi.setupServer({ getEndpoints: [campaignsByIdEndpoint] })
 
-    it('Should return a campaign', function() {
+    it('Should return a campaign', () => {
       return hubspot()
         .campaigns.getById()
-        .then(data => {
+        .then((data) => {
           expect(data.campaigns).to.be.an('array')
         })
     })
   })
 
-  describe('events', function() {
+  describe('events', () => {
     const eventsGetEndpoint = {
       path: '/email/public/v1/events',
       response: { events: [] },
     }
     fakeHubspotApi.setupServer({ getEndpoints: [eventsGetEndpoint] })
 
-    it('Should return events', function() {
+    it('Should return events', () => {
       return hubspot()
         .campaigns.events()
-        .then(data => {
+        .then((data) => {
           expect(data.events).to.be.an('array')
         })
     })

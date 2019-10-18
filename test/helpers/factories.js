@@ -1,4 +1,4 @@
-const createTestContact = hubspot =>
+const createTestContact = (hubspot) =>
   hubspot.contacts.create({
     properties: [
       {

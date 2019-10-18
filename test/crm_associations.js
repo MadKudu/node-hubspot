@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const Hubspot = require('..')
 const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 
-describe('crm.associations', function() {
+describe('crm.associations', () => {
   const hubspot = new Hubspot({
     accessToken: process.env.ACCESS_TOKEN || 'fake-token',
   })
@@ -38,13 +38,13 @@ describe('crm.associations', function() {
   ]
   const createTestDeal = () =>
     hubspot.deals.create({ properties: dealProperties })
-  const deleteTestDeal = dealId => hubspot.deals.deleteById(dealId)
+  const deleteTestDeal = (dealId) => hubspot.deals.deleteById(dealId)
   const createTestCompany = () =>
     hubspot.companies.create({ properties: companyProperties })
   const createDealWithCompany = () =>
     hubspot.companies
       .create({ properties: companyProperties })
-      .then(companyData => {
+      .then((companyData) => {
         return hubspot.deals
           .create({
             associations: {
@@ -52,16 +52,16 @@ describe('crm.associations', function() {
             },
             properties: dealProperties,
           })
-          .then(dealData => {
+          .then((dealData) => {
             return {
               dataCompanyId: companyData.companyId,
               dataDealId: dealData.dealId,
             }
           })
       })
-  const deleteTestCompany = companyId => hubspot.companies.delete(companyId)
+  const deleteTestCompany = (companyId) => hubspot.companies.delete(companyId)
 
-  describe('create', function() {
+  describe('create', () => {
     let dealId = 123
     let companyId = 234
     const category = 'HUBSPOT_DEFINED'
@@ -71,15 +71,15 @@ describe('crm.associations', function() {
     }
     fakeHubspotApi.setupServer({ putEndpoints: [createAssociationEndpoint] })
 
-    before(function() {
+    before(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
-          createTestDeal().then(data => (dealId = data.dealId)),
-          createTestCompany().then(data => (companyId = data.companyId)),
+          createTestDeal().then((data) => (dealId = data.dealId)),
+          createTestCompany().then((data) => (companyId = data.companyId)),
         ])
       }
     })
-    after(function() {
+    after(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
           deleteTestDeal(dealId),
@@ -88,7 +88,7 @@ describe('crm.associations', function() {
       }
     })
 
-    it('Returns a 204', function() {
+    it('Returns a 204', () => {
       return hubspot.crm.associations
         .create({
           fromObjectId: dealId,
@@ -96,13 +96,13 @@ describe('crm.associations', function() {
           category: category,
           definitionId: 5,
         })
-        .then(data => {
+        .then((data) => {
           expect(data).to.be.an('undefined')
         })
     })
   })
 
-  describe('createBatch', function() {
+  describe('createBatch', () => {
     let dealId = 123
     let companyId = 234
     const category = 'HUBSPOT_DEFINED'
@@ -114,15 +114,15 @@ describe('crm.associations', function() {
       putEndpoints: [createBatchAssociationEndpoint],
     })
 
-    before(function() {
+    before(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
-          createTestDeal().then(data => (dealId = data.dealId)),
-          createTestCompany().then(data => (companyId = data.companyId)),
+          createTestDeal().then((data) => (dealId = data.dealId)),
+          createTestCompany().then((data) => (companyId = data.companyId)),
         ])
       }
     })
-    after(function() {
+    after(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
           deleteTestDeal(dealId),
@@ -131,7 +131,7 @@ describe('crm.associations', function() {
       }
     })
 
-    it('Returns a 204', function() {
+    it('Returns a 204', () => {
       return hubspot.crm.associations
         .createBatch([
           {
@@ -141,13 +141,13 @@ describe('crm.associations', function() {
             definitionId: 5,
           },
         ])
-        .then(data => {
+        .then((data) => {
           expect(data).to.be.an('undefined')
         })
     })
   })
 
-  describe('delete', function() {
+  describe('delete', () => {
     let dealId = 123
     let companyId = 234
     const category = 'HUBSPOT_DEFINED'
@@ -157,7 +157,7 @@ describe('crm.associations', function() {
     }
     fakeHubspotApi.setupServer({ putEndpoints: [deleteAssociationEndpoint] })
 
-    before(function() {
+    before(() => {
       if (process.env.NOCK_OFF) {
         return createDealWithCompany().then(({ dataDealId, dataCompanyId }) => {
           dealId = dataDealId
@@ -165,7 +165,7 @@ describe('crm.associations', function() {
         })
       }
     })
-    after(function() {
+    after(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
           deleteTestDeal(dealId),
@@ -174,7 +174,7 @@ describe('crm.associations', function() {
       }
     })
 
-    it('Returns a 204', function() {
+    it('Returns a 204', () => {
       return hubspot.crm.associations
         .delete({
           fromObjectId: dealId,
@@ -182,13 +182,13 @@ describe('crm.associations', function() {
           category: category,
           definitionId: 5,
         })
-        .then(data => {
-          expect(data).to.be.an('undefined')
+        .then((data) => {
+          return expect(data).to.be.an('undefined')
         })
     })
   })
 
-  describe('deleteBatch', function() {
+  describe('deleteBatch', () => {
     let dealId = 123
     let companyId = 234
     const category = 'HUBSPOT_DEFINED'
@@ -200,15 +200,15 @@ describe('crm.associations', function() {
       putEndpoints: [deleteBatchAssociationEndpoint],
     })
 
-    before(function() {
+    before(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
-          createTestDeal().then(data => (dealId = data.dealId)),
-          createTestCompany().then(data => (companyId = data.companyId)),
+          createTestDeal().then((data) => (dealId = data.dealId)),
+          createTestCompany().then((data) => (companyId = data.companyId)),
         ])
       }
     })
-    after(function() {
+    after(() => {
       if (process.env.NOCK_OFF) {
         return Promise.all([
           deleteTestDeal(dealId),
@@ -217,7 +217,7 @@ describe('crm.associations', function() {
       }
     })
 
-    it('Returns a 204', function() {
+    it('Returns a 204', () => {
       return hubspot.crm.associations
         .deleteBatch([
           {
@@ -227,7 +227,7 @@ describe('crm.associations', function() {
             definitionId: 5,
           },
         ])
-        .then(data => {
+        .then((data) => {
           expect(data).to.be.an('undefined')
         })
     })
