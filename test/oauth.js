@@ -2,28 +2,29 @@ const { expect } = require('chai')
 const Hubspot = require('..')
 const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 
-describe('oauth', function() {
+describe('oauth', () => {
   let hubspot
 
-  describe('getAuthorizationUrl', function() {
+  describe('getAuthorizationUrl', () => {
     beforeEach(() => {
       hubspot = new Hubspot()
     })
 
-    it('should return the correct authorizationUrl for a given app using provided params', function() {
+    it('should return the correct authorizationUrl for a given app using provided params', () => {
       const params = {
         client_id: 'fake_client_id',
         scope: 'some scopes',
         redirect_uri: 'take_me_to_the_ballpark',
       }
-      const expectedURL = 'https://app.hubspot.com/oauth/authorize?client_id=fake_client_id&scope=some%20scopes&redirect_uri=take_me_to_the_ballpark';
+      const expectedURL =
+        'https://app.hubspot.com/oauth/authorize?client_id=fake_client_id&scope=some%20scopes&redirect_uri=take_me_to_the_ballpark'
       const uri = hubspot.oauth.getAuthorizationUrl(params)
       console.log(uri)
       expect(uri).to.be.a('string')
       expect(uri).to.be.eq(expectedURL)
     })
 
-    it('should return the correct authorizationUrl for a given app using Habspot constructor values', function() {
+    it('should return the correct authorizationUrl for a given app using Habspot constructor values', () => {
       hubspot = new Hubspot({
         clientId: 'fake_client_id',
         redirectUri: 'take_me_to_the_ballpark',
@@ -31,13 +32,14 @@ describe('oauth', function() {
       const params = {
         scope: 'some scopes',
       }
-      const expectedURL = 'https://app.hubspot.com/oauth/authorize?client_id=fake_client_id&redirect_uri=take_me_to_the_ballpark&scope=some%20scopes';
+      const expectedURL =
+        'https://app.hubspot.com/oauth/authorize?client_id=fake_client_id&redirect_uri=take_me_to_the_ballpark&scope=some%20scopes'
       const uri = hubspot.oauth.getAuthorizationUrl(params)
       expect(uri).to.be.a('string')
       expect(uri).to.be.eq(expectedURL)
     })
 
-    it('should return the correct authorizationUrl for a given app and override initial params if provided', function() {
+    it('should return the correct authorizationUrl for a given app and override initial params if provided', () => {
       hubspot = new Hubspot({
         clientId: 'fake_client_id',
         redirectUri: 'take_me_to_the_ballpark',
@@ -47,14 +49,15 @@ describe('oauth', function() {
         scope: 'some scopes',
         redirect_uri: 'params_take_me_to_the_ballpark',
       }
-      const expectedURL = 'https://app.hubspot.com/oauth/authorize?client_id=params_fake_client_id&redirect_uri=params_take_me_to_the_ballpark&scope=some%20scopes';
+      const expectedURL =
+        'https://app.hubspot.com/oauth/authorize?client_id=params_fake_client_id&redirect_uri=params_take_me_to_the_ballpark&scope=some%20scopes'
       const uri = hubspot.oauth.getAuthorizationUrl(params)
       expect(uri).to.be.a('string')
       expect(uri).to.be.eq(expectedURL)
     })
   })
 
-  describe('getAccessToken', function() {
+  describe('getAccessToken', () => {
     const code = 'a_fake_code'
     const clientProperties = {
       clientId: 'fake_client_id',
@@ -82,17 +85,17 @@ describe('oauth', function() {
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
-      it('should return a token from hubspot', function() {
+      it('should return a token from hubspot', () => {
         hubspot = new Hubspot(clientProperties)
 
-        return hubspot.oauth.getAccessToken({ code }).then(data => {
+        return hubspot.oauth.getAccessToken({ code }).then((data) => {
           expect(data).to.deep.equal(expectedResponse)
         })
       })
     }
   })
 
-  describe('refreshAccessToken', function() {
+  describe('refreshAccessToken', () => {
     const clientProperties = {
       clientId: 'fake_client_id',
       clientSecret: 'fake_client_secret',
@@ -121,10 +124,10 @@ describe('oauth', function() {
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
-      it('should return a token from hubspot', function() {
+      it('should return a token from hubspot', () => {
         hubspot = new Hubspot(clientProperties)
 
-        return hubspot.oauth.refreshAccessToken().then(data => {
+        return hubspot.oauth.refreshAccessToken().then((data) => {
           expect(data).to.deep.equal(expectedResponse)
         })
       })

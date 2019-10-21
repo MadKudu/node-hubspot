@@ -4,10 +4,10 @@ const expect = chai.expect
 const Hubspot = require('..')
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
-describe('Engagements', function() {
-  describe('Get All Engagements', function() {
-    it('Should return engagement properties', function() {
-      return hubspot.engagements.get().then(data => {
+describe('Engagements', () => {
+  describe('Get All Engagements', () => {
+    it('Should return engagement properties', () => {
+      return hubspot.engagements.get().then((data) => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
         expect(data.results[0]).to.have.a.property('engagement')
@@ -15,9 +15,9 @@ describe('Engagements', function() {
     })
   })
 
-  describe('Get Recent Engagements', function() {
-    it('Should return engagement properties', function() {
-      return hubspot.engagements.getRecentlyModified().then(data => {
+  describe('Get Recent Engagements', () => {
+    it('Should return engagement properties', () => {
+      return hubspot.engagements.getRecentlyModified().then((data) => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')
         expect(data.results[0]).to.have.a.property('engagement')
@@ -26,9 +26,9 @@ describe('Engagements', function() {
     })
   })
 
-  describe('Get Call Dispositions', function() {
-    it('Should return a list of call dispositions', function() {
-      return hubspot.engagements.getCallDispositions().then(data => {
+  describe('Get Call Dispositions', () => {
+    it('Should return a list of call dispositions', () => {
+      return hubspot.engagements.getCallDispositions().then((data) => {
         expect(data).to.be.an('array')
         expect(data[0]).to.have.a.property('id')
         expect(data[0]).to.have.a.property('label')

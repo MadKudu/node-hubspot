@@ -9,10 +9,10 @@ const group = {
   name: 'mk_group_fit_segment',
 }
 
-describe('deals.properties.groups', function() {
-  describe('get', function() {
-    it('should return the list of properties groups for deals', function() {
-      return hubspot.deals.properties.groups.get().then(data => {
+describe('deals.properties.groups', () => {
+  describe('get', () => {
+    it('should return the list of properties groups for deals', () => {
+      return hubspot.deals.properties.groups.get().then((data) => {
         // console.log(data)
         expect(data).to.be.an('array')
         expect(data[0]).to.be.an('object')
@@ -21,9 +21,9 @@ describe('deals.properties.groups', function() {
     })
   })
 
-  describe('getAll', function() {
-    it('should return the same thing as get', function() {
-      return hubspot.deals.properties.groups.get().then(data => {
+  describe('getAll', () => {
+    it('should return the same thing as get', () => {
+      return hubspot.deals.properties.groups.get().then((data) => {
         // console.log(data)
         expect(data).to.be.an('array')
         expect(data[0]).to.be.an('object')
@@ -32,22 +32,22 @@ describe('deals.properties.groups', function() {
     })
   })
 
-  describe('upsert (create)', function() {
-    it('should create or update the properties group', function() {
-      return hubspot.deals.properties.groups.upsert(group).then(data => {
+  describe('upsert (create)', () => {
+    it('should create or update the properties group', () => {
+      return hubspot.deals.properties.groups.upsert(group).then((data) => {
         expect(data).to.be.an('object')
         expect(data).to.have.a.property('name')
       })
     })
   })
 
-  describe('update', function() {
+  describe('update', () => {
     group.displayName = 'MadKudo Company Fit'
 
-    it('should update the property', function() {
+    it('should update the property', () => {
       return hubspot.deals.properties.groups
         .update(group.name, group)
-        .then(data => {
+        .then((data) => {
           expect(data).to.be.an('object')
           expect(data).to.have.a.property('name')
           expect(data.displayName).to.equal(group.displayName)

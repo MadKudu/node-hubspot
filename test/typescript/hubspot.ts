@@ -3,7 +3,7 @@ import { RequestError } from 'request-promise/errors'
 
 const apiKeyOptions: ApiOptions = { apiKey: 'demo' }
 
-const handleResponse = response => {
+const handleResponse = (response) => {
   console.log(response)
 }
 

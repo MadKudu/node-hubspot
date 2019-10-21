@@ -1,22 +1,26 @@
 const { expect } = require('chai')
 const Hubspot = require('..')
 
-describe('Owners', function() {
-  describe('get', function() {
-    it('Should return all owners', function() {
-      const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
+describe('Owners', () => {
+  describe('get', () => {
+    it('Should return all owners', () => {
+      const hubspot = new Hubspot({
+        apiKey: process.env.HUBSPOT_API_KEY || 'demo',
+      })
 
-      return hubspot.owners.get().then(data => {
+      return hubspot.owners.get().then((data) => {
         expect(data).to.be.a('array')
       })
     })
   })
 
-  describe('getById', function() {
-    it('should return one owner', function() {
-      const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
+  describe('getById', () => {
+    it('should return one owner', () => {
+      const hubspot = new Hubspot({
+        apiKey: process.env.HUBSPOT_API_KEY || 'demo',
+      })
 
-      return hubspot.owners.getById(66).then(data => {
+      return hubspot.owners.getById(66).then((data) => {
         expect(data).to.be.a('object')
         expect(data).to.have.all.keys(
           'portalId',
