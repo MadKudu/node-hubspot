@@ -1,4 +1,10 @@
-# 2.2.1
+# 2.3.2 / 2019-10-21
+
+- Update hubspot.contacts.getById method
+- Update hubspot.companies.getByDomain method
+- Update hubspot.oauth.getAuthorizationUrl method
+
+# 2.3.1
 
 - Add getPortalInfo for OAuth
 - Update getByDomain method
