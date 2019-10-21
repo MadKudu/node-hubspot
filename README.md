@@ -443,7 +443,8 @@ pass.
 If you haven't already, create a [developer account] on hubspot. You'll want to
 [create an app] and a [test account] as well. Then, create a new file, `.env` in
 the root of the repo. Inside you'll need to add an [app id], a HubSpot user id,
-and an [oauth access token];
+and an [oauth access token], also you will need to provide [api key] and
+set some [workflow id];
 
 NOTE: Your HubSpot user ID; This can be found in the same place as your
 Developer HAPIkey in your Developer portal.
@@ -453,11 +454,15 @@ Developer HAPIkey in your Developer portal.
 [test account]: https://developers.hubspot.com/docs/faq/how-do-i-create-a-test-account
 [app id]: https://developers.hubspot.com/docs/faq/how-do-i-find-the-app-id
 [oauth access token]: https://developers.hubspot.com/docs/methods/oauth2/oauth2-overview
+[api key]: https://developers.hubspot.com/docs/faq/developer-hapikeys
+[workflow id]: https://developers.hubspot.com/docs/methods/workflows/workflows_overview
 
 ```.env
 APPLICATION_ID=111111
 USER_ID=2222222
 ACCESS_TOKEN=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA_BBB_CCCC_____-D_EEEEEEEEEEEEEEEEEEEEEEE_fffffff-gggggg"
+HUBSPOT_API_KEY=1111-2222-3333-4444-5555
+TEST_WORKFLOW_ID=333
 ```
 
 To get an access token, you should follow the [instructions here] after cloning

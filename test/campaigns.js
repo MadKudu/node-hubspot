@@ -24,7 +24,7 @@ describe('campaigns', function() {
   })
 
   describe('getOne', function() {
-    const hubspotDemo = new Hubspot({ apiKey: 'demo' })
+    const hubspotDemo = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
     describe('successfully', function() {
       let campaignId = 345

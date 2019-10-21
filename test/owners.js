@@ -4,7 +4,7 @@ const Hubspot = require('..')
 describe('Owners', function() {
   describe('get', function() {
     it('Should return all owners', function() {
-      const hubspot = new Hubspot({ apiKey: 'demo' })
+      const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
       return hubspot.owners.get().then(data => {
         expect(data).to.be.a('array')
@@ -14,7 +14,7 @@ describe('Owners', function() {
 
   describe('getById', function() {
     it('should return one owner', function() {
-      const hubspot = new Hubspot({ apiKey: 'demo' })
+      const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
       return hubspot.owners.getById(66).then(data => {
         expect(data).to.be.a('object')
