@@ -8,12 +8,15 @@ declare class Contact {
 
   getByEmailBatch(email: string[]): RequestPromise
 
-  getById(number: string, opts?: {
-    property?: string[],
-    propertyMode?: string,
-    formSubmissionMode?: string,
-    showListMemberships?: boolean
-  }): RequestPromise
+  getById(
+    number: string,
+    opts?: {
+      property?: string[]
+      propertyMode?: string
+      formSubmissionMode?: string
+      showListMemberships?: boolean
+    }
+  ): RequestPromise
 
   getByIdBatch(ids: number[]): RequestPromise
 

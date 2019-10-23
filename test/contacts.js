@@ -442,8 +442,8 @@ describe('contacts', () => {
   })
 
   describe('merge', () => {
-    let primaryVid = 12345
-    let secondaryVid = 3456
+    let primaryVid = process.env.MERGE_FROM_ID || 12345
+    let secondaryVid = process.env.MERGE_TO_ID || 3456
     const mergeData = { primaryVid: primaryVid, secondaryVid: secondaryVid }
 
     let c = []

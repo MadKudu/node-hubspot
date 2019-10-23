@@ -6,11 +6,13 @@
   "scripts": {
     "build": "npm install && npm test && npm run lint",
     "test": "cross-env NODE_ENV=test npm run lint && npm run mocha && npm run tsc",
+    "test-debug": "cross-env NODE_ENV=test npm run lint && npm run mocha-debug && npm run tsc",
     "coverage": "nyc --reporter=lcov mocha --timeout=10000",
     "lint": "npm run prettier && npm run eslint",
     "tsc": "tsc",
     "ts-node": "ts-node test/typescript/hubspot.ts",
-    "mocha": "mocha --recursive test/ --timeout 15000",
+    "mocha": "mocha --recursive test/ --timeout 60000",
+    "mocha-debug": "mocha --recursive --inspect-brk=9229 test/ --timeout 15000",
     "eslint": "eslint . --fix",
     "prettier": "prettier --write {lib,test}/**/*.{js,ts}",
     "watch-test": "mocha --recursive test/ --timeout 15000 --watch"
@@ -30,7 +32,9 @@
   "dependencies": {
     "bottleneck": "^2.19.5",
     "debug": "^4.1.1",
+    "form-data": "^2.5.1",
     "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   },

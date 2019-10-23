@@ -31,4 +31,27 @@ describe('files', () => {
       })
     })
   })
+
+  describe('upload', () => {
+    let file
+
+    before(() => {
+      return hubspot.files.get().then((data) => {
+        file = data.objects[0]
+      })
+    })
+
+    it('Should upload a file', () => {
+      const fileToUpload = {
+        url: file.url,
+        name: 'test.png',
+        folderPath: 'hs_marketplace_assets/modules',
+      }
+
+      return hubspot.files.upload(fileToUpload).then((data) => {
+        // console.log(data)
+        expect(data.status).to.equal(200)
+      })
+    })
+  })
 })

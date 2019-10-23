@@ -59,7 +59,7 @@ describe('forms', () => {
 
     before(() => {
       return hubspot.forms
-        .get({ limit: 1, offset: 10 })
+        .get({ limit: 1 })
         .then((data) => {
           formGuid = data[0].guid
           return hubspot.forms.getFields(formGuid)
@@ -81,7 +81,7 @@ describe('forms', () => {
     let formGuid
 
     before(() => {
-      return hubspot.forms.get({ limit: 1, offset: 5 }).then((data) => {
+      return hubspot.forms.get({ limit: 1 }).then((data) => {
         formGuid = data[0].guid
       })
     })
