@@ -20,6 +20,7 @@ import { Campaign } from './lib/typescript/campaign'
 import { Broadcast } from './lib/typescript/broadcast'
 import { CRM } from './lib/typescript/crm'
 import { Emails } from './lib/typescript/emails'
+import { Form } from './lib/typescript/form'
 
 interface BaseOptions {
   baseUrl?: string
@@ -82,6 +83,7 @@ declare class Hubspot {
   broadcasts: Broadcast
   crm: CRM
   emails: Emails
+  forms: Form
 }
 
 export default Hubspot
