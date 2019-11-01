@@ -20,7 +20,7 @@ describe('Owners', () => {
         apiKey: process.env.HUBSPOT_API_KEY || 'demo',
       })
 
-      return hubspot.owners.getById(66).then((data) => {
+      return hubspot.owners.getById(process.env.OWNER_ID || 66).then((data) => {
         expect(data).to.be.a('object')
         expect(data).to.have.all.keys(
           'portalId',
@@ -34,6 +34,7 @@ describe('Owners', () => {
           'remoteList',
           'hasContactsAccess',
           'activeUserId',
+          'activeSalesforceId',
           'userIdIncludingInactive',
           'isActive'
         )
