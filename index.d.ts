@@ -51,6 +51,12 @@ export interface AccessTokenOptions extends BaseOptions, LimiterOptions {
   accessToken: string
 }
 
+export interface AccessTokenResponse {
+  refresh_token: string;
+  access_token: string;
+  expires_in: number;
+}
+
 export interface AppOptions extends BaseOptions {
   clientId: string
   clientSecret: string
@@ -67,6 +73,7 @@ export interface HubspotError {
 
 declare class Hubspot {
   constructor(options?: ApiOptions | AccessTokenOptions | AppOptions)
+  refreshAccessToken(): Promise<AccessTokenResponse>
   companies: Company
   contacts: Contact
   pages: Page
