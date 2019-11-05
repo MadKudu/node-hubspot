@@ -15,4 +15,14 @@ describe('subscriptions', () => {
       })
     })
   })
+
+  describe('subscribeToAll', () => {
+    it('Should return success', () => {
+      return hubspot.subscriptions
+        .subscribeToAll('example@domain.com')
+        .then((data) => {
+          expect(data.success).to.equal(true)
+        })
+    })
+  })
 })
