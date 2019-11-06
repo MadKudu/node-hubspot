@@ -371,6 +371,16 @@ from the resolved promise.
 hubspot.emails.sendTransactionalEmail(data)
 ```
 
+### Workflows
+
+```javascript
+hubspot.workflows.getAll()
+hubspot.workflows.get(workflowId)
+hubspot.workflows.enroll(workflowId, email)
+hubspot.workflows.unenroll(workflowId, email)
+hubspot.workflows.current(contactId)
+```
+
 ### OAuth
 
 #### Obtain your authorization url
