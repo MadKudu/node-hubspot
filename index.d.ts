@@ -21,6 +21,7 @@ import { Broadcast } from './lib/typescript/broadcast'
 import { CRM } from './lib/typescript/crm'
 import { Emails } from './lib/typescript/emails'
 import { Form } from './lib/typescript/form'
+import { Workflow } from './lib/typescript/workflow';
 
 interface BaseOptions {
   baseUrl?: string
@@ -91,6 +92,7 @@ declare class Hubspot {
   crm: CRM
   emails: Emails
   forms: Form
+  workflows: Workflow
 }
 
 export default Hubspot
