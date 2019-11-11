@@ -57,6 +57,59 @@ describe('oauth', () => {
     })
   })
 
+  describe('getPortalInfo', () => {
+    const accessToken = 'fake_access_token'
+
+    const clientProperties = {
+      clientId: 'fake_client_id',
+      clientSecret: 'fake_client_secret',
+      redirectUri: 'some-redirect-uri',
+    }
+    const expectedResponse = {
+      token:
+        'CJSP5qf1KhICAQEYs-gDIIGOBii1hQIyGQAf3xBKmlwHjX7OIpuIFEavB2-qYAGQsF4',
+      user: 'test@hubspot.com',
+      hub_domain: 'demo.hubapi.com',
+      scopes: ['contacts', 'automation', 'oauth'],
+      hub_id: 62515,
+      app_id: 456,
+      expires_in: 21588,
+      user_id: 123,
+      token_type: 'access',
+    }
+
+    const oauthTokenEndpoint = {
+      path: `/oauth/v1/access-tokens/${accessToken}`,
+      response: expectedResponse,
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [oauthTokenEndpoint] })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should return the correct info if token is provided', async () => {
+        hubspot = new Hubspot(clientProperties)
+        const data = await hubspot.oauth.getPortalInfo(accessToken)
+
+        expect(data).to.be.a('object')
+        expect(data).to.be.deep.equal(expectedResponse)
+      })
+    }
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should return the correct info if token is not provided', async () => {
+        hubspot = new Hubspot(clientProperties)
+        hubspot.setAccessToken(accessToken)
+        const data = await hubspot.oauth.getPortalInfo()
+
+        expect(data).to.be.a('object')
+        expect(data).to.be.deep.equal(expectedResponse)
+      })
+    }
+  })
+
   describe('getAccessToken', () => {
     const code = 'a_fake_code'
     const clientProperties = {
