@@ -2,7 +2,8 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
+let hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 describe('Engagements', () => {
   describe('Get All Engagements', () => {
@@ -34,6 +35,50 @@ describe('Engagements', () => {
         expect(data[0]).to.have.a.property('label')
       })
     })
+  })
+
+  describe('update', () => {
+    const engagementId = 'fake_engagement_id'
+    const clientProperties = {
+      clientId: 'fake_client_id',
+      clientSecret: 'fake_client_secret',
+      redirectUri: 'some-redirect-uri',
+      refreshToken: 'a_fake_refresh_token',
+      accessToken: 'a_fake_access_token',
+    }
+    const expectedResponse = {
+      updated: true,
+    }
+    const engagementsBody = {
+      engagement: {
+        ownerId: 1,
+        timestamp: 1409172644778,
+      },
+      metadata: {
+        body: 'a new note body',
+      },
+    }
+    const engagementsEndpoint = {
+      path: `/engagements/v1/engagements/${engagementId}`,
+      request: engagementsBody,
+      response: expectedResponse,
+    }
+    fakeHubspotApi.setupServer({ patchEndpoints: [engagementsEndpoint] })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should update engagement', () => {
+        hubspot = new Hubspot(clientProperties)
+
+        return hubspot.engagements
+          .update(engagementId, engagementsBody)
+          .then((data) => {
+            expect(data).to.be.an('object')
+            expect(data).to.be.deep.equal(expectedResponse)
+          })
+      })
+    }
   })
 
   // Test too brittle. First contactId doesn't necessarily has engagement
