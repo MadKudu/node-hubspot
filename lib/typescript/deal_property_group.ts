@@ -7,6 +7,8 @@ declare class Groups {
 
   update(name: string, data: {}): RequestPromise
 
+  delete(name: string): RequestPromise
+
   upsert(name: string, data: {}): RequestPromise
 }
 
