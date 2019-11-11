@@ -178,6 +178,7 @@ hubspot.contacts.search(query)
 hubspot.contacts.getRecentlyCreated()
 hubspot.contacts.getRecentlyModified()
 hubspot.contacts.createOrUpdate(email, data)
+hubspot.contacts.updateByEmail(email, data)
 hubspot.contacts.delete(id)
 hubspot.contacts.merge(primaryId, secondaryId)
 ```
@@ -253,6 +254,7 @@ hubspot.deals.properties.groups.get(query) // query is optional
 hubspot.deals.properties.groups.create(data)
 hubspot.deals.properties.groups.update(name, data)
 hubspot.deals.properties.groups.upsert(data)
+hubspot.deals.properties.groups.delete(name)
 // not an official API, wrapper doing two API calls. Callbacks not supported at
 // this time
 ```
@@ -262,6 +264,7 @@ hubspot.deals.properties.groups.upsert(data)
 ```javascript
 hubspot.engagements.create(data)
 hubspot.engagements.get(opts)
+hubspot.engagements.update(engagementId, data)
 hubspot.engagements.getRecentlyModified(opts)
 hubspot.engagements.getAssociated(objectType, objectId, opts)
 hubspot.engagements.getCallDispositions()
@@ -383,6 +386,12 @@ hubspot.workflows.current(contactId)
 
 ### OAuth
 
+```javascript
+hubspot.oauth.getAuthorizationUrl(opts)
+hubspot.oauth.getAccessToken(data)
+hubspot.oauth.refreshAccessToken()
+hubspot.oauth.getPortalInfo(token)
+```
 #### Obtain your authorization url
 
 ```javascript

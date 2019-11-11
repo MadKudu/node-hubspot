@@ -36,6 +36,8 @@ declare class Contact {
 
   createOrUpdate(email: string, data: {}): RequestPromise
 
+  updateByEmail(email: string, data: {}): RequestPromise
+
   delete(id: number): RequestPromise
 
   properties: Properties

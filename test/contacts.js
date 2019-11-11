@@ -298,6 +298,49 @@ describe('contacts', () => {
     })
   })
 
+  describe('updateByEmail', () => {
+    const email = 'test@hubspot.com'
+    const updateByEmailData = {
+      properties: [
+        {
+          property: 'firstname',
+          value: 'Updated',
+        },
+        {
+          property: 'lastname',
+          value: 'Record',
+        },
+        {
+          property: 'website',
+          value: 'http://updated.example.com',
+        },
+        {
+          property: 'lifecyclestage',
+          value: 'customer',
+        },
+      ],
+    }
+    const updateByEmailEndpoint = {
+      path: `/contacts/v1/contact/createOrUpdate/email/${email}/profile`,
+      request: updateByEmailData,
+      response: {
+        updated: true,
+      },
+    }
+    fakeHubspotApi.setupServer({
+      postEndpoints: [updateByEmailEndpoint],
+    })
+
+    it('should Create or Update a contact', () => {
+      return hubspot.contacts
+        .updateByEmail(email, updateByEmailData)
+        .then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.updated).to.be.eq(true)
+        })
+    })
+  })
+
   describe('create', () => {
     const companyName = 'MadKudu'
     const createData = {
