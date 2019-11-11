@@ -60,6 +60,11 @@ class NockHelper {
     mockEndpoint(parameters)
   }
 
+  mockPatchEndpoint(parameters) {
+    parameters.verb = 'PATCH'
+    mockEndpoint(parameters)
+  }
+
   mockDeleteEndpoint(parameters) {
     parameters.verb = 'DELETE'
     mockEndpoint(parameters)
