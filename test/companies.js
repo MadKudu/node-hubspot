@@ -1,9 +1,10 @@
-var chai = require('chai')
-var expect = chai.expect
+const chai = require('chai')
+const expect = chai.expect
 
 const Hubspot = require('..')
-const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
-const _ = require('lodash')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
+const apiKey = { apiKey: process.env.HUBSPOT_API_KEY || 'demo' }
+const hubspot = new Hubspot(apiKey)
 
 describe('companies', () => {
   describe('get', () => {
@@ -69,59 +70,96 @@ describe('companies', () => {
   })
 
   describe('getByDomain', () => {
-    it('should returns a list of all companies that have a matching domain to the specified domain in the request URL', function() {
-      this.timeout(10000)
-      const payload = {
-        limit: 2,
-        requestOptions: {
-          properties: ['domain', 'createdate', 'name', 'hs_lastmodifieddate'],
-        },
-        offset: {
-          isPrimary: true,
-          companyId: 0,
-        },
-      }
-      return hubspot.companies
-        .getByDomain('example.com', payload)
-        .then((data) => {
-          // console.log(data)
-          expect(data).to.be.an('object')
-          expect(data.results).to.be.an('array')
-          expect(data.results[0].properties.domain.value).to.equal(
-            'example.com'
-          )
-        })
+    const domain = 'fake_domain'
+    const payload = {
+      limit: 2,
+      requestOptions: {
+        properties: ['domain', 'createdate', 'name', 'hs_lastmodifieddate'],
+      },
+      offset: {
+        isPrimary: true,
+        companyId: 0,
+      },
+    }
+
+    const companiesEndpoint = {
+      path: `/companies/v2/domains/${domain}/companies`,
+      request: payload,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [companiesEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it(`should returns a list of all companies that have a matching 
+      domain to the specified domain in the request URL`, () => {
+        return hubspot.companies.getByDomain(domain, payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
   })
 
   describe('create', () => {
-    it('should create a company in a given portal', () => {
-      const payload = {
-        properties: [
-          { name: 'name', value: 'A company name' },
-          { name: 'description', value: 'A company description' },
-        ],
-      }
-      return hubspot.companies.create(payload).then((data) => {
-        expect(data).to.be.an('object')
-        // console.log(data)
-        expect(data.properties.name.value).to.equal('A company name')
-      })
+    const payload = {
+      properties: [
+        { name: 'name', value: 'A company name' },
+        { name: 'description', value: 'A company description' },
+      ],
+    }
+
+    const companiesEndpoint = {
+      path: '/companies/v2/companies',
+      request: payload,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [companiesEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create a company in a given portal', () => {
+        return hubspot.companies.create(payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
   })
 
   describe('delete', () => {
-    it('can delete', () => {
-      const payload = {
-        properties: [
-          { name: 'name', value: 'A company name' },
-          { name: 'description', value: 'A company description' },
-        ],
-      }
-      return hubspot.companies.create(payload).then((data) => {
-        return hubspot.companies.delete(data.companyId)
-      })
+    const id = 'fake_id'
+
+    const companiesEndpoint = {
+      path: `/companies/v2/companies/${id}`,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      deleteEndpoints: [companiesEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can delete', () => {
+        return hubspot.companies.delete(id).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
   })
 
   describe('getContactIds', () => {
@@ -169,33 +207,62 @@ describe('companies', () => {
   })
 
   describe('updateBatch', () => {
-    let companies
+    const payload = [
+      {
+        objectId: 'fake_id',
+        properties: [{ name: 'about_us', value: 'Thumbs up!' }],
+      },
+      {
+        objectId: 'fake_id1',
+        properties: [{ name: 'about_us', value: 'Thumbs up!!!' }],
+      },
+    ]
 
-    before(() => {
-      return hubspot.companies.get().then((data) => {
-        companies = data.companies
-      })
+    const companiesEndpoint = {
+      path: '/companies/v1/batch-async/update',
+      request: payload,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [companiesEndpoint],
+      demo: true,
     })
 
-    it('should update a batch of company', () => {
-      const batch = _.map(companies, (company) => {
-        const update = {
-          objectId: company.companyId,
-          properties: [{ name: 'about_us', value: 'Thumbs up!' }],
-        }
-        return update
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should update a batch of company', () => {
+        return hubspot.companies.updateBatch(payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.equal(true)
+        })
       })
-      return hubspot.companies.updateBatch(batch).then((data) => {
-        expect(data).to.equal(undefined)
-      })
-    })
+    }
   })
 
-  // describe('addContactToCompany', function () {
-  //   it('should add contact to a specific company', function () {
-  //     return hubspot.companies.addContactToCompany({ companyId: 322620707, contactVid: 123123 }).then(data => {
-  //       expect(data).to.be.an('undefined')
-  //     })
-  //   })
-  // })
+  describe('addContactToCompany', () => {
+    const data = { companyId: 322620707, contactVid: 123123 }
+
+    const companiesEndpoint = {
+      path: `/companies/v2/companies/${data.companyId}/contacts/${data.contactVid}`,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      putEndpoints: [companiesEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should add contact to a specific company', () => {
+        return hubspot.companies.addContactToCompany(data).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
 })

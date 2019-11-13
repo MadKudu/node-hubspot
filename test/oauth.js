@@ -19,7 +19,6 @@ describe('oauth', () => {
       const expectedURL =
         'https://app.hubspot.com/oauth/authorize?client_id=fake_client_id&scope=some%20scopes&redirect_uri=take_me_to_the_ballpark'
       const uri = hubspot.oauth.getAuthorizationUrl(params)
-      console.log(uri)
       expect(uri).to.be.a('string')
       expect(uri).to.be.eq(expectedURL)
     })

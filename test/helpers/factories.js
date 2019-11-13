@@ -3,7 +3,7 @@ const createTestContact = (hubspot) =>
     properties: [
       {
         property: 'email',
-        value: 'node-hubspot' + Date.now() + '@madkudu.com',
+        value: `node-hubspot${Date.now()}@madkudu.com`,
       },
       {
         property: 'firstname',

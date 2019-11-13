@@ -7,7 +7,7 @@ declare class Groups {
 
   update(name: string, data: {}): RequestPromise
 
-  upsert(name: string, data: {}): RequestPromise
+  upsert(data: {}): RequestPromise
 }
 
 export { Groups }
