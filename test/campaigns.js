@@ -1,5 +1,5 @@
 const Hubspot = require('..')
-// const fakeHubspotApi = require('./helpers/fake_hubspot_api')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const { expect } = require('chai')
 const hubspot = () =>
   new Hubspot({
@@ -8,11 +8,11 @@ const hubspot = () =>
 
 describe('campaigns', () => {
   describe('get', () => {
-    // const campaignsGetEndpoint = {
-    //   path: '/email/public/v1/campaigns',
-    //   response: { campaigns: [] },
-    // }
-    // fakeHubspotApi.setupServer({ getEndpoints: [campaignsGetEndpoint] })
+    const campaignsGetEndpoint = {
+      path: '/email/public/v1/campaigns',
+      response: { campaigns: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [campaignsGetEndpoint] })
 
     it('Should return campaigns with IDs', () => {
       return hubspot()
@@ -24,20 +24,16 @@ describe('campaigns', () => {
   })
 
   describe('getOne', () => {
-    // const hubspotDemo = new Hubspot({
-    //   apiKey: process.env.HUBSPOT_API_KEY || 'demo',
-    // })
-
     describe('successfully', () => {
       let campaignId = process.env.EMAIL_CAMPAIGN_ID || 345
-      // const campaignGetEndpoint = {
-      //   path: `/email/public/v1/campaigns/${campaignId}`,
-      //   response: { id: campaignId },
-      // }
-      // fakeHubspotApi.setupServer({
-      //   demo: process.env.USE_DEMO || true,
-      //   getEndpoints: [campaignGetEndpoint],
-      // })
+      const campaignGetEndpoint = {
+        path: `/email/public/v1/campaigns/${campaignId}`,
+        response: { id: campaignId },
+      }
+
+      fakeHubspotApi.setupServer({
+        getEndpoints: [campaignGetEndpoint],
+      })
 
       beforeEach(() => {
         if (process.env.NOCK_OFF) {
@@ -70,11 +66,11 @@ describe('campaigns', () => {
   })
 
   describe('getById', () => {
-    // const campaignsByIdEndpoint = {
-    //   path: '/email/public/v1/campaigns/by-id',
-    //   response: { campaigns: [] },
-    // }
-    // fakeHubspotApi.setupServer({ getEndpoints: [campaignsByIdEndpoint] })
+    const campaignsByIdEndpoint = {
+      path: '/email/public/v1/campaigns/by-id',
+      response: { campaigns: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [campaignsByIdEndpoint] })
 
     it('Should return a campaign', () => {
       return hubspot()
@@ -86,11 +82,11 @@ describe('campaigns', () => {
   })
 
   describe('events', () => {
-    // const eventsGetEndpoint = {
-    //   path: '/email/public/v1/events',
-    //   response: { events: [] },
-    // }
-    // fakeHubspotApi.setupServer({ getEndpoints: [eventsGetEndpoint] })
+    const eventsGetEndpoint = {
+      path: '/email/public/v1/events',
+      response: { events: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [eventsGetEndpoint] })
 
     it('Should return events', () => {
       return hubspot()

@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 describe('forms', () => {
@@ -15,7 +16,7 @@ describe('forms', () => {
     it('should return a limited number of forms', () => {
       return hubspot.forms.get({ limit: 5 }).then((data) => {
         expect(data).to.be.a('array')
-        expect(data.length).to.eq(5)
+        expect(data.length).to.lte(5)
       })
     })
   })
@@ -95,102 +96,98 @@ describe('forms', () => {
   })
 
   describe('create', () => {
-    it('should create a form', () => {
-      const payload = {
-        name: 'CREATE: A test form',
-        submitText: 'Submit',
-        formFieldGroups: [
-          {
-            fields: [
-              {
-                name: 'firstname',
-                label: 'First name',
-                defaultValue: '',
-                placeholder: 'Enter first name',
-              },
-            ],
-          },
-        ],
-      }
+    const payload = {
+      name: 'CREATE: A test form',
+      submitText: 'Submit',
+      formFieldGroups: [
+        {
+          fields: [
+            {
+              name: 'firstname',
+              label: 'First name',
+              defaultValue: '',
+              placeholder: 'Enter first name',
+            },
+          ],
+        },
+      ],
+    }
 
-      return hubspot.forms.create(payload).then((data) => {
-        expect(data.name).to.eq('CREATE: A test form')
-        expect(data.submitText).to.eq('Submit')
-        return hubspot.forms.delete(data.guid)
-      })
+    const formEndpoint = {
+      path: '/forms/v2/forms',
+      request: payload,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [formEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create a form', () => {
+        return hubspot.forms.create(payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
   })
 
   describe('update', () => {
-    let formGuid
+    const formGuid = 'fake_guid'
+    const payload = {
+      name: 'UPDATE: A new name',
+      redirect: 'http://hubspot.com',
+    }
 
-    before(() => {
-      const payload = {
-        name: 'UPDATE: A new name',
-        submitText: 'Submit',
-        formFieldGroups: [
-          {
-            fields: [
-              {
-                name: 'firstname',
-                label: 'First name',
-                defaultValue: '',
-                placeholder: 'Enter first name',
-              },
-            ],
-          },
-        ],
-      }
+    const formEndpoint = {
+      path: `/forms/v2/forms/${formGuid}`,
+      request: payload,
+      response: { success: true },
+    }
 
-      return hubspot.forms.create(payload).then((data) => {
-        formGuid = data.guid
+    fakeHubspotApi.setupServer({
+      putEndpoints: [formEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can update a form', () => {
+        return hubspot.forms.update(formGuid, payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
       })
-    })
-    after(() => {
-      return hubspot.forms.delete(formGuid)
-    })
-
-    it('can update a form', () => {
-      const payload = {
-        name: 'UPDATE: A new name',
-        redirect: 'http://hubspot.com',
-      }
-
-      return hubspot.forms.update(formGuid, payload).then((data) => {
-        expect(data.name).to.eq('UPDATE: A new name')
-        expect(data.redirect).to.eq('http://hubspot.com')
-      })
-    })
+    }
   })
 
   describe('delete', () => {
-    let formGuid
+    const formGuid = 'fake_guid'
 
-    before(() => {
-      const payload = {
-        name: 'DELETE: A new name',
-        submitText: 'Submit',
-        formFieldGroups: [
-          {
-            fields: [
-              {
-                name: 'firstname',
-                label: 'First name',
-                defaultValue: '',
-                placeholder: 'Enter first name',
-              },
-            ],
-          },
-        ],
-      }
+    const formEndpoint = {
+      path: `/forms/v2/forms/${formGuid}`,
+      response: { success: true },
+    }
 
-      return hubspot.forms.create(payload).then((data) => {
-        formGuid = data.guid
+    fakeHubspotApi.setupServer({
+      deleteEndpoints: [formEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can delete a form', () => {
+        return hubspot.forms.delete(formGuid).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
       })
-    })
-
-    it('can delete a form', () => {
-      return hubspot.forms.delete(formGuid)
-    })
+    }
   })
 })

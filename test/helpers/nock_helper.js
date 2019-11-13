@@ -20,6 +20,7 @@ const mockEndpoint = ({
       .query(query)
       .reply(statusCode, response)
   }
+  console.log()
 }
 
 class NockHelper {

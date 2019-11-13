@@ -2,6 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 const property = {
@@ -60,26 +61,85 @@ describe('companies.properties', () => {
     })
   })
 
-  describe('upsert (create)', () => {
-    it('should create or update the property', () => {
-      return hubspot.companies.properties.upsert(property).then((data) => {
-        expect(data).to.be.an('object')
-        expect(data).to.have.a.property('name')
-      })
+  describe('upsert call create endpoint first ', () => {
+    const companiesEndpoint = {
+      path: '/properties/v1/companies/properties',
+      request: property,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [companiesEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create or update the property (not existed)', () => {
+        return hubspot.companies.properties.upsert(property).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
+  describe('upsert call update endpoint if property exists ', () => {
+    const tryCreateEndpoint = {
+      path: '/properties/v1/companies/properties',
+      request: property,
+      response: 'property exists',
+      statusCode: 409,
+    }
+
+    const propertiesEndpoint = {
+      path: `/properties/v1/companies/properties/named/${property.name}`,
+      request: property,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [tryCreateEndpoint],
+      putEndpoints: [propertiesEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create or update the property (existed)', () => {
+        return hubspot.companies.properties.upsert(property).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
   })
 
   describe('update', () => {
-    property.label = 'MadKudo Company Fit'
+    const propertiesEndpoint = {
+      path: `/properties/v1/companies/properties/named/${property.name}`,
+      request: property,
+      response: { success: true },
+    }
 
-    it('should update the property', () => {
-      return hubspot.companies.properties
-        .update(property.name, property)
-        .then((data) => {
-          expect(data).to.be.an('object')
-          expect(data).to.have.a.property('name')
-          expect(data.label).to.equal(property.label)
-        })
+    fakeHubspotApi.setupServer({
+      putEndpoints: [propertiesEndpoint],
+      demo: true,
     })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should update the property', () => {
+        return hubspot.companies.properties
+          .update(property.name, property)
+          .then((data) => {
+            expect(data).to.be.an('object')
+            expect(data.success).to.eq(true)
+          })
+      })
+    }
   })
 })

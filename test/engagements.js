@@ -17,7 +17,8 @@ describe('Engagements', () => {
   })
 
   describe('Get Recent Engagements', () => {
-    it('Should return engagement properties', () => {
+    // Required additional preconditions
+    xit('Should return resent engagement properties', () => {
       return hubspot.engagements.getRecentlyModified().then((data) => {
         expect(data).to.be.an('object')
         expect(data.results).to.be.a('array')

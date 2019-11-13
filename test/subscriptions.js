@@ -2,6 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 describe('subscriptions', () => {
@@ -17,12 +18,28 @@ describe('subscriptions', () => {
   })
 
   describe('subscribeToAll', () => {
-    it('Should return success', () => {
-      return hubspot.subscriptions
-        .subscribeToAll('example@domain.com')
-        .then((data) => {
+    const email = 'example@domain.com'
+    const expectedBody = { subscribed: true }
+    const formEndpoint = {
+      path: `/email/public/v1/subscriptions/${email}`,
+      request: expectedBody,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      putEndpoints: [formEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('Should return success', () => {
+        return hubspot.subscriptions.subscribeToAll(email).then((data) => {
+          expect(data).to.be.an('object')
           expect(data.success).to.equal(true)
         })
-    })
+      })
+    }
   })
 })

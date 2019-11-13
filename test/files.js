@@ -32,7 +32,8 @@ describe('files', () => {
     })
   })
 
-  describe('upload', () => {
+  // move it to the integration test
+  describe.skip('upload', () => {
     let file
 
     before(() => {

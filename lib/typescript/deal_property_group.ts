@@ -9,7 +9,7 @@ declare class Groups {
 
   delete(name: string): RequestPromise
 
-  upsert(name: string, data: {}): RequestPromise
+  upsert(data: {}): RequestPromise
 }
 
 export { Groups }

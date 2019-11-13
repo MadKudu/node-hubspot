@@ -347,7 +347,7 @@ describe('contacts', () => {
       properties: [
         {
           property: 'email',
-          value: 'node-hubspot' + Date.now() + '@madkudu.com',
+          value: `node-hubspot${Date.now()}@madkudu.com`,
         },
         {
           property: 'firstname',
@@ -487,7 +487,7 @@ describe('contacts', () => {
   describe('merge', () => {
     let primaryVid = process.env.MERGE_FROM_ID || 12345
     let secondaryVid = process.env.MERGE_TO_ID || 3456
-    const mergeData = { primaryVid: primaryVid, secondaryVid: secondaryVid }
+    const mergeData = { vidToMerge: secondaryVid }
 
     let c = []
 
@@ -495,6 +495,7 @@ describe('contacts', () => {
       path: `/contacts/v1/contact/merge-vids/${primaryVid}`,
       statusCode: 200,
       request: mergeData,
+      response: { success: true },
     }
     fakeHubspotApi.setupServer({
       postEndpoints: [mergeEndpoint],
@@ -512,7 +513,7 @@ describe('contacts', () => {
 
     it('should merge the {primaryVid} contact in {secondaryVid} contact ', () => {
       return hubspot.contacts.merge(primaryVid, secondaryVid).then((data) => {
-        expect(data).to.equal('SUCCESS')
+        expect(data.success).to.be.equal(true)
       })
     })
   })
