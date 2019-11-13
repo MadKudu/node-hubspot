@@ -13,7 +13,7 @@
 
 - Begins migration of test suite to mocked api calls instead of hitting HubSpot
   "live"
-- Added support for some api endpoints such as timeline.
+- Added support for some api endpoints such as timelines.
 
 Breaking changes:
 

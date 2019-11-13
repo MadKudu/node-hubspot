@@ -336,26 +336,26 @@ hubspot.campaigns.events(opts)
 hubspot.broadcasts.get(opts)
 ```
 
-### Timeline
+### Timelines
 
 ```javascript
 // setup for timeline events
-hubspot.timeline.createEventType(applicationId, userId, data)
-hubspot.timeline.updateEventType(applicationId, eventTypeId, data)
-hubspot.timeline.createEventTypeProperty(
+hubspot.timelines.createEventType(applicationId, userId, data)
+hubspot.timelines.updateEventType(applicationId, eventTypeId, data)
+hubspot.timelines.createEventTypeProperty(
   applicationId,
   eventTypeId,
   userId,
   data,
 )
-hubspot.timeline.updateEventTypeProperty(
+hubspot.timelines.updateEventTypeProperty(
   applicationId,
   eventTypeId,
   propertyId,
   data,
 )
 // creating timeline events
-hubspot.timeline.createTimelineEvent(applicationId, eventTypeId, data)
+hubspot.timelines.createTimelineEvent(applicationId, eventTypeId, data)
 ```
 
 NOTE: From the [documentation] for createTimelineEvent:
