@@ -1,9 +1,6 @@
 // Type definitions for hubspot 1.3.0
 // Project: https://github.com/MadKudu/node-hubspot
 
-import { RequestCallback } from 'request'
-import { RequestPromise } from 'request-promise'
-
 import { Company } from './lib/typescript/company'
 import { Contact } from './lib/typescript/contact'
 import { Page } from './lib/typescript/page'
@@ -22,6 +19,7 @@ import { CRM } from './lib/typescript/crm'
 import { Emails } from './lib/typescript/emails'
 import { Form } from './lib/typescript/form'
 import { Workflow } from './lib/typescript/workflow';
+import {Timeline} from "./lib/typescript/timeline";
 
 interface BaseOptions {
   baseUrl?: string
@@ -87,6 +85,7 @@ declare class Hubspot {
   lists: List
   files: File
   subscriptions: Subscription
+  timelines: Timeline
   campaigns: Campaign
   broadcasts: Broadcast
   crm: CRM
