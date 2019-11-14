@@ -321,7 +321,7 @@ describe('contacts', () => {
       ],
     }
     const updateByEmailEndpoint = {
-      path: `/contacts/v1/contact/createOrUpdate/email/${email}/profile`,
+      path: `/contacts/v1/contact/email/${email}/profile`,
       request: updateByEmailData,
       response: {
         updated: true,
