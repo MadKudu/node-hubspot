@@ -336,7 +336,7 @@ hubspot.campaigns.events(opts)
 hubspot.broadcasts.get(opts)
 ```
 
-### Timeline
+### Timelines
 
 ```javascript
 // setup for timeline events

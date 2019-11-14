@@ -15,6 +15,7 @@ describe('client', function() {
     it('should instantiate all methods', () => {
       expect(hubspot.campaigns).to.be.an('object')
       expect(hubspot.subscriptions).to.be.an('object')
+      expect(hubspot.timelines).to.be.an('object')
       expect(hubspot.contacts).to.be.an('object')
       expect(hubspot.companies).to.be.an('object')
       expect(hubspot.deals).to.be.an('object')
