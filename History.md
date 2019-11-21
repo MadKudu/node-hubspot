@@ -1,3 +1,10 @@
+# 2.3.3 / 2019-11-21
+
+- Add multipart form-data upload
+- Fix tests, update typing
+- Extended client with expiresIn and updatedAt values
+- Add hubspot.forms.getUploadedFileByUrl method
+
 # 2.3.2 / 2019-10-21
 
 - Update hubspot.contacts.getById method
