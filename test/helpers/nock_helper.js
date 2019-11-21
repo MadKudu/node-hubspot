@@ -1,5 +1,7 @@
 const nock = require('nock')
 
+let basePath = 'https://api.hubapi.com'
+
 const mockEndpoint = ({
   path,
   response,
@@ -10,22 +12,29 @@ const mockEndpoint = ({
   statusCode = 200,
 }) => {
   if (responseError) {
-    nock('https://api.hubapi.com', { encodedQueryParams: true })
+    nock(basePath, { encodedQueryParams: true })
+      // .log(console.log)
       .intercept(path, verb, request)
       .query(query)
       .replyWithError(responseError)
   } else {
-    nock('https://api.hubapi.com', { encodedQueryParams: true })
+    nock(basePath, { encodedQueryParams: true })
+      // .log(console.log)
       .intercept(path, verb, request)
       .query(query)
       .reply(statusCode, response)
   }
-  console.log()
 }
 
 class NockHelper {
   disableNetConnect() {
     nock.disableNetConnect()
+  }
+
+  setBasePath(path) {
+    if (path) {
+      basePath = path
+    }
   }
 
   mockRateLimit() {

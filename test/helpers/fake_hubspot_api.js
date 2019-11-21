@@ -2,6 +2,7 @@ const nockHelper = require('./nock_helper')
 
 class FakeHubSpotApi {
   setupServer({
+    basePath = null,
     demo = false,
     getEndpoints = [],
     postEndpoints = [],
@@ -21,6 +22,7 @@ class FakeHubSpotApi {
     beforeEach(() => {
       nockHelper.disableNetConnect()
       nockHelper.mockRateLimit()
+      nockHelper.setBasePath(basePath)
       getEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockGetEndpoint)
       postEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPostEndpoint)
       putEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPutEndpoint)

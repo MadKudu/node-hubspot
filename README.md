@@ -313,6 +313,8 @@ hubspot.forms.update(id, data)
 hubspot.forms.delete(id)
 
 hubspot.forms.submit(portalId, formId, data)
+
+hubspot.forms.getUploadedFileByUrl(url)
 ```
 
 ### Email

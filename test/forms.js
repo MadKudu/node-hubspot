@@ -87,7 +87,7 @@ describe('forms', () => {
       })
     })
 
-    it('should return sugmissions', () => {
+    it('should return submissions', () => {
       return hubspot.forms.getSubmissions(formGuid).then((data) => {
         expect(data).to.be.a('object')
         expect(data.results).to.be.a('array')
@@ -186,6 +186,45 @@ describe('forms', () => {
         return hubspot.forms.delete(formGuid).then((data) => {
           expect(data).to.be.an('object')
           expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
+  describe('getUploadedFileByUrl', () => {
+    const fileId = '20128659661'
+    const endpoint = 'form-integrations/v1/uploaded-files/signed-url-redirect'
+    const portalId = '62515'
+    const sign = 'sXEkvOBg6C5eiGuxOxrMYWCQb8k%3D'
+    const conversionId = '1eac2f96-f4b7-4312-a4c3-9962382207f2%3D'
+    const filename =
+      '1eac2f96-f4b7-4312-a4c3-9962382207f2-upload_a_file-test_file.txt'
+    const query = `portalId=${portalId}&sign=${sign}&conversionId=${conversionId}&filename=${filename}`
+    const url = `https://api.hubspot.com/${endpoint}/${fileId}?${query}`
+
+    const formEndpoint = {
+      path: `/${endpoint}/${fileId}`,
+      query: {
+        portalId,
+        sign,
+        conversionId,
+        filename,
+      },
+      headers: { host: 'api.hubspot.com' },
+      response: 'success',
+    }
+
+    fakeHubspotApi.setupServer({
+      getEndpoints: [formEndpoint],
+      basePath: 'https://api.hubspot.com',
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('correctly make request by the url', () => {
+        return hubspot.forms.getUploadedFileByUrl(url).then((data) => {
+          expect(data).to.be.eq('success')
         })
       })
     }
