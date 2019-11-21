@@ -26,12 +26,8 @@ class FakeHubSpotApi {
       getEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockGetEndpoint)
       postEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPostEndpoint)
       putEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPutEndpoint)
-      patchEndpoints
-        .map(maybeAddHapiKeyToQuery)
-        .map(nockHelper.mockPatchEndpoint)
-      deleteEndpoints
-        .map(maybeAddHapiKeyToQuery)
-        .map(nockHelper.mockDeleteEndpoint)
+      patchEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPatchEndpoint)
+      deleteEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockDeleteEndpoint)
     })
 
     afterEach(() => {

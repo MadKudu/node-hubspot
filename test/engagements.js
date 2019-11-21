@@ -72,12 +72,10 @@ describe('Engagements', () => {
       it('should update engagement', () => {
         hubspot = new Hubspot(clientProperties)
 
-        return hubspot.engagements
-          .update(engagementId, engagementsBody)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data).to.be.deep.equal(expectedResponse)
-          })
+        return hubspot.engagements.update(engagementId, engagementsBody).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data).to.be.deep.equal(expectedResponse)
+        })
       })
     }
   })

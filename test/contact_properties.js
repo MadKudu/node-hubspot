@@ -15,15 +15,11 @@ describe('contacts.properties', () => {
     fieldType: 'text',
     options: [],
   }
-  const deleteTestContactPropertyGroup = (name) =>
-    hubspot.contacts.properties.deleteGroup(name)
-  const createTestContactPropertyGroup = (properties) =>
-    hubspot.contacts.properties.createGroup(properties)
+  const deleteTestContactPropertyGroup = (name) => hubspot.contacts.properties.deleteGroup(name)
+  const createTestContactPropertyGroup = (properties) => hubspot.contacts.properties.createGroup(properties)
 
-  const deleteTestContactProperty = (name) =>
-    hubspot.contacts.properties.delete(name)
-  const createTestContactProperty = (properties) =>
-    hubspot.contacts.properties.create(properties)
+  const deleteTestContactProperty = (name) => hubspot.contacts.properties.delete(name)
+  const createTestContactProperty = (properties) => hubspot.contacts.properties.create(properties)
 
   describe('get', () => {
     const getAllEndpoint = {
@@ -74,12 +70,10 @@ describe('contacts.properties', () => {
     })
 
     it('should get a property by name', () => {
-      return hubspot.contacts.properties
-        .getByName(contactPropertyProperties.name)
-        .then((results) => {
-          expect(results).to.be.an('object')
-          expect(results).to.have.a.property('name')
-        })
+      return hubspot.contacts.properties.getByName(contactPropertyProperties.name).then((results) => {
+        expect(results).to.be.an('object')
+        expect(results).to.have.a.property('name')
+      })
     })
   })
 
@@ -97,11 +91,9 @@ describe('contacts.properties', () => {
     })
 
     it('can delete', () => {
-      return hubspot.contacts.properties
-        .delete(contactPropertyProperties.name)
-        .then((data) => {
-          expect(data).to.be.an('undefined')
-        })
+      return hubspot.contacts.properties.delete(contactPropertyProperties.name).then((data) => {
+        expect(data).to.be.an('undefined')
+      })
     })
   })
 
@@ -119,11 +111,9 @@ describe('contacts.properties', () => {
     })
 
     it('should create the property', () => {
-      return hubspot.contacts.properties
-        .create(contactPropertyProperties)
-        .then((data) => {
-          expect(data.description).to.eq(contactPropertyProperties.description)
-        })
+      return hubspot.contacts.properties.create(contactPropertyProperties).then((data) => {
+        expect(data.description).to.eq(contactPropertyProperties.description)
+      })
     })
   })
 
@@ -148,10 +138,7 @@ describe('contacts.properties', () => {
 
     it('should update the property', () => {
       return hubspot.contacts.properties
-        .update(
-          contactPropertyProperties.name,
-          Object.assign({}, contactPropertyProperties, { description })
-        )
+        .update(contactPropertyProperties.name, Object.assign({}, contactPropertyProperties, { description }))
 
         .then((data) => {
           expect(data.description).to.eq(description)
@@ -174,13 +161,9 @@ describe('contacts.properties', () => {
       })
 
       it('should create the property', () => {
-        return hubspot.contacts.properties
-          .upsert(contactPropertyProperties)
-          .then((data) => {
-            expect(data.description).to.eq(
-              contactPropertyProperties.description
-            )
-          })
+        return hubspot.contacts.properties.upsert(contactPropertyProperties).then((data) => {
+          expect(data.description).to.eq(contactPropertyProperties.description)
+        })
       })
     })
 
@@ -250,9 +233,7 @@ describe('contacts.properties', () => {
       })
 
       it('returns a 200', () => {
-        return hubspot.contacts.properties
-          .createGroup({ name })
-          .then((data) => expect(data).to.be.a('object'))
+        return hubspot.contacts.properties.createGroup({ name }).then((data) => expect(data).to.be.a('object'))
       })
     })
 
@@ -305,9 +286,7 @@ describe('contacts.properties', () => {
       })
 
       it('returns a 204', () => {
-        return hubspot.contacts.properties
-          .deleteGroup(name)
-          .then((data) => expect(data).to.be.an('undefined'))
+        return hubspot.contacts.properties.deleteGroup(name).then((data) => expect(data).to.be.an('undefined'))
       })
     })
   })

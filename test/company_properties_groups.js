@@ -49,12 +49,10 @@ describe('companies.properties.groups', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should create or update the properties group', () => {
-        return hubspot.companies.properties.groups
-          .upsert(group)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.be.eq(true)
-          })
+        return hubspot.companies.properties.groups.upsert(group).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
       })
     }
   })
@@ -83,12 +81,10 @@ describe('companies.properties.groups', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should create or update the properties group exist', () => {
-        return hubspot.companies.properties.groups
-          .upsert(group)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.be.eq(true)
-          })
+        return hubspot.companies.properties.groups.upsert(group).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
       })
     }
   })
@@ -109,12 +105,10 @@ describe('companies.properties.groups', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should update the property', () => {
-        return hubspot.companies.properties.groups
-          .update(group.name, group)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.be.equal(true)
-          })
+        return hubspot.companies.properties.groups.update(group.name, group).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.equal(true)
+        })
       })
     }
   })

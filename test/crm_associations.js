@@ -36,29 +36,25 @@ describe('crm.associations', () => {
     { name: 'name', value: 'A company name' },
     { name: 'description', value: 'A company description' },
   ]
-  const createTestDeal = () =>
-    hubspot.deals.create({ properties: dealProperties })
+  const createTestDeal = () => hubspot.deals.create({ properties: dealProperties })
   const deleteTestDeal = (dealId) => hubspot.deals.deleteById(dealId)
-  const createTestCompany = () =>
-    hubspot.companies.create({ properties: companyProperties })
+  const createTestCompany = () => hubspot.companies.create({ properties: companyProperties })
   const createDealWithCompany = () =>
-    hubspot.companies
-      .create({ properties: companyProperties })
-      .then((companyData) => {
-        return hubspot.deals
-          .create({
-            associations: {
-              associatedCompanyIds: [companyData.companyId],
-            },
-            properties: dealProperties,
-          })
-          .then((dealData) => {
-            return {
-              dataCompanyId: companyData.companyId,
-              dataDealId: dealData.dealId,
-            }
-          })
-      })
+    hubspot.companies.create({ properties: companyProperties }).then((companyData) => {
+      return hubspot.deals
+        .create({
+          associations: {
+            associatedCompanyIds: [companyData.companyId],
+          },
+          properties: dealProperties,
+        })
+        .then((dealData) => {
+          return {
+            dataCompanyId: companyData.companyId,
+            dataDealId: dealData.dealId,
+          }
+        })
+    })
   const deleteTestCompany = (companyId) => hubspot.companies.delete(companyId)
 
   describe('create', () => {
@@ -81,10 +77,7 @@ describe('crm.associations', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 
@@ -124,10 +117,7 @@ describe('crm.associations', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 
@@ -167,10 +157,7 @@ describe('crm.associations', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 
@@ -210,10 +197,7 @@ describe('crm.associations', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 

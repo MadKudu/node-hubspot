@@ -36,29 +36,25 @@ describe('deals', () => {
     { name: 'name', value: 'A company name' },
     { name: 'description', value: 'A company description' },
   ]
-  const createTestDeal = () =>
-    hubspot.deals.create({ properties: dealProperties })
+  const createTestDeal = () => hubspot.deals.create({ properties: dealProperties })
   const deleteTestDeal = (dealId) => hubspot.deals.deleteById(dealId)
-  const createTestCompany = () =>
-    hubspot.companies.create({ properties: companyProperties })
+  const createTestCompany = () => hubspot.companies.create({ properties: companyProperties })
   const createDealWithCompany = () =>
-    hubspot.companies
-      .create({ properties: companyProperties })
-      .then((companyData) => {
-        return hubspot.deals
-          .create({
-            associations: {
-              associatedCompanyIds: [companyData.companyId],
-            },
-            properties: dealProperties,
-          })
-          .then((dealData) => {
-            return {
-              dataCompanyId: companyData.companyId,
-              dataDealId: dealData.dealId,
-            }
-          })
-      })
+    hubspot.companies.create({ properties: companyProperties }).then((companyData) => {
+      return hubspot.deals
+        .create({
+          associations: {
+            associatedCompanyIds: [companyData.companyId],
+          },
+          properties: dealProperties,
+        })
+        .then((dealData) => {
+          return {
+            dataCompanyId: companyData.companyId,
+            dataDealId: dealData.dealId,
+          }
+        })
+    })
   const deleteTestCompany = (companyId) => hubspot.companies.delete(companyId)
 
   describe('get', () => {
@@ -161,12 +157,10 @@ describe('deals', () => {
     })
 
     it('Returns the deals associated to the object', () => {
-      return hubspot.deals
-        .getAssociated(associationType, companyId)
-        .then((data) => {
-          expect(data).to.be.an('object')
-          expect(data.deals).to.have.length(1)
-        })
+      return hubspot.deals.getAssociated(associationType, companyId).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.deals).to.have.length(1)
+      })
     })
   })
 
@@ -323,19 +317,14 @@ describe('deals', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 
     it('Returns a 204', () => {
-      return hubspot.deals
-        .associate(dealId, associationType, companyId)
-        .then((data) => {
-          expect(data).to.be.an('undefined')
-        })
+      return hubspot.deals.associate(dealId, associationType, companyId).then((data) => {
+        expect(data).to.be.an('undefined')
+      })
     })
   })
 
@@ -360,19 +349,14 @@ describe('deals', () => {
     })
     after(() => {
       if (process.env.NOCK_OFF) {
-        return Promise.all([
-          deleteTestDeal(dealId),
-          deleteTestCompany(companyId),
-        ])
+        return Promise.all([deleteTestDeal(dealId), deleteTestCompany(companyId)])
       }
     })
 
     it('Returns a 204', () => {
-      return hubspot.deals
-        .removeAssociation(dealId, associationType, companyId)
-        .then((data) => {
-          expect(data).to.be.an('undefined')
-        })
+      return hubspot.deals.removeAssociation(dealId, associationType, companyId).then((data) => {
+        expect(data).to.be.an('undefined')
+      })
     })
   })
 })

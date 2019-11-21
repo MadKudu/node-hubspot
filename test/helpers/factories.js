@@ -23,7 +23,6 @@ const createTestContact = (hubspot) =>
       },
     ],
   })
-const deleteTestContact = (hubspot, contactId) =>
-  hubspot.contacts.delete(contactId)
+const deleteTestContact = (hubspot, contactId) => hubspot.contacts.delete(contactId)
 
 module.exports = { createTestContact, deleteTestContact }

@@ -10,10 +10,7 @@ const emailsFromContacts = (contacts) =>
       .filter((el) => {
         return el.identities.length > 0
       })
-      .map(
-        (profile) =>
-          profile.identities.find((identity) => identity.type === 'EMAIL').value
-      )
+      .map((profile) => profile.identities.find((identity) => identity.type === 'EMAIL').value)
   )
 
 describe('contacts', () => {
@@ -160,10 +157,7 @@ describe('contacts', () => {
   })
 
   describe('getByEmailBatch', () => {
-    let emails = [
-      'testingapis@hubspot.com',
-      'testingapisawesomeandstuff@hubspot.com',
-    ]
+    let emails = ['testingapis@hubspot.com', 'testingapisawesomeandstuff@hubspot.com']
     const contactByEmailsEndpoint = {
       path: '/contacts/v1/contact/emails/batch',
       response: { properties: {} },
@@ -290,11 +284,9 @@ describe('contacts', () => {
     })
 
     it('should Create or Update a contact', () => {
-      return hubspot.contacts
-        .createOrUpdate(email, createOrUpdateData)
-        .then((data) => {
-          expect(data).to.be.an('object')
-        })
+      return hubspot.contacts.createOrUpdate(email, createOrUpdateData).then((data) => {
+        expect(data).to.be.an('object')
+      })
     })
   })
 
@@ -332,12 +324,10 @@ describe('contacts', () => {
     })
 
     it('should Create or Update a contact', () => {
-      return hubspot.contacts
-        .updateByEmail(email, updateByEmailData)
-        .then((data) => {
-          expect(data).to.be.an('object')
-          expect(data.updated).to.be.eq(true)
-        })
+      return hubspot.contacts.updateByEmail(email, updateByEmailData).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.updated).to.be.eq(true)
+      })
     })
   })
 
@@ -459,11 +449,9 @@ describe('contacts', () => {
     })
 
     it('should update a batch of company', () => {
-      return hubspot.contacts
-        .createOrUpdateBatch(createOrUpdateData)
-        .then((data) => {
-          expect(data).to.equal(undefined)
-        })
+      return hubspot.contacts.createOrUpdateBatch(createOrUpdateData).then((data) => {
+        expect(data).to.equal(undefined)
+      })
     })
   })
 

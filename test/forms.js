@@ -197,8 +197,7 @@ describe('forms', () => {
     const portalId = '62515'
     const sign = 'sXEkvOBg6C5eiGuxOxrMYWCQb8k%3D'
     const conversionId = '1eac2f96-f4b7-4312-a4c3-9962382207f2%3D'
-    const filename =
-      '1eac2f96-f4b7-4312-a4c3-9962382207f2-upload_a_file-test_file.txt'
+    const filename = '1eac2f96-f4b7-4312-a4c3-9962382207f2-upload_a_file-test_file.txt'
     const query = `portalId=${portalId}&sign=${sign}&conversionId=${conversionId}&filename=${filename}`
     const url = `https://api.hubspot.com/${endpoint}/${fileId}?${query}`
 

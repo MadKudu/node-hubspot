@@ -20,17 +20,9 @@ declare class Deal {
 
   updateBatch(data: {}[]): RequestPromise
 
-  associate(
-    id: number,
-    objectType: string,
-    associatedObjectId: number
-  ): RequestPromise
+  associate(id: number, objectType: string, associatedObjectId: number): RequestPromise
 
-  removeAssociation(
-    id: number,
-    objectType: string,
-    associatedObjectId: number
-  ): RequestPromise
+  removeAssociation(id: number, objectType: string, associatedObjectId: number): RequestPromise
 
   properties: Properties
 }
