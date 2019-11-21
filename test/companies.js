@@ -26,12 +26,10 @@ describe('companies', () => {
     })
 
     it('should return the requested properties', () => {
-      return hubspot.companies
-        .get({ limit: 5, properties: ['name', 'country', 'city'] })
-        .then((data) => {
-          expect(data.companies).to.be.a('array')
-          expect(data.companies[0].properties.name.value).to.be.a('string')
-        })
+      return hubspot.companies.get({ limit: 5, properties: ['name', 'country', 'city'] }).then((data) => {
+        expect(data.companies).to.be.a('array')
+        expect(data.companies[0].properties.name.value).to.be.a('string')
+      })
     })
   })
 
@@ -173,15 +171,13 @@ describe('companies', () => {
 
     it('should return a list of contact vids', () => {
       const payload = { count: 10 }
-      return hubspot.companies
-        .getContactIds(companyId, payload)
-        .then((data) => {
-          expect(data).to.be.an('object')
-          expect(data).to.have.property('vids')
-          expect(data).to.have.property('vidOffset')
-          expect(data).to.have.property('hasMore')
-          expect(data.vids).to.be.an('array')
-        })
+      return hubspot.companies.getContactIds(companyId, payload).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.property('vids')
+        expect(data).to.have.property('vidOffset')
+        expect(data).to.have.property('hasMore')
+        expect(data.vids).to.be.an('array')
+      })
     })
   })
 

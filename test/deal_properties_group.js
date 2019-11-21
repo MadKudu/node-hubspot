@@ -105,12 +105,10 @@ describe('deals.properties.groups', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should update the property', () => {
-        return hubspot.deals.properties.groups
-          .update(group.name, group)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.be.equal(true)
-          })
+        return hubspot.deals.properties.groups.update(group.name, group).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.equal(true)
+        })
       })
     }
   })
@@ -130,12 +128,10 @@ describe('deals.properties.groups', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should delete a property', () => {
-        return hubspot.deals.properties.groups
-          .delete(group.name)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.eq(true)
-          })
+        return hubspot.deals.properties.groups.delete(group.name).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.eq(true)
+        })
       })
     }
   })

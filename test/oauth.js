@@ -65,8 +65,7 @@ describe('oauth', () => {
       redirectUri: 'some-redirect-uri',
     }
     const expectedResponse = {
-      token:
-        'CJSP5qf1KhICAQEYs-gDIIGOBii1hQIyGQAf3xBKmlwHjX7OIpuIFEavB2-qYAGQsF4',
+      token: 'CJSP5qf1KhICAQEYs-gDIIGOBii1hQIyGQAf3xBKmlwHjX7OIpuIFEavB2-qYAGQsF4',
       user: 'test@hubspot.com',
       hub_domain: 'demo.hubapi.com',
       scopes: ['contacts', 'automation', 'oauth'],

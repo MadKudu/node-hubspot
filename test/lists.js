@@ -157,11 +157,9 @@ describe('lists', () => {
       }
       fakeHubspotApi.setupServer({ postEndpoints: [addContactToListEndpoint] })
       it('should return results', () => {
-        return hubspot.lists
-          .addContacts(listId, { vids: [contactId] })
-          .then((data) => {
-            expect(data).to.be.a('object')
-          })
+        return hubspot.lists.addContacts(listId, { vids: [contactId] }).then((data) => {
+          expect(data).to.be.a('object')
+        })
       })
     })
 
@@ -186,9 +184,7 @@ describe('lists', () => {
             throw new Error('I should have thrown an error')
           })
           .catch((error) => {
-            expect(error.message).to.equal(
-              'contactBody parameter must be provided.'
-            )
+            expect(error.message).to.equal('contactBody parameter must be provided.')
           })
       })
     })

@@ -51,13 +51,11 @@ describe('companies.properties', () => {
     })
 
     it('should get a property by name', () => {
-      return hubspot.companies.properties
-        .getByName(propertyName)
-        .then((results) => {
-          // console.log(results)
-          expect(results).to.be.an('object')
-          expect(results).to.have.a.property('name')
-        })
+      return hubspot.companies.properties.getByName(propertyName).then((results) => {
+        // console.log(results)
+        expect(results).to.be.an('object')
+        expect(results).to.have.a.property('name')
+      })
     })
   })
 
@@ -133,12 +131,10 @@ describe('companies.properties', () => {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
       it('should update the property', () => {
-        return hubspot.companies.properties
-          .update(property.name, property)
-          .then((data) => {
-            expect(data).to.be.an('object')
-            expect(data.success).to.eq(true)
-          })
+        return hubspot.companies.properties.update(property.name, property).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.eq(true)
+        })
       })
     }
   })

@@ -38,14 +38,7 @@ describe('Owners', () => {
           'userIdIncludingInactive',
           'isActive'
         )
-        expect(data.remoteList[0]).to.have.all.keys(
-          'id',
-          'portalId',
-          'ownerId',
-          'remoteId',
-          'remoteType',
-          'active'
-        )
+        expect(data.remoteList[0]).to.have.all.keys('id', 'portalId', 'ownerId', 'remoteId', 'remoteType', 'active')
       })
     })
   })

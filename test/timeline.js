@@ -6,10 +6,8 @@ const userId = process.env.USER_ID || 23456
 const applicationId = process.env.APPLICATION_ID || 12345
 
 describe('timeline', () => {
-  const headerTemplate =
-    '# Title for event {{id}}\nThis is an event for {{objectType}}'
-  const detailTemplate =
-    'This event happened on {{#formatDate timestamp}}{{/formatDate}}'
+  const headerTemplate = '# Title for event {{id}}\nThis is an event for {{objectType}}'
+  const detailTemplate = 'This event happened on {{#formatDate timestamp}}{{/formatDate}}'
   const hubspot = new Hubspot({
     accessToken: process.env.ACCESS_TOKEN || 'some-fake-token',
   })
@@ -20,16 +18,11 @@ describe('timeline', () => {
       detailTemplate,
     })
   const createEventTypeProperty = (eventTypeId) =>
-    hubspot.timelines.createEventTypeProperty(
-      applicationId,
-      eventTypeId,
-      userId,
-      {
-        name: 'NumericProperty',
-        label: 'Numeric Property',
-        propertyType: 'Numeric',
-      }
-    )
+    hubspot.timelines.createEventTypeProperty(applicationId, eventTypeId, userId, {
+      name: 'NumericProperty',
+      label: 'Numeric Property',
+      propertyType: 'Numeric',
+    })
 
   describe('createEventType', () => {
     const createEventTypeEndpoint = {
@@ -155,16 +148,11 @@ describe('timeline', () => {
 
     it('should update an event type property', () => {
       return hubspot.timelines
-        .updateEventTypeProperty(
-          applicationId,
-          eventTypeId,
-          eventTypePropertyId,
-          {
-            name: 'NumericProperty',
-            label: 'A new label',
-            propertyType: 'Numeric',
-          }
-        )
+        .updateEventTypeProperty(applicationId, eventTypeId, eventTypePropertyId, {
+          name: 'NumericProperty',
+          label: 'A new label',
+          propertyType: 'Numeric',
+        })
         .then((data) => {
           expect(data.label).to.eq('A new label')
         })
@@ -176,11 +164,7 @@ describe('timeline', () => {
     const createTimelineEventEndpoint = {
       path: `/integrations/v1/${applicationId}/timeline/event`,
       request: (body) => {
-        return (
-          !!body.id &&
-          body.email === 'test@test.com' &&
-          body.eventTypeId === eventTypeId
-        )
+        return !!body.id && body.email === 'test@test.com' && body.eventTypeId === eventTypeId
       },
       statusCode: 204,
     }

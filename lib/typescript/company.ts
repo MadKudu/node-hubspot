@@ -15,10 +15,7 @@ declare class Company {
 
   create(data: {}): RequestPromise
 
-  addContactToCompany(data: {
-    companyId: number
-    contactVid: number
-  }): RequestPromise
+  addContactToCompany(data: { companyId: number; contactVid: number }): RequestPromise
 
   getContactIds(id: number, opts?: {}): RequestPromise
 
