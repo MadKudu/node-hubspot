@@ -20,6 +20,8 @@ declare class Form {
   update(guid: string, data: {}): RequestPromise
 
   delete(guid: string): RequestPromise
+
+  getUploadedFileByUrl(url: string): RequestPromise
 }
 
 export { Form }
