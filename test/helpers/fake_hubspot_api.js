@@ -35,6 +35,7 @@ class FakeHubSpotApi {
     })
 
     afterEach(() => {
+      nockHelper.clearBasePath()
       nockHelper.resetNock()
     })
   }

@@ -37,6 +37,10 @@ class NockHelper {
     }
   }
 
+  clearBasePath() {
+    basePath = 'https://api.hubapi.com'
+  }
+
   mockRateLimit() {
     mockEndpoint({
       path: '/integrations/v1/limit/daily',
