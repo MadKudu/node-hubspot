@@ -23,5 +23,6 @@ module.exports = {
     'prefer-arrow-callback': 2,
     'prefer-template': 2,
     'no-template-curly-in-string': 2,
+    'newline-per-chained-call': 2,
   },
 }
