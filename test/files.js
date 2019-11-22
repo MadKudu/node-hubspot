@@ -2,13 +2,13 @@ const chai = require('chai')
 const expect = chai.expect
 
 const Hubspot = require('..')
+const fakeHubspotApi = require('./helpers/fake_hubspot_api')
 const hubspot = new Hubspot({ apiKey: process.env.HUBSPOT_API_KEY || 'demo' })
 
 describe('files', () => {
   describe('get', () => {
     it('Should return all files', () => {
       return hubspot.files.get().then((data) => {
-        // console.log(data)
         expect(data).to.be.a('object')
         expect(data.total_count).to.be.above(0)
       })
@@ -26,33 +26,46 @@ describe('files', () => {
 
     it('Should return one file', () => {
       return hubspot.files.getOne(fileId).then((data) => {
-        // console.log(data)
         expect(data).to.be.an('object')
       })
     })
   })
 
   // move it to the integration test
-  describe.skip('upload', () => {
-    let file
+  describe('upload', () => {
+    const fetchEndpoint = {
+      path: '/some.txt',
+      response: 'success',
+      endpointPath: 'http://app.hubspot.com',
+    }
 
-    before(() => {
-      return hubspot.files.get().then((data) => {
-        file = data.objects[0]
-      })
+    const uploadEndpoint = {
+      path: '/filemanager/api/v2/files',
+      query: {
+        override: 'true',
+        hapikey: 'demo',
+      },
+      request: /.*/,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      getEndpoints: [fetchEndpoint],
+      postEndpoints: [uploadEndpoint],
     })
 
-    it('Should upload a file', () => {
-      const fileToUpload = {
-        url: file.url,
-        name: 'test.png',
-        folderPath: 'hs_marketplace_assets/modules',
-      }
-
-      return hubspot.files.upload(fileToUpload).then((data) => {
-        // console.log(data)
-        expect(data.status).to.equal(200)
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should upload a file with correct upl and payload', () => {
+        const fileDetails = {
+          url: 'http://app.hubspot.com/some.txt',
+          name: 'fetchFileName',
+        }
+        return hubspot.files.upload(fileDetails, true, false).then((data) => {
+          expect(data.success).to.be.eq(true)
+        })
       })
-    })
+    }
   })
 })

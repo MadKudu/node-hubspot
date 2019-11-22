@@ -52,7 +52,7 @@ declare class File {
   getOne(id: number): RequestPromise
 
   upload(
-    file: { url: string; name: string; folderId?: number; folderPath?: string },
+    fileDetails: { url: string; name: string; folderId?: number; folderPath?: string },
     overwrite?: boolean,
     hidden?: boolean
   ): RequestPromise
