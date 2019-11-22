@@ -22,7 +22,7 @@ class FakeHubSpotApi {
     beforeEach(() => {
       nockHelper.disableNetConnect()
       nockHelper.mockRateLimit()
-      nockHelper.setBasePath(basePath)
+      if (basePath) nockHelper.setBasePath(basePath)
       getEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockGetEndpoint)
       postEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPostEndpoint)
       putEndpoints.map(maybeAddHapiKeyToQuery).map(nockHelper.mockPutEndpoint)

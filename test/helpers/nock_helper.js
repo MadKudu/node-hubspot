@@ -2,15 +2,15 @@ const nock = require('nock')
 
 let basePath = 'https://api.hubapi.com'
 
-const mockEndpoint = ({ path, response, responseError, verb, request, query = {}, statusCode = 200 }) => {
+const mockEndpoint = ({ path, response, responseError, verb, request, query = {}, statusCode = 200, endpointPath }) => {
   if (responseError) {
-    nock(basePath, { encodedQueryParams: true })
+    nock(endpointPath || basePath, { encodedQueryParams: true })
       // .log(console.log)
       .intercept(path, verb, request)
       .query(query)
       .replyWithError(responseError)
   } else {
-    nock(basePath, { encodedQueryParams: true })
+    nock(endpointPath || basePath, { encodedQueryParams: true })
       // .log(console.log)
       .intercept(path, verb, request)
       .query(query)
