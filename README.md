@@ -299,6 +299,7 @@ hubspot.lists.addContacts(id, contactBody)
 ```javascript
 hubspot.files.get()
 hubspot.files.getOne(id)
+hubspot.files.upload(fileDetails, overwrite, hidden)
 ```
 
 ### Forms
