@@ -9,7 +9,7 @@ declare class Properties {
 
   update(name: string, data: {}): RequestPromise
 
-  upsert(name: string, data: {}): RequestPromise
+  upsert(data: {}): RequestPromise
 
   getGroups(): RequestPromise
   getGroups(): RequestPromise
