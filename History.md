@@ -1,3 +1,7 @@
+# 2.3.4 / 2019-11-25
+
+- Add OAuth for multipart form-data upload
+
 # 2.3.3 / 2019-11-21
 
 - Add multipart form-data upload
