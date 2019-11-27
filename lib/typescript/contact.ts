@@ -38,7 +38,7 @@ declare class Contact {
 
   updateByEmail(email: string, data: {}): RequestPromise
 
-  createOrUpdateBatch(data: {}): RequestPromise
+  createOrUpdateBatch(data: any[]): RequestPromise
 
   merge(primaryVid: string, secondaryVid: string): RequestPromise
 
