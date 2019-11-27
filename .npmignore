@@ -4,3 +4,5 @@
 .eslintrc.js
 .prettierrc
 .travis.yml
+.idea
+.nyc_output

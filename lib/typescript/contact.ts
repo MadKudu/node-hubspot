@@ -4,6 +4,12 @@ import { Properties } from './contact_property'
 declare class Contact {
   get(opts?: {}): RequestPromise
 
+  getAll(opts?: {}): RequestPromise
+
+  getRecentlyModified(opts: {}): RequestPromise
+
+  getRecentlyCreated(opts: {}): RequestPromise
+
   getByEmail(email: string): RequestPromise
 
   getByEmailBatch(email: string[]): RequestPromise
@@ -22,23 +28,21 @@ declare class Contact {
 
   getByToken(utk: string): RequestPromise
 
+  delete(id: number): RequestPromise
+
   update(id: number, data: {}): RequestPromise
 
   create(data: {}): RequestPromise
-
-  createOrUpdateBatch(data: any[]): RequestPromise
-
-  search(query: string): RequestPromise
-
-  getRecentlyCreated(opts: {}): RequestPromise
-
-  getRecentlyModified(opts: {}): RequestPromise
 
   createOrUpdate(email: string, data: {}): RequestPromise
 
   updateByEmail(email: string, data: {}): RequestPromise
 
-  delete(id: number): RequestPromise
+  createOrUpdateBatch(data: any[]): RequestPromise
+
+  merge(primaryVid: string, secondaryVid: string): RequestPromise
+
+  search(query: string): RequestPromise
 
   properties: Properties
 }
