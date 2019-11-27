@@ -1,4 +1,4 @@
-// Type definitions for hubspot 1.3.0
+// Type definitions for hubspot 2.3.4
 // Project: https://github.com/MadKudu/node-hubspot
 
 import { Company } from './lib/typescript/company'
@@ -20,6 +20,7 @@ import { Emails } from './lib/typescript/emails'
 import { Form } from './lib/typescript/form'
 import { Workflow } from './lib/typescript/workflow';
 import {Timeline} from "./lib/typescript/timeline";
+import { RequestPromise } from 'request-promise'
 
 interface BaseOptions {
   baseUrl?: string
@@ -73,6 +74,15 @@ export interface HubspotError {
 declare class Hubspot {
   constructor(options?: ApiOptions | AccessTokenOptions | AppOptions)
   refreshAccessToken(): Promise<AccessTokenResponse>
+  apiRequest(options: {
+    method: string,
+    path: string,
+    body?: any,
+    qs?: any,
+    useQuerystring?: boolean,
+    qsStringifyOptions?: any,
+    form?: { [key: string]: any } | string;
+  }): RequestPromise
   companies: Company
   contacts: Contact
   pages: Page
