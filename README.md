@@ -165,6 +165,7 @@ hubspot.companies.properties.groups.upsert(data)
 
 ```javascript
 hubspot.contacts.get(opts)
+hubspot.contacts.getAll(opts)
 hubspot.contacts.getByEmail(email)
 hubspot.contacts.getByEmailBatch(emails)
 hubspot.contacts.getById(id)
