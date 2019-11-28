@@ -42,7 +42,7 @@ declare class Contact {
 
   merge(primaryVid: string, secondaryVid: string): RequestPromise
 
-  search(query: string): RequestPromise
+  search(query: string, opts?: {}): RequestPromise
 
   properties: Properties
 }

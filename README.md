@@ -20,7 +20,7 @@ npm install hubspot
 const Hubspot = require('hubspot')
 const hubspot = new Hubspot({ 
   apiKey: 'abc',
-  checkLimit: false // (Optional) Specify whether or not to check the API limit on each call. Default: true 
+  checkLimit: false // (Optional) Specify whether to check the API limit on each call. Default: true 
 })
 ```
 
@@ -301,6 +301,7 @@ hubspot.lists.addContacts(id, contactBody)
 hubspot.files.get()
 hubspot.files.getOne(id)
 hubspot.files.upload(fileDetails, overwrite, hidden)
+hubspot.files.uploadByUrl(fileDetails, overwrite, hidden)
 ```
 
 ### Forms

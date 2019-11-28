@@ -12,7 +12,6 @@ declare class Properties {
   upsert(data: {}): RequestPromise
 
   getGroups(): RequestPromise
-  getGroups(): RequestPromise
 
   createGroup(data: {}): void
 
