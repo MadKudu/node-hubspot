@@ -1,3 +1,9 @@
+# 2.3.5 / 2019-11-28
+
+- Extend client request wrapper
+- Fix issues with files and forms
+- Fix typing
+
 # 2.3.4 / 2019-11-25
 
 - Add OAuth for multipart form-data upload
