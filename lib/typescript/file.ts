@@ -53,9 +53,9 @@ declare class File {
 
   upload(
     fileDetails: {
-      name: string;
-      content: any;
-      folderId?: number;
+      name: string
+      content: any
+      folderId?: number
       folderPath?: string
     },
     overwrite?: boolean,
@@ -64,9 +64,9 @@ declare class File {
 
   uploadByUrl(
     fileDetails: {
-      url: string;
-      name: string;
-      folderId?: number;
+      url: string
+      name: string
+      folderId?: number
       folderPath?: string
     },
     overwrite?: boolean,
