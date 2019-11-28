@@ -32,7 +32,7 @@ describe('files', () => {
   })
 
   // move it to the integration test
-  describe('upload', () => {
+  describe('uploadByUrl', () => {
     const fetchEndpoint = {
       path: '/some.txt',
       response: 'success',
@@ -45,7 +45,6 @@ describe('files', () => {
         override: 'true',
         hapikey: 'demo',
       },
-      request: /.*/,
       response: { success: true },
     }
 
@@ -57,10 +56,39 @@ describe('files', () => {
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
-      it('should upload a file with correct upl and payload', () => {
+      it('should upload a file with correct url and payload', () => {
         const fileDetails = {
           url: 'http://app.hubspot.com/some.txt',
           name: 'fetchFileName',
+        }
+        return hubspot.files.uploadByUrl(fileDetails, true, false).then((data) => {
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
+  describe('upload', () => {
+    const uploadEndpoint = {
+      path: '/filemanager/api/v2/files',
+      query: {
+        override: 'true',
+        hapikey: 'demo',
+      },
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [uploadEndpoint],
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should upload a file with correct url and payload', () => {
+        const fileDetails = {
+          name: 'fetchFileName',
+          content: 'some file content',
         }
         return hubspot.files.upload(fileDetails, true, false).then((data) => {
           expect(data.success).to.be.eq(true)
