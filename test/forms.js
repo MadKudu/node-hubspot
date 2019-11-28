@@ -209,13 +209,13 @@ describe('forms', () => {
         conversionId,
         filename,
       },
-      headers: { host: 'api.hubspot.com' },
-      response: 'success',
+      response: { success: true },
     }
 
     fakeHubspotApi.setupServer({
       getEndpoints: [formEndpoint],
       basePath: 'https://api.hubspot.com',
+      demo: true,
     })
 
     if (process.env.NOCK_OFF) {
@@ -223,7 +223,7 @@ describe('forms', () => {
     } else {
       it('correctly make request by the url', () => {
         return hubspot.forms.getUploadedFileByUrl(url).then((data) => {
-          expect(data).to.be.eq('success')
+          expect(data.success).to.be.eq(true)
         })
       })
     }

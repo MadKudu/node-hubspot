@@ -449,6 +449,15 @@ hubspot.apiRequest({
           })
 ```
 
+Also it is possible to overlap hubspot base API URL using `overlapUrl` parameter
+
+```javascript
+hubspot.apiRequest({
+            method: 'GET',
+            overlapUrl: 'https://api.hubspot.com/some/alternative/api',
+          })
+```
+
 ## Typescript
 
 You may use this library in your Typescript project via:

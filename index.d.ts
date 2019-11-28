@@ -75,8 +75,9 @@ declare class Hubspot {
   constructor(options?: ApiOptions | AccessTokenOptions | AppOptions)
   refreshAccessToken(): Promise<AccessTokenResponse>
   apiRequest(options: {
-    method: string,
-    path: string,
+    method?: string,
+    path?: string,
+    overlapUrl?: string,
     body?: any,
     qs?: any,
     useQuerystring?: boolean,
