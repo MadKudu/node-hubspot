@@ -458,6 +458,11 @@ hubspot.apiRequest({
           })
 ```
 
+## Samples
+
+Please see repository with sample applications with common cases. 
+https://github.com/HubSpot/integration-examples-nodejs
+
 ## Typescript
 
 You may use this library in your Typescript project via:
