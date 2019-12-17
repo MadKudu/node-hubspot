@@ -89,6 +89,13 @@ hubspot.contacts
 
 [promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
+
+## Samples
+
+Please see repository with [samples] applications with common cases. 
+
+[samples]: https://github.com/HubSpot/integration-examples-nodejs
+
 ## {EXAMPLE} Create Contact
 
 ```javascript
@@ -458,10 +465,6 @@ hubspot.apiRequest({
           })
 ```
 
-## Samples
-
-Please see repository with sample applications with common cases. 
-https://github.com/HubSpot/integration-examples-nodejs
 
 ## Typescript
 
