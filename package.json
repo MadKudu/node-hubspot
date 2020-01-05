@@ -1,6 +1,6 @@
 {
-  "name": "hubspot",
-  "version": "2.3.5",
+  "name": "@richpanel/hubspot",
+  "version": "1.0.0",
   "description": "A node wrapper for the HubSpot API",
   "engines": {
     "node": ">=10.0.0"
@@ -22,14 +22,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/MadKudu/node-hubspot.git"
+    "url": "git://github.com/richpanel/node-hubspot.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "hubspot"
   ],
   "author": {
-    "name": "Brian Falk",
-    "url": "https://github.com/brainflake/"
+    "name": "Richpanel",
+    "url": "https://github.com/richpanel"
   },
   "license": "MIT",
   "dependencies": {
