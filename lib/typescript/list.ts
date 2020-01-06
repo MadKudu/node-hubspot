@@ -10,6 +10,8 @@ declare class List {
   getRecentContacts(id: number): RequestPromise
 
   addContacts(id: number, contactBody: {}): RequestPromise
+
+  removeContacts(id: number, contactBody: {}): RequestPromise
 }
 
 export { List }

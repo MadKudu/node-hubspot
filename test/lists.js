@@ -189,4 +189,48 @@ describe('lists', () => {
       })
     })
   })
+
+  describe('removeContacts', () => {
+    describe('when a id and contactBody is provided', () => {
+      const listId = 123
+      const contactId = 234
+      const removeContactsFromListEndpoint = {
+        path: `/contacts/v1/lists/${listId}/remove`,
+        request: { vids: [contactId] },
+        response: { contacts: [] },
+      }
+      fakeHubspotApi.setupServer({ postEndpoints: [removeContactsFromListEndpoint] })
+      it('should return results', () => {
+        return hubspot.lists.removeContacts(listId, { vids: [contactId] }).then((data) => {
+          expect(data).to.be.a('object')
+        })
+      })
+    })
+
+    describe('when not passed a listId', () => {
+      it('should return a rejected promise', () => {
+        return hubspot.lists
+          .removeContacts()
+          .then(() => {
+            throw new Error('I should have thrown an error')
+          })
+          .catch((error) => {
+            expect(error.message).to.equal('id parameter must be provided.')
+          })
+      })
+    })
+
+    describe('when passed a listId but not contactBody', () => {
+      it('should return a rejected promise', () => {
+        return hubspot.lists
+          .removeContacts(123)
+          .then(() => {
+            throw new Error('I should have thrown an error')
+          })
+          .catch((error) => {
+            expect(error.message).to.equal('contactBody parameter must be provided.')
+          })
+      })
+    })
+  })
 })
