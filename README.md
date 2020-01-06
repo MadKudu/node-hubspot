@@ -300,6 +300,7 @@ hubspot.lists.delete(id)
 hubspot.lists.getContacts(id, opts)
 hubspot.lists.getRecentContacts(id, opts)
 hubspot.lists.addContacts(id, contactBody)
+hubspot.lists.removeContacts(id, contactBody)
 ```
 
 ### Files
