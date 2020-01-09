@@ -1,3 +1,7 @@
+# 2.3.6 / 2020-01-09
+
+- Add possibility to delete contacts from list 
+
 # 2.3.5 / 2019-11-28
 
 - Extend client request wrapper
