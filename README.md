@@ -343,6 +343,16 @@ hubspot.campaigns.getOne(id)
 hubspot.campaigns.events(opts)
 ```
 
+### Marketing Email
+
+```javascript
+hubspot.marketingEmail.get(opts)
+hubspot.marketingEmail.getById(id)
+hubspot.marketingEmail.create(data)
+hubspot.marketingEmail.update(id, data)
+hubspot.marketingEmail.delete(id)
+```
+
 ### Social Media
 
 ```javascript
