@@ -402,6 +402,8 @@ hubspot.emails.sendTransactionalEmail(data)
 ```javascript
 hubspot.workflows.getAll()
 hubspot.workflows.get(workflowId)
+hubspot.workflows.create(data)
+hubspot.workflows.delete(workflowId)
 hubspot.workflows.enroll(workflowId, email)
 hubspot.workflows.unenroll(workflowId, email)
 hubspot.workflows.current(contactId)
