@@ -5,6 +5,10 @@ declare class Workflow {
 
   getAll(): RequestPromise
 
+  create(data: {}): RequestPromise
+
+  delete(workflowId: string): RequestPromise
+
   enroll(workflowId: number, email: string): RequestPromise
 
   unenroll(workflowId: number, email: string): RequestPromise

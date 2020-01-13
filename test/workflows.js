@@ -33,9 +33,58 @@ describe('workflows', () => {
     })
   })
 
-  describe.skip('create', () => {})
+  describe('create', () => {
+    const payload = {
+      name: 'Test Workflow',
+      type: 'DRIP_DELAY',
+      onlyEnrollsManually: true,
+    }
 
-  describe.skip('delete', () => {})
+    const workflowEndpoint = {
+      path: '/automation/v3/workflows',
+      request: payload,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      postEndpoints: [workflowEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create an workflow', () => {
+        return hubspot.workflows.create(payload).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
+  describe('delete', () => {
+    const workflowsEndpoint = {
+      path: `/automation/v3/workflows/${workflowId}`,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      deleteEndpoints: [workflowsEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can delete an workflow', () => {
+        return hubspot.workflows.delete(workflowId).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
 
   describe('enroll', () => {
     const email = 'fake_email'
