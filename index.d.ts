@@ -21,6 +21,7 @@ import { Form } from './lib/typescript/form'
 import { Workflow } from './lib/typescript/workflow';
 import {Timeline} from "./lib/typescript/timeline";
 import { RequestPromise } from 'request-promise'
+import { MarketingEmail } from './lib/typescript/marketing_email'
 
 interface BaseOptions {
   baseUrl?: string
@@ -103,6 +104,7 @@ declare class Hubspot {
   emails: Emails
   forms: Form
   workflows: Workflow
+  marketingEmail: MarketingEmail
 }
 
 export default Hubspot
