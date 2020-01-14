@@ -154,7 +154,7 @@ describe('lists', () => {
         fakeHubspotApi.setupServer({ getEndpoints: [listsEndpoint] })
 
         it('should return the last 20 contacts created or updated lists', () => {
-            return hubspot.lists.get().then((data) => {
+            return hubspot.lists.getRecentUpdates().then((data) => {
                 expect(data).to.be.a('object')
                 expect(data.lists).to.be.a('array')
             })
