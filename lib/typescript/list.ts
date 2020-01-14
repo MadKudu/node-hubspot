@@ -9,6 +9,8 @@ declare class List {
 
   getRecentContacts(id: number): RequestPromise
 
+  getRecentUpdates(opts?:{}): RequestPromise
+                   
   addContacts(id: number, contactBody: {}): RequestPromise
 
   removeContacts(id: number, contactBody: {}): RequestPromise
