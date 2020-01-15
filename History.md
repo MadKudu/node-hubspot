@@ -1,3 +1,9 @@
+# 2.3.7 / 2020-01-15
+
+- Add possibility to get the list of recently updated contacts 
+- Add workflows create & delete commands 
+- Add marketing emails functionality   
+
 # 2.3.6 / 2020-01-09
 
 - Add possibility to delete contacts from list 
