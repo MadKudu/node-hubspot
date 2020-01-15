@@ -145,21 +145,21 @@ describe('lists', () => {
       })
     })
   })
-  
-  describe('getRecentUpdates', () => {
-        const listsEndpoint = {
-            path: '/contacts/v1/lists/recently_updated/contacts/recent',
-            response: { lists: [] },
-        }
-        fakeHubspotApi.setupServer({ getEndpoints: [listsEndpoint] })
 
-        it('should return contacts', () => {
-            return hubspot.lists.getRecentUpdates().then((data) => {
-                expect(data).to.be.a('object')
-                expect(data.lists).to.be.a('array')
-            })
-        })
+  describe('getRecentUpdates', () => {
+    const listsEndpoint = {
+      path: '/contacts/v1/lists/recently_updated/contacts/recent',
+      response: { lists: [] },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [listsEndpoint] })
+
+    it('should return contacts', () => {
+      return hubspot.lists.getRecentUpdates().then((data) => {
+        expect(data).to.be.a('object')
+        expect(data.lists).to.be.a('array')
+      })
     })
+  })
 
   describe('addContacts', () => {
     describe('when a id and contactBody is provided', () => {
