@@ -1,6 +1,8 @@
 import { RequestPromise } from 'request-promise'
 
 declare class Properties {
+  getAll(options?: {}): RequestPromise
+
   get(): RequestPromise
 
   getByName(name: string): RequestPromise
