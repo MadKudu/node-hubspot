@@ -1,6 +1,8 @@
 import { RequestPromise } from 'request-promise'
 
 declare class Groups {
+  getAll(options?: {}): RequestPromise
+
   get(query?: {}): RequestPromise
 
   create(data: {}): RequestPromise
