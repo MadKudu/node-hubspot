@@ -19,7 +19,7 @@ declare class Properties {
 
   deleteGroup(name: string): void
 
-  delete(name: string): void
+  delete(name: string): RequestPromise
 }
 
 export { Properties }
