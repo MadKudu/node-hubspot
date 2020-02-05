@@ -1,3 +1,7 @@
+# 2.3.8 / 2020-02-05
+
+- Update typing   
+
 # 2.3.7 / 2020-01-15
 
 - Add possibility to get the list of recently updated contacts 
