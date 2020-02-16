@@ -5,6 +5,10 @@ declare class List {
 
   getOne(id: number): RequestPromise
 
+  create(data: {}): RequestPromise
+
+  delete(id: number): RequestPromise
+
   getContacts(id: number): RequestPromise
 
   getRecentContacts(id: number): RequestPromise
