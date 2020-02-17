@@ -54,6 +54,23 @@ describe('lists', () => {
     })
   })
 
+  describe('getByIdBatch', () => {
+    const listIds = [123, 234, 345]
+    const listsByIdsEndpoint = {
+      path: '/contacts/v1/lists/batch',
+      response: { '123': {}, '234': {}, '345': {} },
+      query: { listId: listIds },
+    }
+    fakeHubspotApi.setupServer({ getEndpoints: [listsByIdsEndpoint] })
+
+    it('should return lists based on an array of ids', () => {
+      return hubspot.lists.getByIdBatch(listIds).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data).to.have.a.property(listIds[0])
+      })
+    })
+  })
+
   describe('create', () => {
     const createListEndpoint = {
       path: '/contacts/v1/lists',
