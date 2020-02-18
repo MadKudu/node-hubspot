@@ -295,6 +295,7 @@ hubspot.pipelines.get(opts)
 ```javascript
 hubspot.lists.get(opts)
 hubspot.lists.getOne(id)
+hubspot.lists.getByIdBatch(ids)
 hubspot.lists.create(data)
 hubspot.lists.delete(id)
 hubspot.lists.getContacts(id, opts)

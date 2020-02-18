@@ -5,6 +5,8 @@ declare class List {
 
   getOne(id: number): RequestPromise
 
+  getByIdBatch(ids: number[]): RequestPromise
+
   create(data: {}): RequestPromise
 
   delete(id: number): RequestPromise
