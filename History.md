@@ -1,5 +1,10 @@
 # 2.3.8 / 2020-02-05
 
+- Add email marketing missing functionality
+- Update lists retrieving functionality
+
+# 2.3.8 / 2020-02-05
+
 - Update typing   
 
 # 2.3.7 / 2020-01-15
