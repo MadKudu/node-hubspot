@@ -18,9 +18,9 @@ npm install hubspot
 
 ```javascript
 const Hubspot = require('hubspot')
-const hubspot = new Hubspot({ 
+const hubspot = new Hubspot({
   apiKey: 'abc',
-  checkLimit: false // (Optional) Specify whether to check the API limit on each call. Default: true 
+  checkLimit: false // (Optional) Specify whether to check the API limit on each call. Default: true
 })
 ```
 
@@ -92,7 +92,7 @@ hubspot.contacts
 
 ## Samples
 
-Please see repository with [samples] applications with common cases. 
+Please see repository with [samples] applications with common cases.
 
 [samples]: https://github.com/HubSpot/integration-examples-nodejs
 
@@ -319,7 +319,7 @@ hubspot.files.uploadByUrl(fileDetails, overwrite, hidden)
 ```javascript
 hubspot.forms.get(opts)
 hubspot.forms.getById(id)
-hubspot.forms.getSingleField(guid, fieldname) 
+hubspot.forms.getSingleField(guid, fieldname)
 hubspot.forms.getSubmissions(guid, opts)
 hubspot.forms.create(data)
 hubspot.forms.update(id, data)
@@ -352,7 +352,13 @@ hubspot.marketingEmail.get(opts)
 hubspot.marketingEmail.getById(id)
 hubspot.marketingEmail.create(data)
 hubspot.marketingEmail.update(id, data)
+hubspot.marketingEmail.clone(id, data)
 hubspot.marketingEmail.delete(id)
+hubspot.marketingEmail.versions(id)
+hubspot.marketingEmail.restore(id)
+hubspot.marketingEmail.hasBufferedChanges(id)
+hubspot.marketingEmail.statistics(opts)
+hubspot.marketingEmail.statisticsById(id)
 ```
 
 ### Social Media

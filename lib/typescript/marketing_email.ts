@@ -11,7 +11,19 @@ declare class MarketingEmail {
 
   update(id: string, data: {}): RequestPromise
 
+  clone(id: string, data: {}): RequestPromise
+
   delete(id: string): RequestPromise
+
+  versions(id: string): RequestPromise
+
+  restore(id: string): RequestPromise
+
+  hasBufferedChanges(id: string): RequestPromise
+
+  statistics(opts?: {}): RequestPromise
+
+  statisticsById(id: string): RequestPromise
 }
 
 export { MarketingEmail }
