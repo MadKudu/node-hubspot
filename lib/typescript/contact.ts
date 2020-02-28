@@ -44,6 +44,8 @@ declare class Contact {
 
   search(query: string, opts?: {}): RequestPromise
 
+  addSecondaryEmail(vid: string, secondaryEmail: string): RequestPromise
+
   properties: Properties
 }
 

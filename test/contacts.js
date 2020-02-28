@@ -505,4 +505,28 @@ describe('contacts', () => {
       })
     })
   })
+
+  describe('addSecondaryEmail', () => {
+    const vid = 123
+    const secondaryEmail = 'test-sec@hubspot.com'
+    const addSecondaryEmailEndpoint = {
+      path: `/contacts/v1/secondary-email/${vid}/email/${secondaryEmail}`,
+      statusCode: 200,
+      response: {
+        vid,
+        secondaryEmails: ['test-sec@hubspot.com'],
+      },
+    }
+    fakeHubspotApi.setupServer({
+      putEndpoints: [addSecondaryEmailEndpoint],
+    })
+
+    it('should Create or Update a contact', () => {
+      return hubspot.contacts.addSecondaryEmail(vid, secondaryEmail).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.vid).to.be.eq(123)
+        expect(data.secondaryEmails).to.be.eql(['test-sec@hubspot.com'])
+      })
+    })
+  })
 })

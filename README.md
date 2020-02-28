@@ -189,6 +189,9 @@ hubspot.contacts.createOrUpdate(email, data)
 hubspot.contacts.updateByEmail(email, data)
 hubspot.contacts.delete(id)
 hubspot.contacts.merge(primaryId, secondaryId)
+
+// Add a secondary email address to a contact
+hubspot.contacts.addSecondaryEmail(vid, secondaryEmail)
 ```
 
 ### Contact properties
