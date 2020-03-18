@@ -337,6 +337,8 @@ hubspot.forms.getUploadedFileByUrl(url)
 
 ```javascript
 hubspot.subscriptions.get(opts)
+hubspot.subscriptions.subscribeToAll(email)
+hubspot.subscriptions.unsubscribe(email)
 ```
 
 ### Email Events
