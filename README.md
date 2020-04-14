@@ -492,6 +492,7 @@ const data = [
 hubspot.tickets.create(data);
 hubspot.tickets.getAll();
 hubspot.tickets.delete(id);
+hubspot.tickets.update(id, newData);
 ```
 
 ## Not wrapped endpoint(s)

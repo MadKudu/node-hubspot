@@ -6,6 +6,8 @@ declare class Ticket {
   create(data: {}): RequestPromise
 
   delete(id: number): RequestPromise
+
+  update(id: number, data: {}): RequestPromise
 }
 
 export { Ticket }

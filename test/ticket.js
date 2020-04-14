@@ -85,4 +85,38 @@ describe('tickets', () => {
       })
     }
   })
+
+  describe('update', () => {
+    const id = 'mock_id'
+    const newData = {
+      properties: [
+        {
+          name: 'content',
+          value: 'This is now an updated ticket marked as high priority.',
+        },
+      ],
+    }
+
+    const ticketsEndpoint = {
+      path: `/crm-objects/v1/objects/tickets/${id}`,
+      request: newData,
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({
+      putEndpoints: [ticketsEndpoint],
+      demo: true,
+    })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can update a ticket', () => {
+        return hubspot.tickets.update(id, newData).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
 })
