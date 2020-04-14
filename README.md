@@ -468,6 +468,12 @@ const hubspot = new Hubspot(params)
 return hubspot.oauth.getAccessToken(params).then(...)
 ```
 
+### Tickets
+
+```javascript
+hubspot.ticket.getAll()
+```
+
 ## Not wrapped endpoint(s)
 
 It is possible to access the hubspot request method directly,
