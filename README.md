@@ -471,7 +471,27 @@ return hubspot.oauth.getAccessToken(params).then(...)
 ### Tickets
 
 ```javascript
-hubspot.ticket.getAll()
+const data = [
+  {
+    name: 'subject',
+    value: 'This is an example ticket'
+  },
+  {
+    name: 'content',
+    value: 'Here are the details of the ticket.'
+  },
+  {
+    name: 'hs_pipeline',
+    value: '0'
+  },
+  {
+    name: 'hs_pipeline_stage',
+    value: '1'
+  }
+];
+hubspot.tickets.create(data);
+hubspot.tickets.getAll();
+hubspot.tickets.delete(id);
 ```
 
 ## Not wrapped endpoint(s)
