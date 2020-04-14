@@ -1,4 +1,10 @@
-# 2.3.8 / 2020-02-05
+# 2.3.10 / 2020-04-14
+
+- Add Get in Tickets 
+- Fix subscription typescript definition to have unsubscribe function 
+- Add support for contact addSecondaryEmail 
+
+# 2.3.9 / 2020-02-05
 
 - Add email marketing missing functionality
 - Update lists retrieving functionality
