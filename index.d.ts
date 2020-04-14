@@ -106,7 +106,7 @@ declare class Hubspot {
   forms: Form
   workflows: Workflow
   marketingEmail: MarketingEmail
-  ticket: Ticket
+  tickets: Ticket
 }
 
 export default Hubspot
