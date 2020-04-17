@@ -1,6 +1,6 @@
 import { RequestPromise } from 'request-promise'
 
-export interface IHubspotTicket {
+export interface ITicket {
   subject: string
   content: string
   due_date: number
@@ -9,16 +9,23 @@ export interface IHubspotTicket {
   hs_pipeline_stage: number
 }
 
+export interface ITicketUpdate {
+  objectId: number
+  properties: any[]
+}
+
 declare class Ticket {
   getAll(opts?: {}): RequestPromise
 
-  create(data: IHubspotTicket): RequestPromise
+  create(data: ITicket): RequestPromise
 
-  createBatch(data: IHubspotTicket[]): RequestPromise
+  createBatch(data: ITicket[]): RequestPromise
 
   delete(id: number): RequestPromise
 
   update(id: number, data: {}): RequestPromise
+
+  updateBatch(data: ITicketUpdate[]): RequestPromise
 }
 
 export { Ticket }

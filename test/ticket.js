@@ -120,7 +120,7 @@ describe('tickets', () => {
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
     } else {
-      it('should create a ticket in a given portal', () => {
+      it('should create multiple tickets in a given portal', () => {
         return hubspot.tickets.createBatch(newTickets).then((data) => {
           expect(data).to.be.an('array')
           expect(data[0].subject.value).to.equal(subjectValue)
@@ -138,10 +138,7 @@ describe('tickets', () => {
       response: { success: true },
     }
 
-    fakeHubspotApi.setupServer({
-      deleteEndpoints: [ticketsEndpoint],
-      demo: true,
-    })
+    fakeHubspotApi.setupServer({ deleteEndpoints: [ticketsEndpoint], demo: true })
 
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
@@ -172,10 +169,7 @@ describe('tickets', () => {
       response: { success: true },
     }
 
-    fakeHubspotApi.setupServer({
-      putEndpoints: [ticketsEndpoint],
-      demo: true,
-    })
+    fakeHubspotApi.setupServer({ putEndpoints: [ticketsEndpoint], demo: true })
 
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
@@ -184,6 +178,62 @@ describe('tickets', () => {
         return hubspot.tickets.update(id, newData).then((data) => {
           expect(data).to.be.an('object')
           expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
+  describe('updateBatch', () => {
+    const newSubject = 'NEW SUBJECT'
+    const anotherSubject = 'ANOTHER SUBJECT'
+    const newData = [
+      {
+        objectId: 'mock_id_one',
+        properties: [
+          {
+            name: 'subject',
+            value: newSubject,
+          },
+          {
+            name: 'content',
+            value: 'NEW TICKET...',
+          },
+        ],
+      },
+      {
+        objectId: 'mock_id_two',
+        properties: [
+          {
+            name: 'subject',
+            value: anotherSubject,
+          },
+          {
+            name: 'content',
+            value: 'ANOTHER TICKET...',
+          },
+        ],
+      },
+    ]
+
+    const ticketsEndpoint = {
+      path: `/crm-objects/v1/objects/tickets/batch-update`,
+      request: newData,
+      response: [
+        { properties: { subject: { value: newSubject } } },
+        { properties: { subject: { value: anotherSubject } } },
+      ],
+    }
+
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsEndpoint], demo: true })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('can update multiple tickets', () => {
+        return hubspot.tickets.updateBatch(newData).then((data) => {
+          expect(data).to.be.an('array')
+          expect(data[0].properties.subject.value).to.equal(newSubject)
+          expect(data[1].properties.subject.value).to.equal(anotherSubject)
         })
       })
     }
