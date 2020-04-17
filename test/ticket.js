@@ -152,6 +152,29 @@ describe('tickets', () => {
     }
   })
 
+  describe('deleteBatch', () => {
+    const ids = ['fake_id_one', 'fake_id_two']
+
+    const ticketsEndpoint = {
+      path: '/crm-objects/v1/objects/tickets/batch-delete',
+      request: { ids },
+      response: { success: true },
+    }
+
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsEndpoint], demo: true })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should delete multiple tickets in a given portal', () => {
+        return hubspot.tickets.deleteBatch(ids).then((data) => {
+          expect(data).to.be.an('object')
+          expect(data.success).to.be.eq(true)
+        })
+      })
+    }
+  })
+
   describe('update', () => {
     const id = 'mock_id'
     const newData = {

@@ -23,6 +23,8 @@ declare class Ticket {
 
   delete(id: number): RequestPromise
 
+  deleteBatch(ids: number[]): RequestPromise
+
   update(id: number, data: {}): RequestPromise
 
   updateBatch(data: ITicketUpdate[]): RequestPromise
