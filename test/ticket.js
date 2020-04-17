@@ -17,11 +17,12 @@ describe('tickets', () => {
   })
 
   describe('create', () => {
+    const subjectValue = 'This is an example ticket'
     const newTicket = {
       properties: [
         {
           name: 'subject',
-          value: 'This is an example ticket',
+          value: subjectValue,
         },
         {
           name: 'content',
@@ -41,13 +42,10 @@ describe('tickets', () => {
     const ticketsEndpoint = {
       path: '/crm-objects/v1/objects/tickets',
       request: newTicket,
-      response: { properties: { subject: { value: 'This is an example ticket' } } },
+      response: { properties: { subject: { value: subjectValue } } },
     }
 
-    fakeHubspotApi.setupServer({
-      postEndpoints: [ticketsEndpoint],
-      demo: true,
-    })
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsEndpoint], demo: true })
 
     if (process.env.NOCK_OFF) {
       it('will not run with NOCK_OFF set to true. See commit message.')
@@ -55,7 +53,78 @@ describe('tickets', () => {
       it('should create a ticket in a given portal', () => {
         return hubspot.tickets.create(newTicket).then((data) => {
           expect(data).to.be.an('object')
-          expect(data.properties.subject.value).to.equal('This is an example ticket')
+          expect(data.properties.subject.value).to.equal(subjectValue)
+        })
+      })
+    }
+  })
+
+  describe('createBatch', () => {
+    const subjectValue = 'This is an example ticket'
+    const anotherSubjectValue = 'This is another example ticket'
+    const newTickets = [
+      [
+        {
+          name: 'subject',
+          value: subjectValue,
+        },
+        {
+          name: 'content',
+          value: 'Here are the details of the ticket.',
+        },
+        {
+          name: 'hs_pipeline',
+          value: 0,
+        },
+        {
+          name: 'hs_pipeline_stage',
+          value: 1,
+        },
+        {
+          name: 'hs_ticket_priority',
+          value: 'HIGH',
+        },
+      ],
+      [
+        {
+          name: 'subject',
+          value: anotherSubjectValue,
+        },
+        {
+          name: 'content',
+          value: 'Here are the details of the ticket.',
+        },
+        {
+          name: 'hs_pipeline',
+          value: 0,
+        },
+        {
+          name: 'hs_pipeline_stage',
+          value: 1,
+        },
+        {
+          name: 'hs_ticket_priority',
+          value: 'HIGH',
+        },
+      ],
+    ]
+
+    const ticketsEndpoint = {
+      path: '/crm-objects/v1/objects/tickets/batch-create',
+      request: newTickets,
+      response: [{ subject: { value: subjectValue } }, { subject: { value: anotherSubjectValue } }],
+    }
+
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsEndpoint], demo: true })
+
+    if (process.env.NOCK_OFF) {
+      it('will not run with NOCK_OFF set to true. See commit message.')
+    } else {
+      it('should create a ticket in a given portal', () => {
+        return hubspot.tickets.createBatch(newTickets).then((data) => {
+          expect(data).to.be.an('array')
+          expect(data[0].subject.value).to.equal(subjectValue)
+          expect(data[1].subject.value).to.equal(anotherSubjectValue)
         })
       })
     }
