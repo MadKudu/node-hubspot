@@ -522,6 +522,9 @@ const newDataId = [
 hubspot.tickets.create(data);
 hubspot.tickets.createBatch(data);
 hubspot.tickets.getAll();
+hubspot.tickets.getAll(['subject', 'content']);
+hubspot.tickets.getById(id);
+hubspot.tickets.getById(id, ['subject', 'content']);
 hubspot.tickets.delete(id);
 hubspot.tickets.deleteBatch(ids);
 hubspot.tickets.update(id, newData);

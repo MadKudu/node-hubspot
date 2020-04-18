@@ -11,7 +11,39 @@ describe('tickets', () => {
     it('should return all tickets', () => {
       return hubspot.tickets.getAll().then((data) => {
         expect(data).to.be.an('object')
-        expect(data.objects).to.be.a('array')
+        expect(data.objects).to.be.an('array')
+      })
+    })
+
+    it('should return all tickets with properties', () => {
+      const properties = ['subject', 'content', 'hs_pipeline', 'hs_pipeline_stage']
+      return hubspot.tickets.getAll(properties).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.objects).to.be.an('array')
+      })
+    })
+  })
+
+  describe('getById', () => {
+    let ticketId
+
+    before(() => {
+      return hubspot.tickets.getAll().then((data) => {
+        ticketId = data.objects[0].objectId
+      })
+    })
+
+    it('should return a ticket by ID', () => {
+      return hubspot.tickets.getById(ticketId).then((data) => {
+        expect(data).to.be.an('object')
+      })
+    })
+
+    it('should return a ticket by ID with properties', () => {
+      const properties = ['subject', 'content', 'hs_pipeline', 'hs_pipeline_stage']
+      return hubspot.tickets.getById(ticketId, properties).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.properties).to.be.an('object')
       })
     })
   })

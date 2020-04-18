@@ -15,7 +15,9 @@ export interface ITicketUpdate {
 }
 
 declare class Ticket {
-  getAll(opts?: {}): RequestPromise
+  getAll(properties?: []): RequestPromise
+
+  getById(id: number, properties?: []): RequestPromise
 
   create(data: ITicket): RequestPromise
 
