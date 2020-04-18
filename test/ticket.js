@@ -48,6 +48,44 @@ describe('tickets', () => {
     })
   })
 
+  describe('getBatchById', () => {
+    const ticketIds = ['fake_id_1', 'fake_id_2']
+
+    const ticketsByIdEndpoint = {
+      path: '/crm-objects/v1/objects/tickets/batch-read',
+      request: { ids: ticketIds },
+      response: { success: true },
+    }
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsByIdEndpoint], demo: true })
+
+    it('should return multiple tickets by IDs', () => {
+      return hubspot.tickets.getBatchById(ticketIds).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.success).to.be.eq(true)
+      })
+    })
+  })
+
+  describe('getBatchById with properties', () => {
+    const ticketIds = ['fake_id_1', 'fake_id_2']
+
+    const ticketsByIdEndpoint = {
+      path: '/crm-objects/v1/objects/tickets/batch-read',
+      query: { properties: ['subject', 'content', 'hs_pipeline', 'hs_pipeline_stage'] },
+      request: { ids: ticketIds },
+      response: { success: true },
+    }
+    fakeHubspotApi.setupServer({ postEndpoints: [ticketsByIdEndpoint], demo: true })
+
+    it('should return multiple tickets by IDs with properties', () => {
+      const properties = ['subject', 'content', 'hs_pipeline', 'hs_pipeline_stage']
+      return hubspot.tickets.getBatchById(ticketIds, properties).then((data) => {
+        expect(data).to.be.an('object')
+        expect(data.success).to.be.eq(true)
+      })
+    })
+  })
+
   describe('create', () => {
     const subjectValue = 'This is an example ticket'
     const newTicket = {
