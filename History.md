@@ -1,3 +1,7 @@
+# 2.3.12 / 2020-04-22
+
+- Add Tickets related functionality
+
 # 2.3.11 / 2020-04-22
 
 - Add Tickets related functionality
