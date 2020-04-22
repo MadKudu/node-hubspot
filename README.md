@@ -489,10 +489,49 @@ const data = [
     value: '1'
   }
 ];
+const ids = [176606, 177919];
+const properties = ['subject', 'content', 'hs_pipeline'];
+const newDataId = [
+    {
+      objectId: 176606,
+      properties: [
+        {
+          name: 'subject',
+          value: 'SUBJECT 001'
+        },
+        {
+          name: 'content',
+          value: 'TICKET 001'
+        }
+      ]
+    },
+    {
+      objectId: 177919,
+      properties: [
+        {
+          name: 'subject',
+          value: 'SUBJECT 002'
+        },
+        {
+          name: 'content',
+          value: 'TICKET 002'
+        }
+      ]
+    }
+  ];
+
 hubspot.tickets.create(data);
+hubspot.tickets.createBatch(data);
 hubspot.tickets.getAll();
+hubspot.tickets.getAll(properties);
+hubspot.tickets.getById(id);
+hubspot.tickets.getById(id, properties);
+hubspot.tickets.getBatchById(ids);
+hubspot.tickets.getBatchById(ids, properties);
 hubspot.tickets.delete(id);
+hubspot.tickets.deleteBatch(ids);
 hubspot.tickets.update(id, newData);
+hubspot.tickets.updateBatch(newDataId);
 ```
 
 ## Not wrapped endpoint(s)
