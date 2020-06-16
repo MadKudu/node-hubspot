@@ -1,6 +1,6 @@
 {
   "name": "hubspot",
-  "version": "2.3.12",
+  "version": "2.3.13",
   "description": "A node wrapper for the HubSpot API",
   "engines": {
     "node": ">=10.0.0"
@@ -59,7 +59,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "mocha": "^6.2.2",
+    "mocha": "^8.0.1",
     "nock": "^11.7.0",
     "nyc": "^14.1.1",
     "prettier": "^1.19.1",

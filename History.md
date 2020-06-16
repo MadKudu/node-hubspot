@@ -1,3 +1,7 @@
+# 2.3.13 / 2020-06-16
+
+- Fix query parameter for the file uploading
+
 # 2.3.12 / 2020-04-22
 
 - Add Tickets related functionality
