@@ -42,7 +42,8 @@ describe('files', () => {
     const uploadEndpoint = {
       path: '/filemanager/api/v2/files',
       query: {
-        override: 'true',
+        override: true,
+        hidden: false,
         hapikey: 'demo',
       },
       response: { success: true },
@@ -72,7 +73,8 @@ describe('files', () => {
     const uploadEndpoint = {
       path: '/filemanager/api/v2/files',
       query: {
-        override: 'true',
+        override: true,
+        hidden: false,
         hapikey: 'demo',
       },
       response: { success: true },
