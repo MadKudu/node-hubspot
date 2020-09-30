@@ -11,7 +11,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   plugins: [
-    'prefer-arrow'
+    'prefer-arrow',
     // 'mocha'
   ],
   env: {

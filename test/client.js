@@ -3,7 +3,7 @@ const expect = chai.expect
 
 const Hubspot = require('..')
 
-describe('client', function() {
+describe('client', function () {
   this.timeout(10000)
   let hubspot
 
