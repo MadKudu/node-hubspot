@@ -1,3 +1,7 @@
+# 2.3.14 / 2020-11-05
+
+- Update file related functionality according to API changes
+
 # 2.3.13 / 2020-06-16
 
 - Fix query parameter for the file uploading
