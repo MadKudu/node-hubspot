@@ -42,8 +42,6 @@ describe('files', () => {
     const uploadEndpoint = {
       path: '/filemanager/api/v3/files/upload',
       query: {
-        overwrite: true,
-        hidden: false,
         hapikey: 'demo',
       },
       response: { success: true },
