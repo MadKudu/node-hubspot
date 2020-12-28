@@ -58,7 +58,7 @@ describe('lists', () => {
     const listIds = [123, 234, 345]
     const listsByIdsEndpoint = {
       path: '/contacts/v1/lists/batch',
-      response: { '123': {}, '234': {}, '345': {} },
+      response: { 123: {}, 234: {}, 345: {} },
       query: { listId: listIds },
     }
     fakeHubspotApi.setupServer({ getEndpoints: [listsByIdsEndpoint] })
