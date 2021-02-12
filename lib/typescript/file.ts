@@ -74,4 +74,4 @@ declare class File {
   ): RequestPromise
 }
 
-export { File, HubspotFile, HubspotImage }
+export type { File, HubspotFile, HubspotImage }
