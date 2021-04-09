@@ -18,8 +18,53 @@ describe('subscriptions', () => {
   })
 
   describe('subscribeToAll', () => {
+    const getEndpoint = {
+      path: `/email/public/v1/subscriptions`,
+      response: {
+        subscriptionDefinitions: [
+          {
+            id: 10,
+            portalId: 1,
+            name: 'Product & Marketing Information',
+            description: 'New product feature updates & Marketing offers.',
+            active: true,
+            internal: false,
+            category: 'Marketing',
+            channel: 'Email',
+            order: 0,
+            internalName: 'MARKETING_INFORMATION',
+          },
+          {
+            id: 11,
+            portalId: 1,
+            name: 'One to One',
+            description: 'One to One emails',
+            active: true,
+            internal: true,
+            category: 'Sales',
+            channel: 'Email',
+            order: 5,
+            internalName: 'ONE_TO_ONE',
+          },
+        ],
+      },
+    }
+
     const email = 'example@domain.com'
-    const expectedBody = { subscribed: true }
+    const expectedBody = {
+      subscriptionStatuses: [
+        {
+          id: 10,
+          subscribed: true,
+          optState: 'OPT_IN',
+        },
+        {
+          id: 11,
+          subscribed: true,
+          optState: 'OPT_IN',
+        },
+      ],
+    }
     const formEndpoint = {
       path: `/email/public/v1/subscriptions/${email}`,
       request: expectedBody,
@@ -28,6 +73,7 @@ describe('subscriptions', () => {
 
     fakeHubspotApi.setupServer({
       putEndpoints: [formEndpoint],
+      getEndpoints: [getEndpoint],
       demo: true,
     })
 
